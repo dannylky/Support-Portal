@@ -33,6 +33,7 @@ button.reset:hover{background:#e0e7ff}
 .card .hint{margin:0 0 10px;color:#64748b;font-size:13px}
 .chartbox{position:relative;height:300px}
 .chartbox.tall{height:380px}
+.chartbox.xl{height:540px}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #f1f5f9}
 th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
@@ -94,7 +95,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <div class="compare-note" id="cmpNote"></div>
 <div class="compare-table"><table><thead><tr><th>Metric</th><th id="cmpHeadA">Month A</th><th id="cmpHeadB">Month B</th><th>Change (B − A)</th></tr></thead><tbody id="cmpBody"></tbody></table></div>
 <div class="compare-charts">
-<section class="card"><h2>Category comparison</h2><p class="hint">Case count in each selected month, grouped by category.</p><div class="chartbox tall"><canvas id="cCmpCat"></canvas></div></section>
+<section class="card"><h2>Category comparison</h2><p class="hint">Case count in each selected month, grouped by category.</p><div class="chartbox xl"><canvas id="cCmpCat"></canvas></div></section>
 <section class="card"><h2>Daily pattern comparison</h2><p class="hint">Cases by day of month, aligned so the rhythm of the two months can be compared.</p><div class="chartbox tall"><canvas id="cCmpDaily"></canvas></div></section>
 </div>
 <h2 style="margin-top:20px">Biggest category changes</h2><p class="hint">Categories with the largest absolute movement between the two selected months.</p>
@@ -104,7 +105,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <div class="grid">
 <section class="card wide"><h2>📈 Cases per day</h2><p class="hint">Daily case volume across the semester so far — the early-September start-of-term peak is clearly visible.</p><div class="chartbox"><canvas id="cTrend"></canvas></div></section>
 
-<section class="card wide"><h2>🗂️ Cases by category</h2><p class="hint">What the team actually works on, by the form's Categories field.</p><div class="chartbox tall"><canvas id="cCat"></canvas></div></section>
+<section class="card wide"><h2>🗂️ Cases by category</h2><p class="hint">What the team actually works on, by the form's Categories field.</p><div class="chartbox xl"><canvas id="cCat"></canvas></div></section>
 
 <section class="card"><h2>⚠️ Severity mix</h2><p class="hint">Incidents vs. service requests, by severity level.</p><div class="chartbox"><canvas id="cSev"></canvas></div></section>
 
@@ -159,7 +160,7 @@ function current(){ return DATA.filter(r =>
   (!$("fReq").value || r.req === $("fReq").value) &&
   (!$("fStatus").value || r.st === $("fStatus").value)); }
 function makeChart(id, cfg){ if(charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
-function barCfg(labels, values, horizontal, color){ return { type:"bar", data:{ labels, datasets:[{ data:values, backgroundColor: color || labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderRadius:6 }]}, options:{ indexAxis: horizontal ? "y" : "x", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ x:{ ticks:{ precision:0 } }, y:{ ticks:{ precision:0 } } } } }; }
+function barCfg(labels, values, horizontal, color){ return { type:"bar", data:{ labels, datasets:[{ data:values, backgroundColor: color || labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderRadius:6 }]}, options:{ indexAxis: horizontal ? "y" : "x", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ x:{ ticks:{ precision:0 } }, y: horizontal ? { ticks:{ autoSkip:false, font:{ size:11 } } } : { ticks:{ precision:0 } } } } }; }
 function doughCfg(labels, values){ return { type:"doughnut", data:{ labels, datasets:[{ data:values, backgroundColor: labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderColor:"#fff", borderWidth:2 }]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } } } }; }
 function comparisonRows(month){ return DATA.filter(r => r.m === month &&
   (!$("fCat").value || r.cat === $("fCat").value) &&
@@ -206,7 +207,7 @@ function renderComparison(){
   makeChart("cCmpCat", { type:"bar", data:{ labels:catLabels.map(shortCat), datasets:[
     { label:aMonth, data:catLabels.map(k=>aCats.get(k)||0), backgroundColor:"#3730a3", borderRadius:5 },
     { label:bMonth, data:catLabels.map(k=>bCats.get(k)||0), backgroundColor:"#0e7490", borderRadius:5 }
-  ]}, options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ x:{ ticks:{ precision:0 } } } } });
+  ]}, options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ x:{ ticks:{ precision:0 } }, y:{ ticks:{ autoSkip:false, font:{ size:11 } } } } } });
   const dayLabels = Array.from({length:31}, (_,i)=>String(i+1));
   function byDayOfMonth(rows){ const arr = Array(31).fill(0); rows.forEach(r=>{ arr[parseInt(r.d.slice(8,10),10)-1]++; }); return arr; }
   makeChart("cCmpDaily", { type:"line", data:{ labels:dayLabels, datasets:[
