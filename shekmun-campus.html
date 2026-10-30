@@ -42,7 +42,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <header class="hero"><div class="wrap">
 <h1>ShekMun Campus — Standard Operating Procedure</h1>
 <div class="sub">Complete operating procedure for remote monitoring and control of the Shek Mun teaching block: platforms and inventory, the automated daily schedule, standard procedures, classification rules, manual operations, incident playbooks, and the approval &amp; escalation matrix. This SOP is the single reference for how the site is run day to day. <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal home</a></div>
-<div class="meta"><span class="ver">SOP v1.0</span><span>Effective 30 Oct 2026</span><span>Site owner / approver: Danny LAM (ITSC)</span><span>Operations: Mon–Sat</span><span>Timezone: Asia/Hong_Kong</span></div>
+<div class="meta"><span class="ver">SOP v1.1</span><span>Effective 30 Oct 2026</span><span>Site owner / approver: Danny LAM (ITSC)</span><span>Operations: Mon–Sat</span><span>Timezone: Asia/Hong_Kong</span></div>
 </div></header>
 <nav class="toc"><div class="wrap">
 <a href="#s1">1 Overview</a><a href="#s2">2 Inventory</a><a href="#s3">3 Daily schedule</a><a href="#s4">4 Procedures</a><a href="#s5">5 Classification rules</a><a href="#s6">6 Manual operations</a><a href="#s7">7 Incident playbooks</a><a href="#s8">8 Approvals &amp; escalation</a><a href="#s9">9 Reporting</a><a href="#s10">10 Security &amp; safety</a><a href="#s11">11 Known issues</a><a href="#s12">12 Document control</a>
@@ -55,11 +55,10 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <h3>1.1 Platforms</h3>
 <table>
 <tr><th style="width:24%">Platform</th><th>Role in operations</th></tr>
-<tr><td><strong>Shek Mun AV Monitoring</strong> (v1.9.24)</td><td>Central monitoring web app for the site: per-room device status (<code>snapshot.json</code>), PTZ camera views, and the Kramer AVoIP thumbnail page used as the primary readiness evidence. Reached over the Tailscale network through the operator's tunnel proxy.</td></tr>
+<tr><td><strong>Shek Mun AV Monitoring</strong> (v1.9.24)</td><td>Central monitoring web app for the site: per-room device status (<code>snapshot.json</code>), PTZ camera views, and the Kramer AVoIP thumbnail page used as the primary readiness evidence. Reached through the operator's secure remote access.</td></tr>
 <tr><td><strong>Kramer AVoIP</strong> (Manager + KDS encoders/decoders)</td><td>Video distribution: lectern PC / laptop sources to in-room displays. Managed centrally by the Kramer AVoIP Manager; devices also answer the P3000 control protocol for queries and resets.</td></tr>
 <tr><td><strong>Extron control</strong></td><td>Per-room controllers run the touch-panel (VTLP) interface used by teachers (System On/Off, TV On/Off, source selection). PCU power controllers (IPL T PCS4i) switch rack and lectern power per room.</td></tr>
 <tr><td><strong>Bitfocus Companion</strong></td><td>Per-room hosts expose simple press endpoints used for bulk decoder resets and source selection (PC / Laptop) under the manual-operations procedure.</td></tr>
-<tr><td><strong>Tailscale</strong></td><td>Secure overlay network through which all remote access reaches the site subnets (subnet router on the site gateway). No AV device is exposed to the public internet.</td></tr>
 <tr><td><strong>Automation (Muse)</strong></td><td>Scheduled jobs execute the procedures in §4 (morning TV-on, readiness, patrols, log captures, watchdog, backups) and report in Cantonese (Traditional Chinese) to the site owner's chats and by email.</td></tr>
 </table>
 <h3>1.2 Operating model</h3>
@@ -116,7 +115,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <tr><th style="width:13%">Time</th><th style="width:26%">Job</th><th>What it does</th><th style="width:22%">Output</th></tr>
 <tr><td>03:42 daily</td><td>Operations backup</td><td>Backs up the operations memory/configuration; only the most recent 30 versions are kept.</td><td>Backup archive</td></tr>
 <tr><td>07:05</td><td>Extron Morning TV ON</td><td>Per room SM-11-01…08: logs in to the room controller, syncs, and presses <strong>TV On</strong> (Room 1 also Side TV On) unless the TVs are already on. The panel's TV On triggers System ON automatically. Validates that TV On and System ON settle; retries a failed room exactly once; then re-checks every room with two samples ~15 s apart. Standing authorisation — see §8.2.</td><td>Per-room summary (Cantonese) to the Extron operations chat</td></tr>
-<tr><td>~07:00–22:35</td><td>Route watchdog</td><td>Every 10 minutes, read-only probes of the camera and AV-processor subnets via the tunnel. A round fails only if <em>both</em> probes fail; alerts only on state change (2 consecutive failed rounds = route down; next OK round = recovered).</td><td>Alert to the ShekMun chat on change only</td></tr>
+<tr><td>~07:00–22:35</td><td>Route watchdog</td><td>Every 10 minutes, read-only probes of the camera and AV-processor subnets over the remote access path. A round fails only if <em>both</em> probes fail; alerts only on state change (2 consecutive failed rounds = route down; next OK round = recovered).</td><td>Alert to the ShekMun chat on change only</td></tr>
 <tr><td>08:15</td><td>Readiness — Stage 1</td><td>Early sweep of the AVoIP thumbnail page; retries thumbnail 404s in quick rounds (arm-and-retry, §7.1) to clear capture warm-up effects before the formal verdict.</td><td>Stage 1 data file (no email by design)</td></tr>
 <tr><td>08:20</td><td>Readiness — Stage 2</td><td>Formal READY / NOT READY verdict per room from the AVoIP page (primary), PTZ (support) and snapshot data: PC source live, displays fed, decoders online. Records late-wake rooms (§5.5). Delivered by ~08:50, ahead of the 09:00 class start.</td><td>Verdict report (chat + email, labelled &amp; archived)</td></tr>
 <tr><td>07:30–22:30 hourly (:30)</td><td>Campus patrol</td><td>Read-only PTZ patrol of all rooms plus device status: lighting, in-use/idle, display state and multi-display sync, encoder/decoder online status and temperatures, and the control-panel flash check (§4.4). Judged against the week's classroom booking reference.</td><td>HTML report (chat + email, landscape A4 PDF attached); subject prefixed <em>Status OK</em> / <em>Status ABNORMAL</em></td></tr>
@@ -183,7 +182,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 </div>
 <div class="proc">
 <h3>P6 — Route watchdog</h3>
-<p class="kv">Trigger: every 10 min in the operating window · Read-only probes of one PTZ camera and the AV processor via the tunnel</p>
+<p class="kv">Trigger: every 10 min in the operating window · Read-only probes of one PTZ camera and the AV processor over the remote access path</p>
 <ol>
 <li>A round fails only if <em>both</em> subnet probes fail (a single-probe failure is context, not an outage).</li>
 <li>Two consecutive failed rounds → “route down” alert to the ShekMun chat. The next OK round after that → “route recovered”. Silent otherwise.</li>
@@ -211,7 +210,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <h3>5.5 Late wake （遲醒）</h3>
 <p>A room is recorded as <em>late wake</em> when its PC encoder showed NO SIGNAL in readiness Stage 1 but feeds a live image and is READY by Stage 2. The record carries the wake bracket (last NO SIGNAL time → first IMAGE time; the exact moment is never invented). Late wake is <strong>tracking only</strong>: not a fault, never ABNORMAL, never an escalation, no remedy. Not late wake: a black PC source; a room still NO SIGNAL at the verdict (that is NOT READY); a recovered thumbnail 404. If Stage 1 data is missing/incomplete, no late-wake calls are made that morning.</p>
 <h3>5.6 Decoder that will not show a thumbnail</h3>
-<p>A decoder that is normal in the snapshot data but whose Manager thumbnail keeps returning 404 after the full arm-and-retry pass is classified <strong>NEEDS-RESTART</strong> and escalated to the owner <em>before</em> any restart. The proven remedy is a P3000 <code>#RESET</code> of that decoder (it accepts the command over the tunnel with no login).</p>
+<p>A decoder that is normal in the snapshot data but whose Manager thumbnail keeps returning 404 after the full arm-and-retry pass is classified <strong>NEEDS-RESTART</strong> and escalated to the owner <em>before</em> any restart. The proven remedy is a P3000 <code>#RESET</code> of that decoder (it accepts the command over the private network with no login).</p>
 <h3>5.7 Report terminology</h3>
 <table>
 <tr><th>Situation</th><th>Term used in reports</th></tr>
@@ -254,7 +253,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <li>Do not reset decoders for a source-side fault.</li>
 </ol>
 <h3>7.5 Switch management login failures</h3>
-<p>Fleet switches normally serve their API over HTTP. After the Room 1 pair's firmware upgrade (Oct 2026) those two switches redirect HTTP to HTTPS on port 4443 with an empty body, which reads as an “empty login” failure. The fetch tooling therefore falls back to HTTPS (TLS 1.2 via the tunnel) automatically; the same password works — a redirect/empty response is a transport change, not a credential change. Note: on the upgraded pair the satellite's buffered log may return only one line, and the master's logging level reads 5 (fleet masters otherwise 6) — data caveats, not faults.</p>
+<p>Fleet switches normally serve their API over HTTP. After the Room 1 pair's firmware upgrade (Oct 2026) those two switches redirect HTTP to HTTPS on port 4443 with an empty body, which reads as an “empty login” failure. The fetch tooling therefore falls back to HTTPS (TLS 1.2) automatically; the same password works — a redirect/empty response is a transport change, not a credential change. Note: on the upgraded pair the satellite's buffered log may return only one line, and the master's logging level reads 5 (fleet masters otherwise 6) — data caveats, not faults.</p>
 <h3>7.6 AV processor power cycle (PCU escalation)</h3>
 <ol>
 <li>Preconditions: a flashing/unsettled panel case (§P4), or the owner's direct instruction.</li>
@@ -292,7 +291,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <ul>
 <li><strong>Fault found by a scheduled run</strong> → reported in the run's report; remedy proposed to the owner (main chat) and executed only on confirmation, then re-checked and closed out in a follow-up report.</li>
 <li><strong>Control-panel flashing (patrol)</strong> → Help Desk record (CaseID format <code>U-YYYYMMDDHHMMSS</code>) + PCU approval request to the owner.</li>
-<li><strong>Route down (watchdog)</strong> → alert to the ShekMun chat; investigation follows the network path (tunnel → subnet router → switches) before any device action.</li>
+<li><strong>Route down (watchdog)</strong> → alert to the ShekMun chat; investigation follows the network path (remote access path → subnet router → switches) before any device action.</li>
 <li><strong>Teams access rule:</strong> browser access to Microsoft Teams is strictly limited to the USS Help Desk chat; no other chat is opened, and non-flashing posts need the owner's approval each time.</li>
 </ul>
 </section>
@@ -310,7 +309,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <section class="blk" id="s10">
 <h2>10. Security and safety</h2>
 <ul>
-<li>All remote access reaches the site only through the Tailscale overlay and the site subnet router; no management interface is exposed publicly.</li>
+<li>All remote access reaches the site only through secure remote access and the site subnet router; no management interface is exposed publicly.</li>
 <li>Credentials are used <strong>transiently at runtime</strong> from their secure sources and are never written into documents, memory files, reports or this SOP. Password guessing is prohibited: a login failure is reported as a failure with its reason.</li>
 <li>Monitoring jobs are read-only. The only scheduled device-changing job is the morning TV-on run, within its written limits (§8.2).</li>
 <li>Power switching is restricted to PCU-AVRack outlet 4 under §7.6. PCU-Lectern outlets are never switched for processor restarts.</li>
@@ -333,6 +332,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <h2>12. Document control</h2>
 <table>
 <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+<tr><td>1.1</td><td>30 Oct 2026</td><td>Removed the remote-access technology details at the site owner's direction: the platform entry was deleted and all access-path wording generalised to “secure remote access”. No procedure changed.</td></tr>
 <tr><td>1.0</td><td>30 Oct 2026</td><td>Initial issue. Compiled from the live operating configuration: patrol, readiness, morning TV-on, log capture, watchdog and backup schedules; Quick Keypad manual operations; classification rules; incident playbooks; approval matrix and standing authorisations.</td></tr>
 </table>
 <p class="small">This SOP describes the configuration as agreed with the site owner at the version date. When a workflow, schedule or rule changes, the change is made in the operating configuration first and this document is re-issued with a new version.</p>
