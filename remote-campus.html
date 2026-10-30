@@ -13,10 +13,14 @@ h1{margin:0 0 8px;font-size:32px;letter-spacing:-.02em}
 .hero a{color:#a5f3fc}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:24px 0 8px}
 .card{display:block;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px;color:inherit;text-decoration:none;box-shadow:0 6px 18px rgba(15,23,42,.05);transition:transform .15s,box-shadow .15s}
-a.card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,23,42,.1)}
+.card:not(.soon):hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,23,42,.1)}
 .card h2{margin:0 0 8px;font-size:19px}
 .card p{margin:0;color:#64748b;line-height:1.6;font-size:14.5px}
 .tag{display:inline-block;margin-top:14px;background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.docs{margin-top:14px;border-top:1px solid #e2e8f0;padding-top:12px;display:flex;flex-direction:column;gap:7px}
+.docs .dh{font-size:11.5px;font-weight:800;letter-spacing:.06em;color:#64748b}
+.docs a{color:#3730a3;font-weight:600;font-size:14px;text-decoration:none}
+.docs a:hover{text-decoration:underline}
 .card.soon{opacity:.65}
 h2.sec{font-size:21px;margin:30px 0 4px}
 .prin{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:14px 0 8px}
@@ -33,18 +37,22 @@ h2.sec{font-size:21px;margin:30px 0 4px}
 </div></header>
 <main class="wrap">
 <div class="grid">
-<a class="card" href="shekmun-campus.html">
-<h2>ShekMun Campus</h2>
+<div class="card">
+<h2><a href="shekmun-campus.html" style="color:inherit;text-decoration:none">ShekMun Campus</a></h2>
 <p>Full SOP for the Shek Mun teaching block (rooms SM-11-01 – SM-11-08 plus Common Area): Kramer AVoIP, Extron control, PTZ patrols, two-stage morning readiness, AVoIP log capture, route watchdog, Quick Keypad manual operations, incident playbooks and the approval / escalation matrix.</p>
 <span class="tag">SOP v1.4 · English / 繁體中文 · 8 rooms</span>
-</a>
+<div class="docs"><span class="dh">SHEKMUN DOCUMENTS</span>
+<a href="shekmun-campus.html">📄 Standard Operating Procedure (SOP v1.4 · EN／繁體中文）</a>
+<a href="shekmun-case-handling.html">🛠️ Case Handling for Known Issues</a>
+<a href="shekmun-daily-reports.html">📋 Daily Summary Reports</a>
+</div>
+</div>
 <div class="card soon">
 <h2>More campuses</h2>
 <p>Additional remote campuses will be added here as their monitoring and SOP documentation is completed. Each site gets the same treatment: inventory, daily schedule, procedures, classification rules and escalation paths.</p>
 <span class="tag">Coming soon</span>
 </div>
 </div>
-<p style="margin:2px 0 0;color:#475569;font-size:14.5px">ShekMun Campus documents: <a href="shekmun-campus.html" style="color:#3730a3;font-weight:600">Standard Operating Procedure (SOP v1.4 · EN／繁體中文）</a> · <a href="shekmun-case-handling.html" style="color:#3730a3;font-weight:600">Case Handling for Known Issues</a> · <a href="shekmun-daily-reports.html" style="color:#3730a3;font-weight:600">Daily Summary Reports</a></p>
 <h2 class="sec">Operating principles — all remote campuses</h2>
 <div class="prin">
 <div class="p"><h3>🔍 Read-only by default</h3><p>Monitoring never changes a device. Patrols, readiness sweeps, log captures and watchdogs only observe; any action on a device follows the approval rules of the site SOP.</p></div>
