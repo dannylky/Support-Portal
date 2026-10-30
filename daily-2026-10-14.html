@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Summary 2026-10-14 · ShekMun Campus · Support Portal</title>
+<style>body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:36px 20px 26px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:28px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:860px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.doc{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px 28px;margin:18px 0 40px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.doc h1{font-size:23px;margin:4px 0 12px}
+.doc h2{font-size:19px;margin:22px 0 8px;color:#1e1b4b}
+.doc h3{font-size:16px;margin:18px 0 6px}
+.doc p{line-height:1.7;color:#1f2937;margin:8px 0}
+.doc ul,.doc ol{line-height:1.75;color:#1f2937;margin:8px 0 8px 20px;padding:0}
+.doc li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+th,td{border-bottom:1px solid #e2e8f0;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.5}
+th{background:#f8fafc;color:#475569}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:12.5px;word-break:break-all}
+hr{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
+.doc a{color:#3730a3}</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>📋 Daily Summary — 2026-10-14</h1>
+<div class="sub">Day-end AVoIP summary for ShekMun Campus （石門校園全日總結）, consolidated by the 22:00 log-capture run: merged timeline of the day's eight capture rounds, per-issue status, and the read-only 16-switch cross-check. <a href="shekmun-daily-reports.html">← All daily reports</a> · <a href="remote-campus.html">Remote Campus</a></div>
+<div class="meta"><span class="ver">2026-10-14</span><span>Wednesday · 星期三</span><span>Text summary edition</span></div>
+</div></header>
+<main class="wrap"><div class="doc">
+<h1>AVoIP log capture — DAILY SUMMARY 2026-10-14 (reconstructed)</h1>
+<p><strong>Why this file exists:</strong> the 22:00 consolidation run on 2026-10-14 was interrupted by a service restart at ~22:02 HKT and only pulled the first target (SM-11-01 EN-PC, preserved in this folder). This summary was reconstructed on 2026-10-15 from the five genuine capture runs of the day (12:00 / 14:00 / 16:00 / 18:00 / 20:00, each with its own ANALYSIS.md in <code>../2026-10-14-&lt;HHMM&gt;/</code>), plus the evening events Danny reported and verified in chat the same night. Advice only — no device action was taken or is authorised by this file.</p>
+<h2>Coverage of the day</h2>
+<ul>
+<li>Five genuine runs, each <strong>30/30 readable</strong>, LOG-ACTION <strong>1,3 on all 30 units</strong> in every</li>
+</ul>
+<p>run, no ERR 012, no LOG-ACTION flips.</p>
+<ul>
+<li>&quot;No space left on device&quot;: <strong>0 on all 30 units in all five runs</strong> (caveat: the four</li>
+</ul>
+<p>looping units&#x27; buffers cover only ~50–72 s each).</p>
+<ul>
+<li>HDCP authentication failures: 0. Ethernet link down/up: 0. Thermal warnings: 0.</li>
+</ul>
+<h2>Merged signal-event timeline (HKT)</h2>
+<table><tr><th>Time</th><th>Room</th><th>Event</th></tr>
+<tr><td>09:00:38</td><td>SM-11-02 DEC-1</td><td>Single &quot;power save due to no data&quot; + V1Rx error; no recurrence all day (history by the 12:00 run)</td></tr>
+<tr><td>10:34–10:35</td><td>SM-11-01 (all 4 DEC)</td><td>Room-wide STOP_STREAM cluster, all re-locked; no power-save line</td></tr>
+<tr><td>11:53 / 11:57</td><td>SM-11-08 (both DEC)</td><td>Full signal loss ×2 clusters, both displays together; EN-PC vhub USB errors at matching (clock-offset) times — tentative correlation</td></tr>
+<tr><td>13:21:14</td><td>SM-11-07 (both DEC)</td><td>~1 s no-data blip, no STOP_STREAM, self-recovered; 13:48:38 AVI format moment</td></tr>
+<tr><td>13:51 + 14:00</td><td>SM-11-08 (both DEC)</td><td>Full signal-loss signature recurs twice in 9 min</td></tr>
+<tr><td>13:58–14:12</td><td>SM-11-03 DEC-1</td><td>Post-loop-fix behaviour: full-frame re-sync churn + six AVI error sets</td></tr>
+<tr><td>14:55:11–14:56:01</td><td>SM-11-03 DEC-1</td><td>Full STOP_STREAM event; EN-PC source renegotiation (bogus 1320-wide interlaced detection, mode errors) starts ~20 s before, converted via its in-buffer NTP anchor</td></tr>
+<tr><td>15:02:03</td><td>SM-11-01 (all 4 DEC)</td><td>~1–2 s no-data blip; EN-PC logs mode change + USB suspend as trigger</td></tr>
+<tr><td>16:46:49</td><td>SM-11-08 (both DEC)</td><td>Brief psnd blip, no STOP_STREAM</td></tr>
+<tr><td>17:18:46–17:20:00</td><td>SM-11-01</td><td>Repeated STOP_STREAM cycling — <strong>explained: Danny&#x27;s on-site no-PC source-switch test 17:17–17:19, no TV restart</strong></td></tr>
+<tr><td>17:33:50</td><td>SM-11-03 DEC-1</td><td>Brief psnd blip</td></tr>
+<tr><td>17:34:01</td><td>SM-11-07 (both DEC)</td><td>Brief psnd blip; EN-PC vhub descriptor errors ~11 s later</td></tr>
+<tr><td>17:59:17</td><td>SM-11-02 DEC-1</td><td>Brief psnd blip; EN-PC USB descriptor burst at tentatively the same moment (unsynced clock)</td></tr>
+<tr><td>18:29:17</td><td>SM-11-01 (all 4 DEC)</td><td>Source mode change + AVI sets; transient 720p60 → settles 1080p50 in ~2 s</td></tr>
+<tr><td>18:42:56</td><td>SM-11-03 DEC-1</td><td>Source mode change + AVI set, re-locked ~2 s</td></tr>
+<tr><td>~21:28</td><td>SM-11-02</td><td>Danny&#x27;s PC-on switch test: TV1 restarted (investigation record, not a capture finding)</td></tr>
+<tr><td>21:53–22:06</td><td>R2 TV2 / R4 / R6 / R5 TV-DEC-1</td><td>Danny applied the Manager null-family fix to the last four looping units; loop lines verified stopped the same evening</td></tr>
+</table>
+<h2>Per-issue status at end of 2026-10-14</h2>
+<ul>
+<li><strong>Discovery loop:</strong> four units looped at constant rates in all five runs (SM-11-02 TV-DEC-2</li>
+</ul>
+<p>~9.2–9.9 loop-lines/s; SM-11-04/05/06 TV-DEC-1 ~12–13.3/s). SM-11-03 TV-DEC-1, fixed 11:10, stayed loop-free all day. After the 20:00 run Danny fixed the remaining four in the Manager (21:53–22:06) — fleet loop-free on evening verification. <em>Postscript (2026-10-15 08:00 run): all four fixes confirmed holding; no unit looping.</em></p>
+<ul>
+<li><strong>Encoder NTP:</strong> 13 of 16 encoders on Jan-1 device time at 12:00. In the 14:58–15:05 sync</li>
+</ul>
+<p>wave, <strong>11 synced</strong> (ntp_client 172.18.22.1 visible in-buffer). Still unsynced at day end: <strong>SM-11-02 EN-PC and SM-11-07 EN-Laptop only</strong>. All 14 TV decoders synced all day.</p>
+<ul>
+<li><strong>USB device flapping:</strong> only the known SM-11-07 TV-DEC-1; active in bursts until</li>
+</ul>
+<p><strong>13:17</strong>, then quiet for the rest of the day. The other three known flappers read 0 in every run; no new unit.</p>
+<ul>
+<li><strong>Room 8 signal loss:</strong> four full clusters (11:53, 11:57, 13:51, 14:00) + one brief blip</li>
+</ul>
+<p>(16:46). Switch cross-check (Room 8 master 172.18.22.18 / satellite 172.18.22.28, fetched read-only the same evening): no link, STP, PoE or error-counter trace — network path cleared; suspicion stays on the room&#x27;s shared encoder/USB-over-IP path.</p>
+<ul>
+<li><strong>Room 3 14:55 event:</strong> switch cross-check (172.18.22.13 / .23) likewise cleared the</li>
+</ul>
+<p>network; the encoder-side source renegotiation in the decoder/encoder logs is the cause. Both rooms&#x27; switches were raised to buffered logging level 6 that evening so IGMP evidence survives a recurrence.</p>
+<ul>
+<li><strong>Room 7:</strong> 13:21 and 17:34 room-level blips plus the DEC-1 USB flapper (quiet after</li>
+</ul>
+<p>13:17); EN-PC USB-over-IP instability remains the room&#x27;s watch item.</p>
+<h2>Cross-day patterns</h2>
+<ul>
+<li>Room-level, both-displays-together events dominate (R8 ×5, R7 ×2, R1 ×2) — shared</li>
+</ul>
+<p>source/encoder path, not single-decoder faults.</p>
+<ul>
+<li>Brief psnd blips (no STOP_STREAM) are a separate, milder family and cluster in the late</li>
+</ul>
+<p>afternoon (16:46–17:59, four rooms in 73 min).</p>
+<ul>
+<li>Every full STOP_STREAM event of the day self-recovered to a locked stream within the</li>
+</ul>
+<p>same buffer; none needed intervention during class hours.</p>
+<h2>Suggestions (advice only, evidence-tied)</h2>
+<ol>
+<li>Room 8 EN-PC USB-over-IP path is the top watch item: vhub error clusters coincide with</li>
+</ol>
+<p>three of its four full signal-loss clusters (tentative — encoder clock was unsynced until 14:58).</p>
+<ol>
+<li>Close the last two encoder NTP gaps (SM-11-02 EN-PC, SM-11-07 EN-Laptop) so their logs</li>
+</ol>
+<p>can be correlated directly; every other unit now timestamps in real UTC/HKT.</p>
+<ol>
+<li>No LOG-ACTION change is suggested by today&#x27;s data: no &quot;No space left&quot; anywhere, and</li>
+</ol>
+<p>the loop fix (Manager family assignment) has removed the buffer-churn cause fleet-wide.</p>
+</div></main>
+</body>
+</html>

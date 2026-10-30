@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Summary 2026-10-15 · ShekMun Campus · Support Portal</title>
+<style>body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:36px 20px 26px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:28px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:860px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.doc{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px 28px;margin:18px 0 40px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.doc h1{font-size:23px;margin:4px 0 12px}
+.doc h2{font-size:19px;margin:22px 0 8px;color:#1e1b4b}
+.doc h3{font-size:16px;margin:18px 0 6px}
+.doc p{line-height:1.7;color:#1f2937;margin:8px 0}
+.doc ul,.doc ol{line-height:1.75;color:#1f2937;margin:8px 0 8px 20px;padding:0}
+.doc li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+th,td{border-bottom:1px solid #e2e8f0;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.5}
+th{background:#f8fafc;color:#475569}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:12.5px;word-break:break-all}
+hr{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
+.doc a{color:#3730a3}</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>📋 Daily Summary — 2026-10-15</h1>
+<div class="sub">Day-end AVoIP summary for ShekMun Campus （石門校園全日總結）, consolidated by the 22:00 log-capture run: merged timeline of the day's eight capture rounds, per-issue status, and the read-only 16-switch cross-check. <a href="shekmun-daily-reports.html">← All daily reports</a> · <a href="remote-campus.html">Remote Campus</a></div>
+<div class="meta"><span class="ver">2026-10-15</span><span>Thursday · 星期四</span><span>Text summary edition</span></div>
+</div></header>
+<main class="wrap"><div class="doc">
+<h1>AVoIP log capture — DAILY SUMMARY 2026-10-15</h1>
+<p>Whole-day consolidation by the 22:00 run (Danny&#x27;s direction 2026-10-14). Sources: the ANALYSIS.md / analysis.json of all eight runs of today — 0800, 1000, 1200, 1400, 1600, 1800, 2000 and this 2200 run — all present, no run missing. All captures read-only P3000 <code>#LOG-ACTION?</code> + <code>#LOG-TAIL? 1000</code> via the Tailscale tunnel; no resets, no config writes, no device changes at any point. Advice only — nothing in this file authorises or executes a fix. All times HKT. Scope: Rooms SM-11-01..08, PC/Laptop encoders + TV decoders only (30 targets).</p>
+<h2>Coverage of the day</h2>
+<ul>
+<li>Runs: <strong>8/8 present</strong>. Readable per run: 0800 <strong>30/30</strong>, 1000 <strong>18/30</strong> (12 encoders of Rooms 3–8 no-answer at the P3000 CONNECT stage through two passes — management-plane failure, decoders showed lock throughout), 1200 <strong>30/30</strong>, 1400 <strong>30/30</strong>, 1600 <strong>30/30</strong>, 1800 <strong>30/30</strong>, 2000 <strong>30/30</strong>, 2200 <strong>26/30 answered / 25 with content</strong> (4 encoders no-answer: SM-11-03 EN-PC, SM-11-07 EN-PC, SM-11-08 EN-PC + EN-Laptop; SM-11-07 EN-Laptop answered-but-empty, 1 line).</li>
+<li>LOG-ACTION: <strong>1,3 on every answered unit in every run — no flips, no ERR 012, no paused unit all day.</strong> The coverage rule (1,3 = readable; 2,3 = ERR 012) was never broken.</li>
+<li>&quot;No space left on device&quot;: <strong>0 on every unit in every run.</strong> HDCP failure errors: 0 all day. Ethernet link down/up: 0. Thermal warnings: 0.</li>
+<li>Fleet totals per run (analysis.json): USB lines 367 → 39 → 29 → 46 → 432 → 908 → 541 → <strong>2,338</strong>; STOP_STREAM lines 58 → 21 → 0 → 0 → 42 → 22 → 30 → 24; loop lines 416 → 0 → 0 → 0 → 156 → 0 → 304 → 0.</li>
+</ul>
+<h2>Day timeline (HKT, merged — duplicates across runs counted once)</h2>
+<table><tr><th>Time</th><th>Room / unit</th><th>Event</th><th>Captured by</th></tr>
+<tr><td>~07:00</td><td>Fleet</td><td>Morning power-on boot. The four historical persistent loopers (R2 TV2, R4/R5/R6 TV1) boot <strong>loop-free</strong> and stay stopped all day</td><td>0800</td></tr>
+<tr><td>07:15:01–07:24:20</td><td>SM-11-02 TV-DEC-1</td><td>USB flap burst ×327 while ON, then stops</td><td>0800 (tail 1000)</td></tr>
+<tr><td>07:26:14–07:26:42</td><td>SM-11-08 both DEC</td><td>Transient discovery-loop burst (263 + 153 lines, ~9.7 / ~12.8 lines/s) around EN-PC&#x27;s late boot at 07:26:48 (~26 min after the fleet); self-resolved, locked after</td><td>0800</td></tr>
+<tr><td>08:15:34</td><td>SM-11-02 both DEC</td><td>Source mode change + AVI set, no signal loss</td><td>0800</td></tr>
+<tr><td>08:16:56 / 08:18:36</td><td>SM-11-04 / SM-11-05 DEC-1</td><td>AVI mode-change sets (R5 also <code>No full frame?!</code>), no psnd</td><td>0800</td></tr>
+<tr><td>08:19–08:24</td><td>SM-11-01 all 4 DEC</td><td>Danny&#x27;s on-site PC switch test: mode/AVI clusters, psnd 08:23:28–29, STOP_STREAM; TV restarts 08:20/08:21/08:23 belong to the investigation thread</td><td>0800 (tail 1000/1200)</td></tr>
+<tr><td>08:20:55</td><td>SM-11-07 both DEC</td><td>psnd blip, EN-PC <code>hub suspeneded!</code> 1 s before, re-lock ~3 s; DEC-1 USB flap ×29 at 08:26:36–08:27:18 while ON</td><td>0800</td></tr>
+<tr><td>08:45:45</td><td>SM-11-08 both DEC</td><td>psnd blip (~1 s)</td><td>1000</td></tr>
+<tr><td>09:00:33</td><td>SM-11-03 + SM-11-06 DEC-1</td><td>Simultaneous psnd blips at the class-start minute</td><td>1000</td></tr>
+<tr><td>09:15:31</td><td>SM-11-02 both DEC</td><td>psnd blip</td><td>1000</td></tr>
+<tr><td>09:57:10</td><td>SM-11-07 both DEC</td><td>psnd blip + AVI set 09:57:56; DEC-1 USB flap ×23 while ON 09:58:02–09:58:42</td><td>1000 (tail 1200)</td></tr>
+<tr><td>10:00 run</td><td>Rooms 3–8 encoders</td><td>P3000 non-response (capture-side; AV service up, decoders locked)</td><td>1000</td></tr>
+<tr><td>10:27:17</td><td>SM-11-08 both DEC</td><td>psnd blip during the 10:00 capture</td><td>1000</td></tr>
+<tr><td>10:59:48</td><td>SM-11-07 both DEC</td><td>psnd blip + AVI set 11:03:59</td><td>1200</td></tr>
+<tr><td>11:44:20</td><td>SM-11-06 DEC-1</td><td>AVI-only set</td><td>1200</td></tr>
+<tr><td>11:49:55–11:56:43</td><td>SM-11-01</td><td>Midday cluster: EN-PC hub suspended 11:49:55 → DEC-2/3/4 psnd 11:49:57 → all-4 AVI 11:55:57 → EN-PC vhub ×78 and DEC-1 USB flap ×23 while ON (both sides captured)</td><td>1200</td></tr>
+<tr><td>11:58:56</td><td>SM-11-05 DEC-1</td><td>psnd blip</td><td>1200</td></tr>
+<tr><td>12:02:22</td><td>SM-11-03 DEC-1</td><td>AVI-only set during the 12:00 capture</td><td>1200</td></tr>
+<tr><td>12:03:54</td><td>SM-11-07 both DEC</td><td>psnd blip during the 12:00 capture</td><td>1200</td></tr>
+<tr><td>13:03:52 / 13:05:18</td><td>SM-11-05 DEC-1</td><td>AVI set, then psnd blip (2nd of the day for R5)</td><td>1400</td></tr>
+<tr><td>13:18:12</td><td>SM-11-04 DEC-1</td><td>psnd blip</td><td>1400</td></tr>
+<tr><td>13:25:48</td><td>SM-11-07 EN-Laptop</td><td>NTP sync transition visible in-buffer (Jan → real time); SM-11-02 EN-PC also synced this run — <strong>fleet fully synced from here</strong> (Danny set NTP on both today)</td><td>1400</td></tr>
+<tr><td>13:37–13:43</td><td>SM-11-02</td><td>Danny&#x27;s discriminator switch test (investigation thread; format-constant phase had zero restarts)</td><td>context</td></tr>
+<tr><td>13:50:18–14:03:28</td><td>SM-11-02</td><td>Dense switch cluster: EN-Laptop vhub ×63, EN-PC vhub ×20, DEC psnd 14:00:30 / 14:02:57 / 14:03:27 + AVI sets; all four buffers rotated to ~5–12 min</td><td>1400</td></tr>
+<tr><td>13:59:35</td><td>SM-11-04 DEC-1</td><td>AVI-only set</td><td>1400</td></tr>
+<tr><td>14:05:46–14:06:31</td><td>SM-11-07 both DEC / DEC-1</td><td>AVI set on both; DEC-1 USB flap ×23 while ON</td><td>1400</td></tr>
+<tr><td>15:12:02–16:05:43</td><td>Fleet</td><td><strong>Staggered STOP_STREAM sweep (42 lines)</strong> room by room: R2 15:12 + 15:24, R1 psnd 15:27:53, R3 15:28:32, R5 15:32:53, R8 15:48–15:49, R7 15:59:47, R6 16:00, R5 16:01, R4 16:02, R3 16:03, R1 all-4 16:05 (DEC-1 45-second buffer, kmoip UDP socket failures). Paired stop → AVI re-lock pulses = switch signature</td><td>1600</td></tr>
+<tr><td>15:55:41–15:55:53</td><td>SM-11-07 TV-DEC-2</td><td>Transient loop burst 156 lines at 13.0 lines/s while EN-PC was down; recovered with <code>encoder_ip_got 172.18.22.117</code></td><td>1600</td></tr>
+<tr><td>~15:56</td><td>SM-11-07 EN-PC</td><td><strong>Rebooted</strong> (Jan boot segment; first real-time line 15:56:01; Quick Reset 15:56:08). Cause not evidenced. Healthy at 14:00 run</td><td>1600</td></tr>
+<tr><td>15:59:54 → ~18:21:48</td><td>SM-11-07 TV-DEC-1</td><td><strong>USB storm</strong>: ×431 by 16:00 run, ×718 continuous by 18:00 run (whole buffer = 18 min of churn), EN-PC vhub ×40 paired; <strong>stopped ~18:21:48</strong> (20:00 run: all 217 lines before that minute)</td><td>1600/1800/2000</td></tr>
+<tr><td>16:31:24 / 17:33:49</td><td>SM-11-07 TV-DEC-2</td><td>Single psnd blips</td><td>1800</td></tr>
+<tr><td>16:37:02 / 16:38:42</td><td>SM-11-06 / SM-11-05 DEC-1</td><td>Single psnd blips</td><td>1800</td></tr>
+<tr><td>16:58:41–16:59:13</td><td>SM-11-08 DEC-1</td><td>psnd + STOP_STREAM</td><td>1800</td></tr>
+<tr><td>17:04:01</td><td>SM-11-03 DEC-1</td><td>Single STOP_STREAM</td><td>1800</td></tr>
+<tr><td>17:09:41–17:20:35</td><td>SM-11-01 TV-DEC-1</td><td>USB cycle ×30 paired with EN-PC vhub bursts</td><td>1800</td></tr>
+<tr><td>17:14:42–18:09:55</td><td>SM-11-08 TV-DEC-2</td><td>USB flapping resumed while ON, ×150, still cycling at 18:00 capture end; quiet again by 20:00</td><td>1800</td></tr>
+<tr><td>17:17:35–17:19:26</td><td>SM-11-02</td><td>Cluster: DEC-2 psnd + STOP ×4, DEC-1 STOP ×2 + kmoip failures, EN-PC Quick Reset 17:17:41, DEC-1 USB ×10</td><td>1800</td></tr>
+<tr><td>17:27:25</td><td>SM-11-04 DEC-1</td><td>psnd blip</td><td>1800</td></tr>
+<tr><td>17:48:49</td><td>SM-11-06 DEC-1</td><td>AVI-only set</td><td>1800</td></tr>
+<tr><td>17:58:58</td><td>SM-11-08 both DEC</td><td>psnd blip</td><td>1800</td></tr>
+<tr><td>18:07:55 / 19:33:00</td><td>SM-11-02 TV-DEC-2</td><td>Single psnd blips</td><td>2000</td></tr>
+<tr><td>18:20:10–18:20:29</td><td>SM-11-08 both DEC</td><td>Transient loop burst (181 + 123 lines, ~10.1 / ~12.3 lines/s) during an EN-PC/stream restart (EN-PC buffer restarts 18:20:44); stopped ≤19 s, locked after</td><td>2000</td></tr>
+<tr><td>18:33:06</td><td>SM-11-02 TV-DEC-2</td><td>STOP ×2 + EN-PC vhub ×4</td><td>2000</td></tr>
+<tr><td>18:48:04–18:48:21</td><td>SM-11-01 all 4 DEC</td><td>Switch cluster: STOP on all four, psnd DEC-1/DEC-3, EN-PC vhub ×15 + Quick Reset, EN-Laptop Quick Reset</td><td>2000</td></tr>
+<tr><td>19:16:56–20:04:51</td><td>SM-11-03</td><td>Encoder Quick Resets (EN-PC ×8, EN-Laptop ×2) + DEC-1 dense lock churn (261-second buffer, format flips 720p60 ↔ 1080p60), STOP ×4 20:03:30–20:04:04, psnd 20:04:51, still churning at 20:00 capture end</td><td>2000</td></tr>
+<tr><td>≤19:58:59 → 21:50:11</td><td>SM-11-02 TV-DEC-1</td><td><strong>USB storm</strong>: ×324 at 20:00 run (449-line all-USB buffer), ×720 retained 21:30:42–21:50:11 at 22:00 run; retained buffer ends 21:50:11, later state not evidenced tonight</td><td>2000/2200</td></tr>
+<tr><td>20:37–22:21</td><td>Fleet</td><td><strong>Evening standby transition sweep</strong>: R1 clusters 20:58 / 21:41 (psnd all DEC-2/3/4 + EN-PC hub suspended) / 21:45; R6 psnd 20:44:28, STOP 21:20:25; R5 psnd 20:45:46, STOP 21:16:17; R8 DEC-1 psnd 21:20:04, STOP 21:21:28, both DEC psnd 22:21:22; R7 DEC-2 psnd 21:22:10 + AVI, STOP 21:43:48; R4 psnd 21:35:05 + 21:45:34, STOP+AVI 21:44:37; R3 Quick Reset 21:12:50, psnd 21:49:52, STOP 21:51:41 (churn much calmer: 619 lines over 21:12–22:19)</td><td>2200</td></tr>
+<tr><td>22:00:10–22:17:49</td><td>SM-11-01 TV-DEC-1</td><td><strong>USB storm in standby</strong>, ×721, entire buffer, still cycling at end (was 0 at 20:00)</td><td>2200</td></tr>
+<tr><td>22:08:39–22:20:49</td><td>SM-11-07 TV-DEC-1</td><td><strong>USB storm restarted in standby</strong>, ×461, entire buffer, still cycling at end</td><td>2200</td></tr>
+<tr><td>22:10:26–22:21:44</td><td>SM-11-08 TV-DEC-2</td><td><strong>USB storm in standby</strong>, ×436, entire buffer, still cycling at end (was 0 at 20:00)</td><td>2200</td></tr>
+<tr><td>~22:13</td><td>SM-11-07 EN-Laptop</td><td>Log content cleared/rotated (LOG-TAIL returned 1 line; numbering restarted, uptime counters continuing; LOG-ACTION still 1,3, no ERR 012)</td><td>2200</td></tr>
+<tr><td>22:00 run</td><td>R3 EN-PC, R7 EN-PC, R8 EN-PC + EN-Laptop</td><td>P3000 no-answer (capture-side; snapshot all &quot;ok&quot;, room decoders locked)</td><td>2200</td></tr>
+</table>
+<h2>Per-issue day status</h2>
+<ul>
+<li><strong>Discovery loop — persistent form: CLOSED all day.</strong> The five units fixed via the Manager null-family assignment (R3 on 2026-10-14 ~11:10; R2 TV2 + R4/R5/R6 TV1 on 2026-10-14 evening) show <strong>0 loop lines in all eight runs</strong>, with lock evidence throughout — yesterday&#x27;s ~9–13 lines/s persistent loops did not return on any run. Only <strong>transient bursts tied to encoder absence/restart</strong> remain, three today: R8 both DEC 07:26 (encoder late boot), R7 DEC-2 15:55 (encoder reboot), R8 both DEC 18:20 (encoder/stream restart) — each ≤30 s, each self-recovered with <code>encoder_ip_got</code>, none present at day end (2200: 0 lines on all answered units). This matches the standing finding that the loop fires whenever a decoder cannot resolve its encoder, independent of the null-family defect.</li>
+<li><strong>USB flapping / storms — the day&#x27;s dominant problem, escalating into the night.</strong> Only the four known flappers ever flap (SM-11-01 DEC-1, SM-11-02 DEC-1, SM-11-07 DEC-1, SM-11-08 DEC-2); no new unit all day. Pattern by unit:</li>
+<li><strong>SM-11-07 TV-DEC-1 (worst):</strong> bursts while ON at 08:26 (×29), 09:58 (×23), 14:05 (×23) → <strong>continuous storm 15:59:54–~18:21:48 (~2 h 22 min; ×431 then ×718 per buffer)</strong> paired with EN-PC vhub errors and preceded by the EN-PC reboot → quiet 18:22–22:07 → <strong>storming again in standby at 22:08:39, still running at day end (×461)</strong>. A physical-degradation candidate (cable / TV USB port / hub path) — it now storms in both ON and standby states.</li>
+<li><strong>SM-11-02 TV-DEC-1:</strong> morning burst ×327 while ON (07:15–07:24) → quiet all day (×10 inside the 17:19 cluster) → <strong>storm from ≤19:58:59 through at least 21:50:11 (×324, then ×720 retained)</strong>; retained buffer ends 21:50:11 so its exact state at 22:21 is not evidenced.</li>
+<li><strong>SM-11-01 TV-DEC-1:</strong> midday flap ×23 while ON paired with EN-PC&#x27;s 78 vhub errors (11:56), evening cycle ×30 (17:09–17:20) → <strong>standby storm ×721 from ≤22:00:10, still running at day end</strong>.</li>
+<li><strong>SM-11-08 TV-DEC-2:</strong> quiet until afternoon flap ×150 while ON (17:14–18:09) → quiet at 20:00 → <strong>standby storm ×436 from ≤22:10:26, still running at day end</strong>.</li>
+<li>At day end <strong>all four are/were at full-buffer storm rate simultaneously in standby</strong> (fleet USB 2,338 lines this run vs 541 at 20:00) — materially above the burst-level standby baseline verified on 2026-10-13 night, and each storm erases that unit&#x27;s retained signal history.</li>
+<li><strong>Signal loss / stream transitions:</strong> No STOP_STREAM at all at 12:00/14:00; the day&#x27;s signal events are (a) <strong>brief psnd blips</strong> (~1 s, V1RxClient error + CRT power-save cycle, no STOP) — R7 ×4 (08:20, 09:57, 10:59, 12:03, all room-wide), R8 ×3 (08:45, 10:27, 17:58), R2 09:15, R3+R6 simultaneously 09:00:33, R5 ×2 (11:58, 13:05), R4 13:18, plus scattered singles — and (b) <strong>switch-signature clusters</strong> (paired STOP → AVI re-lock pulses, usually with encoder vhub/Quick Reset lines): R1 test cluster 08:23 (explained), R2 13:50–14:03 and 17:17, R1 11:49–11:56 and 18:48, the <strong>fleet-wide staggered sweeps 15:12–16:05 and 20:37–22:21</strong> covering every room. Every event with a readable buffer re-locked in-buffer; no event needed intervention during class hours, and no decoder stayed unlocked at any run&#x27;s end (storm-filled buffers excepted — their lock state is unverifiable while the storm fills the buffer).</li>
+<li><strong>Storage:</strong> &quot;No space left on device&quot; <strong>0 in all eight runs</strong> — despite the loop fix removing the buffer-churn cause, the USB storms now churn buffers at a comparable rate (a storm unit&#x27;s 1000 lines cover as little as 11–19 minutes). No LOG-ACTION change is indicated by today&#x27;s data (all units 1,3 all day; pausing/clearing would not address USB churn and clear is a Danny decision, still deferred).</li>
+<li><strong>LOG-ACTION:</strong> 1,3 everywhere, all day, no flips, no ERR 012. One read anomaly: SM-11-07 EN-Laptop&#x27;s content cleared/rotated ~22:13 (numbering restarted, LOG-ACTION unchanged).</li>
+<li><strong>Clocks / NTP:</strong> Morning: 2 encoders unsynced (SM-11-02 EN-PC, SM-11-07 EN-Laptop, Jan-1 device-time) as at 2026-10-14 day end. Danny set NTP on both today; the 14:00 run caught SM-11-07 EN-Laptop&#x27;s in-buffer transition at 13:25:48 and SM-11-02 EN-PC fully synced. <strong>Fleet 30/30 synced from the 14:00 run onward, including all of tonight&#x27;s buffers — the encoder NTP item is closed.</strong> All 14 TV decoders were synced all day.</li>
+<li><strong>Device events:</strong> One reboot all day — <strong>SM-11-07 EN-PC ~15:56</strong>, cause not evidenced in any buffer; it was healthy at 14:00, stable after (no new boot segment at 18:00/20:00; P3000 no-answer at 22:00 is the management-plane family, with its room&#x27;s DEC-2 locked). Room 3&#x27;s encoders logged repeated <code>VideoIP: Quick Reset</code> (stream-level, not reboots) at 19:16–20:02 and 21:12 with dense decoder lock churn that calmed by 22:00.</li>
+<li><strong>Encoder P3000 responsiveness (capture-side):</strong> slow at 08:00 (final recheck recovered 8/8), failed for Rooms 3–8 at 10:00 (0/12 recovered), clean attempt-1 at 12:00–20:00, failed again for 4 encoders at 22:00. Snapshot showed all targets &quot;ok&quot; at every run and decoder lock evidence confirms the AV service was up in every affected window — this is a management-plane reliability problem in its own right: on a bad run, encoder-side evidence (and Room 7 EN-PC&#x27;s side of its USB pairing) is simply unobtainable.</li>
+<li><strong>Coverage gaps of the day:</strong> the 10:00 run&#x27;s 12 missing encoder buffers and the 22:00 run&#x27;s 4 missing encoders + 1 empty buffer; otherwise complete. Ring-buffer rotation also limits history: storm/switch-churn units retain as little as 45 s–19 min, so events between runs on those units can be lost (mitigated by the 2-hour cadence today — every run&#x27;s new events were still captured at least once).</li>
+</ul>
+<h2>Switch cross-check</h2>
+<p>Switch cross-check skipped for this run: no credentials message was retrievable from the designated &quot;Switch Password&quot; side chat (chat_id 50cb1ae0-c068-47c9-a173-d15b069090b2) via the runtime database at run time, so no switch login was attempted and no switch logs were fetched (note saved in <code>../2026-10-15-switch/README.txt</code>). Today&#x27;s Room 3 / Room 8 signal events (R8: 08:45, 10:27, 17:58–17:59, 21:20–21:21, 22:21 blips/clusters and the 07:26/18:20 transient loops; R3: 09:00:33 blip, 17:04 STOP, 19:16–20:04 and 21:12–21:51 churn clusters) therefore have <strong>no switch-side correlation tonight</strong> — neither cleared nor implicated. For reference, the 2026-10-14 evening cross-check cleared both rooms&#x27; switch paths for that day&#x27;s events, and both rooms&#x27; buffered logging was raised to level 6 that evening; a future run with the credentials posted in the designated chat can correlate retrospectively only while the switches&#x27; buffered logs retain the window.</p>
+<h2>Day analysis</h2>
+<ol>
+<li><strong>The investigation&#x27;s two headline defects stayed fixed; the day&#x27;s problem moved to USB-over-IP.</strong> The persistent discovery loop (Manager null families) and the encoder NTP gaps both closed today and stayed closed across all eight runs. What replaced them as the dominant signal is USB: four known flappers escalating from bursts to multi-hour storms, on both the decoder side and (when readable) the paired encoder&#x27;s vhub side in the same minutes (R1 11:49–11:56 both sides; R7 15:59–18:21 both sides).</li>
+<li><strong>Room 7 is the day&#x27;s problem room by a wide margin:</strong> 5 room-wide blips, the fleet&#x27;s only encoder reboot (~15:56), a transient loop on DEC-2 during that reboot, EN-PC vhub bursts, the longest USB storm, a standby re-storm at day end, and its EN-Laptop&#x27;s log clearing at 22:13. The events cluster around the room&#x27;s PC-channel USB-over-IP path (EN-PC ↔ DEC-1), consistent with the standing watch item; DEC-2&#x27;s faults today were all knock-on effects of encoder absence, not independent failures.</li>
+<li><strong>Room-wide / staggered-sweep shape dominates signal loss; single-decoder faults are rare.</strong> Blips hit both displays of a room together (shared source/encoder path), and the two fleet sweeps (15:12–16:05, 20:37–22:21) rolled room by room with the paired stop → AVI re-lock signature of channel/source switching — including in evening standby hours, when no class activity explains switching. The capture data alone cannot attribute who or what switches; it does show the pattern is fleet-wide and time-clustered rather than per-device.</li>
+<li><strong>Brief psnd blips are a separate, milder family</strong> — ~1 s, no STOP_STREAM, immediate re-lock — recurring in Rooms 7/8 especially, once simultaneously in R3+R6 at the 09:00:33 class-start second. None escalated today.</li>
+<li><strong>Format-transition context (investigation thread, not re-derived here):</strong> today&#x27;s captures sit alongside Danny&#x27;s on-site tests (R1 PC switch test 08:19–08:24 with TV restarts; R2 discriminator test 13:37–13:43 proving the 720p60 standby transition is the necessary ingredient). The log sweeps show production switching churn of the same signature continuing all day and into standby — every such transition is, per the proven mechanism, a per-event probabilistic restart risk for the Fujitsu TVs while a room&#x27;s source drops to the 720p60 standby.</li>
+<li><strong>Management-plane fragility is now a pattern, not an episode:</strong> encoder P3000 non-response at 08:00 (partial), 10:00 (Rooms 3–8) and 22:00 (4 encoders), uncorrelated with AV service state. It degrades exactly the evidence needed on the worst days (e.g. no EN-PC side for Room 7 tonight).</li>
+</ol>
+<h2>Suggestions (advice only — none executed)</h2>
+<ol>
+<li><strong>SM-11-07 TV-DEC-1 USB path — physical check first (highest priority).</strong> It stormed ~2 h 22 min in class/evening hours and is storming again tonight. Inspect/replace its USB cable and check the TV USB port / hub path on site; the repeated pairing with SM-11-07 EN-PC vhub reset-failure errors points at the physical USB-over-IP link, not the decoder&#x27;s stream path. Extend the same physical check to <strong>SM-11-02 TV-DEC-1</strong> (storm from ≤19:58:59 to ≥21:50:11) and, at lower urgency, SM-11-01 TV-DEC-1 and SM-11-08 TV-DEC-2 (standby storms tonight).</li>
+<li><strong>SM-11-07 EN-PC reboot ~15:56 — ask the room&#x27;s evidence, don&#x27;t chase the decoder.</strong> No buffer explains it; if it recurs, correlate with the room&#x27;s switch/PoE and PCU-AVRack outlet state at the minute. Note its P3000 was also unresponsive tonight, so a field power/connection check of this encoder covers both observations.</li>
+<li><strong>Evening standby switching sweeps (15:12–16:05 and 20:37–22:21) — identify the switching actor.</strong> If a scheduler, the Manager, or a room panel macro is cycling channels/sources in standby, pinning that down would cut both the log churn and the 720p60-transition exposure; per the proven TV-restart mechanism, every standby transition into the 720p60 signal is a (probabilistic) restart risk. This is a question for Danny&#x27;s site knowledge — the logs cannot attribute it.</li>
+<li><strong>Room 3 lock churn (19:16–21:51)</strong> calmed by 22:00 but recurred across two runs with encoder Quick Resets; if it resumes tomorrow, capture the encoder side early (EN-PC was already no-answer tonight) and consider the Room 3 switch cross-check once credentials are available.</li>
+<li><strong>Switch cross-check housekeeping:</strong> post the switch password in the designated &quot;Switch Password&quot; side chat (chat_id 50cb1ae0-c068-47c9-a173-d15b069090b2) so future 22:00 runs can correlate Room 3/Room 8 events; tonight&#x27;s events could not be correlated.</li>
+<li><strong>Encoder P3000 responsiveness:</strong> Rooms 3–8 encoders timing out at CONNECT in three of today&#x27;s eight runs is worth raising with Kramer alongside the TV-restart escalation — it is fleet-management-plane behaviour, reproducible from the capture logs (capture.log of the 1000 and 2200 runs).</li>
+<li><strong>No LOG-ACTION action suggested:</strong> no &quot;No space left&quot; all day and logging stayed 1,3 fleet-wide; the deferred LOG-ACTION clear decision is not advanced by today&#x27;s data (buffer churn is now USB-driven, not loop-driven). The standing mitigation decision on decoder display delays (~300 s) and the KDS-SCALE question remain Danny&#x27;s, and today&#x27;s standby sweeps add context but no new evidence for either.</li>
+</ol>
+</div></main>
+</body>
+</html>

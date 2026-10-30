@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Summary 2026-10-23 · ShekMun Campus · Support Portal</title>
+<style>body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:36px 20px 26px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:28px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:860px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.doc{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px 28px;margin:18px 0 40px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.doc h1{font-size:23px;margin:4px 0 12px}
+.doc h2{font-size:19px;margin:22px 0 8px;color:#1e1b4b}
+.doc h3{font-size:16px;margin:18px 0 6px}
+.doc p{line-height:1.7;color:#1f2937;margin:8px 0}
+.doc ul,.doc ol{line-height:1.75;color:#1f2937;margin:8px 0 8px 20px;padding:0}
+.doc li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+th,td{border-bottom:1px solid #e2e8f0;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.5}
+th{background:#f8fafc;color:#475569}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:12.5px;word-break:break-all}
+hr{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
+.doc a{color:#3730a3}</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>📋 Daily Summary — 2026-10-23</h1>
+<div class="sub">Day-end AVoIP summary for ShekMun Campus （石門校園全日總結）, consolidated by the 22:00 log-capture run: merged timeline of the day's eight capture rounds, per-issue status, and the read-only 16-switch cross-check. <a href="shekmun-daily-reports.html">← All daily reports</a> · <a href="remote-campus.html">Remote Campus</a></div>
+<div class="meta"><span class="ver">2026-10-23</span><span>Friday · 星期五</span><span>Text summary edition</span></div>
+</div></header>
+<main class="wrap"><div class="doc">
+<h1>Shek Mun AVoIP — whole-day summary, Friday 2026-10-23 (HKT)</h1>
+<p>Built from all eight runs of today (0800 / 1000 / 1200 / 1400 / 1600 / 1800 / 2000 / 2200 — <strong>no run missing</strong>), each folder&#x27;s ANALYSIS.md + analysis.json + evidence, plus tonight&#x27;s switch cross-check attempt (below). All times HKT. Read-only all day: no resets, no config writes, no device changes by any run. Suggestions are advice only.</p>
+<p><strong>Day in one paragraph:</strong> a source-behaviour day, not a decoder-failure day. The fleet rebooted on the 07:00 power return; Room 8 looped for the fourth consecutive morning (~13 min after the restore, self-stopped, no recurrence). The black-feed signature appeared exactly once — Room 2 at 09:33, source-side, recovered by noon — and did not spread to a third room. Losses clustered at class transitions all day: the morning start sequence, a 09:12–09:40 wave, the 12:02 Room 7 drop (6 h standby, recovered in-log at 18:22), the 13:00 Room 3 drop, the 14:53 Room 2 and 15:42 Room 6 drops, a 17:35–17:58 evening wave, and the 20:27–21:59 wind-down. Evening classes recovered seven rooms by 20:13 (only idle Room 2 stayed down); the night ends with all eight rooms in standby and all four known USB units storming simultaneously — the same end-of-day pattern as yesterday. Coverage was 30/30 at all eight runs, LOG-ACTION 1,3 never flipped, No-space stayed 0, the fleet stayed NTP-synced, and the discovery loop never ran outside the morning transient.</p>
+<h2>Day timeline (HKT, chronological; duplicates across runs merged; [run] = capturing run)</h2>
+<ul>
+<li><strong>07:00</strong> Campus power schedule ON; fleet reboots. [0800]</li>
+<li><strong>07:01–07:10</strong> Morning power-on sequence: fleet-wide STOP cluster</li>
+</ul>
+<p>(non-fault). [0800]</p>
+<ul>
+<li><strong>07:03–07:12</strong> Morning USB storms: R7 DEC-1 ×306, R1 DEC-1 ×222, R2 DEC-1</li>
+</ul>
+<p>×18 burst (ON hours). [0800]</p>
+<ul>
+<li><strong>07:12:46–07:13:23</strong> R8 discovery-loop episode — DEC-1 344 lines ≈9.30/s,</li>
+</ul>
+<p>DEC-2 297 lines ≈12.38/s, self-stop; STOP set 07:13:36 → standby. <strong>Fourth consecutive morning</strong>, ~13 min after the 07:00 restore (fixed-delay pattern). [0800; retained tail at 1000; 0 loop lines from 1200]</p>
+<ul>
+<li><strong>07:30:39 + 07:31:50</strong> Room 1 drops twice more after the start sequence.</li>
+</ul>
+<p>[0800]</p>
+<ul>
+<li><strong>07:50:04</strong> Room 2 psnd; <strong>08:02:53</strong> Room 1 drop (DEC-1/2/3); <strong>08:04:53</strong></li>
+</ul>
+<p>Room 2 STOP. [0800]</p>
+<ul>
+<li><strong>08:11:53</strong> Room 3 drop → recovered. [1000]</li>
+<li><strong>08:15–08:18 evidence</strong> Standby in Rooms 1/2/3/4/7/8 (source-side); Rooms</li>
+</ul>
+<p>5/6 live content; <strong>no black</strong>. [0800]</p>
+<ul>
+<li><strong>09:18:28</strong> Room 1 all-four drop. [1000]</li>
+<li><strong>09:24:52</strong> Room 5 drop (live→slate). [1000]</li>
+<li><strong>09:31:52–09:32:37</strong> Room 2 DEC-1 USB burst ×29, ~70 s before the drop.</li>
+</ul>
+<p>[1000]</p>
+<ul>
+<li><strong>09:33:47</strong> Room 2 drop → **09:34:35 re-lock onto the 1,167 B pure-black</li>
+</ul>
+<p>feed<strong> (EN-PC + TV-DEC-1 + TV-DEC-2) — </strong>PC-SOURCE-BLACK, today&#x27;s only black episode**. [1000]</p>
+<ul>
+<li><strong>10:11–10:15 evidence</strong> R2 black confirmed; R8 on the 1,218 B dark console</li>
+</ul>
+<p>(distinct from the black signature); Rooms 3/6/7 live. [1000]</p>
+<ul>
+<li><strong>11:26:06</strong> Room 4 re-lock onto title slide. [1200]</li>
+<li><strong>11:45:06/08</strong> Room 2 drop → re-lock onto content (black cleared). [1200]</li>
+<li><strong>11:59:42–12:00:29</strong> Room 7 DEC-1 USB burst ×23, ~2 min before the drop.</li>
+</ul>
+<p>[1200]</p>
+<ul>
+<li><strong>12:00</strong> Room 5 recovered. [1200]</li>
+<li><strong>12:02:35</strong> Room 7 both decoders drop (live lecture at 10:00) → standby for</li>
+</ul>
+<p>~6 h. [1200]</p>
+<ul>
+<li><strong>12:12–12:16 evidence</strong> R7 standby (new case); R1/2/4/5/8 live content.</li>
+</ul>
+<p>[1200]</p>
+<ul>
+<li><strong>13:00:33</strong> Room 3 drop (new live case; transient 1920). [1400]</li>
+<li><strong>14:10–14:12 evidence</strong> R3 new case, R7 continuing; R2/R4 in class. [1400]</li>
+<li><strong>14:53:50</strong> Room 2 both decoders drop (class ended). [1600]</li>
+<li><strong>15:03:32/33</strong> Room 1 drop set → re-lock ~15 s; <strong>15:03:49–15:04:29</strong> Room 1</li>
+</ul>
+<p>DEC-1 USB burst ×23 (ON hours, ~16 s after the drop set). [1600]</p>
+<ul>
+<li><strong>15:06:32/34</strong> Room 8 drop set → genuine re-lock. [1600]</li>
+<li><strong>15:42:21</strong> Room 6 drop, no re-lock (new case). [1600]</li>
+<li><strong>15:56:01</strong> Room 3 genuine re-lock (PC lock screen). [1600]</li>
+<li><strong>16:12–16:16 evidence</strong> R2/R6/R7 standby; R3 recovered; R1/R8 healthy.</li>
+</ul>
+<p>[1600]</p>
+<ul>
+<li><strong>17:17:33</strong> Room 6 extra psnd. [1800]</li>
+<li><strong>17:35:47</strong> Room 3 re-drop (after ~1 h 40 min of feed). [1800]</li>
+<li><strong>17:46:47</strong> Room 4 drop. [1800]</li>
+<li><strong>17:58:38</strong> Room 1 all-four drop (transient 1920 probes only). [1800]</li>
+<li><strong>18:00:35–18:01:48</strong> Room 8 DEC-2 USB storm ×52 (ON hours; ~5 min before the</li>
+</ul>
+<p>drop). [1800]</p>
+<ul>
+<li><strong>18:06:25/48</strong> Room 8 both TVs STOP flapping. [1800]</li>
+<li><strong>18:15 evidence</strong> 7 rooms standby (only Room 5 live — the day&#x27;s low point).</li>
+</ul>
+<p>[1800]</p>
+<ul>
+<li><strong>18:22:25–27</strong> Room 7 <strong>in-log genuine re-lock</strong> (decode screen +</li>
+</ul>
+<p>detect_video_switch stream) — ends the ~6 h standby. [2000]</p>
+<ul>
+<li><strong>18:22:30–18:29:21</strong> Room 7 DEC-1 USB storm ×237 (ended; coincided with the</li>
+</ul>
+<p>recovery). [2000]</p>
+<ul>
+<li><strong>19:42:00</strong> Room 2 DEC-2 drop (new). [2000]</li>
+<li><strong>19:45:01–20:03:20</strong> Room 2 DEC-1 USB storm ×722 (ongoing at capture).</li>
+</ul>
+<p>[2000]</p>
+<ul>
+<li><strong>19:57:23</strong> Room 3 drop. [2000]</li>
+<li><strong>20:13–20:16 evidence</strong> Evening classes recovered R1/R3/R4/R6/R7/R8 — **only</li>
+</ul>
+<p>Room 2 still down** (idle, dark, NO SIGNAL slate). [2000]</p>
+<ul>
+<li><strong>20:27:38 / 20:31:31–32</strong> Room 4 drop (evening class ended; no re-lock in</li>
+</ul>
+<p>buffer). [2200]</p>
+<ul>
+<li><strong>20:41:32 / 20:48:26–27</strong> Room 5 drop ×2 (re-locked in-buffer). [2200]</li>
+<li><strong>20:46:01–21 / 21:46:52–53</strong> Room 3 drop ×2 (no re-lock in-buffer).</li>
+</ul>
+<p>[2200]</p>
+<ul>
+<li><strong>20:52:10–11 / 21:52:06</strong> Room 6 drop ×2 (re-locked in-buffer). [2200]</li>
+<li><strong>21:12:24 / 21:36:06–07</strong> Room 7 DEC-2 drop ×2 (no re-lock in-buffer).</li>
+</ul>
+<p>[2200]</p>
+<ul>
+<li><strong>21:20:17 / 21:27:10</strong> Room 8 DEC-1 drop ×2 (re-locked in-buffer). [2200]</li>
+<li><strong>21:34:24</strong> Room 7 EN-PC log restarts (369-line short buffer). [2200]</li>
+<li><strong>21:44:21</strong> Room 8 EN-Laptop log restarts (247-line short buffer). [2200]</li>
+<li><strong>21:45:53–22:05:22</strong> Room 2 DEC-1 USB storm ×721 (ongoing). [2200]</li>
+<li><strong>21:50:28</strong> Room 1 DEC-3/DEC-4 drop; <strong>21:58:53–54</strong> all four Room 1</li>
+</ul>
+<p>decoders (DEC-3 without re-lock). [2200]</p>
+<ul>
+<li><strong>21:51:24–22:10:27</strong> Room 7 DEC-1 USB storm ×720 (ongoing). [2200]</li>
+<li><strong>21:57:10–22:11:58</strong> Room 8 DEC-2 USB storm ×679 (ongoing). [2200]</li>
+<li><strong>21:59:09–22:03:43</strong> Room 1 DEC-1 USB burst ×193 (ongoing at capture end).</li>
+</ul>
+<p>[2200]</p>
+<ul>
+<li><strong>22:15–22:22 evidence</strong> <strong>All 8 rooms on decoder standby</strong> (dark, empty;</li>
+</ul>
+<p>36/38 thumbnails the NO SIGNAL slate). <strong>Room 3 recovered source-side between capture end and evidence</strong> — EN-PC + TV-DEC-1 byte-identical 12,093 B content frames. No black frames anywhere tonight. [2200]</p>
+<h2>Per-issue day status</h2>
+<ul>
+<li><strong>Discovery loop:</strong> the LED-wall loopers (R2 TV-DEC-2, R4/R5/R6 TV-DEC-1)</li>
+</ul>
+<p>stayed loop-free at all 8 runs — no unit started or stopped looping. The only episode was Room 8&#x27;s morning transient 07:12:46–07:13:23 (fourth consecutive morning, ~13 min after the 07:00 power restore, self-stopped; retained tail visible at 1000, zero loop lines from 1200 on). It is the power-restore fixed-delay transient, not the null-channel persistent family.</p>
+<ul>
+<li><strong>Storage:</strong> &quot;No space left on device&quot; = 0 at all 8 runs, all 30 units.</li>
+<li><strong>LOG-ACTION:</strong> 30/30 units at 1,3 at every run — <strong>zero flips all day</strong>,</li>
+</ul>
+<p>zero ERR 012 (no rule-break anomalies), zero no-answers. Coverage 30/30 at all eight runs.</p>
+<ul>
+<li><strong>Encoder clocks:</strong> NTP-synced all day. Only the 0800 run showed Jan-01 boot</li>
+</ul>
+<p>segments (overnight power cut, landed on sync); 1000–2200 fully clean.</p>
+<ul>
+<li><strong>Black-feed signature:</strong> exactly one episode today — Room 2, 09:33:47 drop</li>
+</ul>
+<p>→ 09:34:35 re-lock onto the 1,167 B frame, recovered to content by 12:00. It did <strong>not</strong> spread to a third room. Room 8&#x27;s 1,218 B dark console is a distinct frame (locked dark console with white points, not the black feed). Rooms 7 and 8 (yesterday&#x27;s black rooms) stayed black-free today.</p>
+<ul>
+<li><strong>USB flapping:</strong> all four known units stormed today. In-class / ON-hours</li>
+</ul>
+<p>bursts (the significant form): R1 DEC-1 ×222 at 07:03–07:08, R2 DEC-1 ×29 at 09:31:52 (~70 s before the drop), R1 DEC-1 ×23 at 15:03:49 (~16 s after the drop set), R8 DEC-2 ×52 at 18:00:35 (~5 min before the drop). Standby storms: R2 DEC-1 ×722 (19:45), R7 DEC-1 ×237 (18:22), then all four simultaneously at day end (R2 ×721, R7 ×720, R8 ×679, R1 ×193) — the same end-of-day pattern as 2026-10-22. No new flapping unit. Encoder-side USB-over-IP fallout rode the transitions on R1/R7/R8 EN-PCs.</p>
+<h2>Day analysis</h2>
+<ol>
+<li><strong>Source behaviour drove everything — again.</strong> All 30 units answered and</li>
+</ol>
+<p>logged actively all day; every confirmed down-state traced to the room&#x27;s encoder input (slate = no input; black = blank input). No decoder-fault candidate today.</p>
+<ol>
+<li><strong>The black signature is contained, not spreading.</strong> One episode (Room 2,</li>
+</ol>
+<p>morning), source-side (class-end PC feeding black), self-recovered within ~2 h. Yesterday&#x27;s black rooms (7, 8) showed nothing of it today. Tonight&#x27;s evidence has zero black frames.</p>
+<ol>
+<li><strong>Events cluster at class transitions, as on previous days:</strong> the 07:00–</li>
+</ol>
+<p>07:31 start sequence, the 09:12–09:40 morning wave, the 12:02 Room 7 drop, the 13:00 Room 3 drop, the 14:53/15:42 afternoon drops, the 17:35–17:58 evening wave, the 20:13 evening-class recovery, and the 20:27–21:59 wind-down. Room-wide simultaneity always resolved to one shared source event per room. Room 3 was the flappiest (5 drop episodes); Room 1 the most in-and-out (4 episodes, always recovering).</p>
+<ol>
+<li><strong>USB bursts keep arriving just before drops</strong> — R2 09:31 → 09:33, R7</li>
+</ol>
+<p>11:59 → 12:02, R8 18:00 → 18:06. Correlation, not proven cause, but the USB-over-IP path remains the top physical suspect and the in-class bursts are the significant form.</p>
+<ol>
+<li><strong>Room 7&#x27;s arc:</strong> black yesterday → clean slate in the morning → 6 h</li>
+</ol>
+<p>standby from 12:02 → genuine in-log re-lock 18:22 → evening class → second wind-down 21:12–21:36 → standby at day end. Still the longest-running recurrence on the board.</p>
+<ol>
+<li><strong>Investigation baselines hold:</strong> the discovery loop has not been a</li>
+</ol>
+<p>persistent fault since the Manager-assignment fixes (today: one boot transient); No-space 0 for three full days; the fleet NTP-synced; LOG-ACTION unflipped across sixteen consecutive runs (two days × eight).</p>
+<h2>Switch cross-check (read-only; no raw JSON tonight)</h2>
+<p><strong>SKIPPED.</strong> The 16-switch fetch was attempted ~22:05 HKT via sw_fetch.py, one attempt per switch, password passed via stdin only (never stored anywhere).</p>
+<ul>
+<li>Room 1 pair (satellite 172.18.22.21 / master 172.18.22.11): AV-UI login</li>
+</ul>
+<p>returned an empty (non-JSON) response — the <strong>fourth consecutive evening</strong> with this failure mode (2026-10-20, -21, -22, -23); the pair succeeded in the 2026-10-20 morning baseline, so this reads as an evening/API behaviour of that pair, not a password problem.</p>
+<ul>
+<li>Rooms 2–8 pairs (14 switches): login <strong>rejected</strong> (JSON response, no session</li>
+</ul>
+<p>token) with the password from the approved fallback source (Danny&#x27;s 2026-10-14 &quot;network switch password for all rooms&quot; message in the Extron Password side chat; the dedicated Switch Password side chat again returned 0 turns). <strong>The same password logged in on 14/16 switches last night (2026-10-22)</strong> — the password may have been rotated today. Per the run rules: no repeated retries, no guessing — so the cross-check stops here.</p>
+<ul>
+<li>Baseline comparison: NOT APPLICABLE — no 2026-10-23-switch-baseline/ exists</li>
+</ul>
+<p>(the morning baseline was a 2026-10-20 one-off).</p>
+<p>Net: <strong>no switch-side evidence exists for any of today&#x27;s decoder events</strong> — nothing below claims anything about the switches. All of today&#x27;s loss readings stand on the decoder/encoder logs alone, which consistently show source-side (PC stop/start, black feed) rather than network-side causes.</p>
+<h2>Suggestions (advice only — nothing executed)</h2>
+<ol>
+<li><strong>Room 7 field check first (longest-running recurrence):</strong> lectern PC</li>
+</ol>
+<p>display mode <strong>Duplicate, not Extend</strong> (the proven 2026-10-15 cause for this room), PC output fixed to <strong>1920×1080@50 Hz</strong>, PC power/sleep settings, HDMI into EN-PC, and the USB-over-IP path (DEC-1 stormed ×720 tonight; EN-PC&#x27;s log restarted at 21:34:24 — worth a look at the same visit).</p>
+<ol>
+<li><strong>Room 8 field check alongside Room 7</strong> (same PC-side list first). For the</li>
+</ol>
+<p>morning loop: the start is pinned to ≈13 min after the 07:00 power restore across four mornings — check the satellite switch .28 PoE schedule/port timing at the 07:00 restore; a timed capture of the encoder&#x27;s boot log at 07:1x would pin the absent window. No Manager change suggested — the loop is transient and the channel scheme is verified correct.</p>
+<ol>
+<li><strong>Physical USB-path checks for the four known storm units</strong></li>
+</ol>
+<p>(SM-11-01 TV-DEC-1, SM-11-02 TV-DEC-1, SM-11-07 TV-DEC-1, SM-11-08 TV-DEC-2 — cable / TV USB port / hub). Prioritise R2 and R8 (bursts minutes before today&#x27;s drops) and R1 (in-class bursts at 07:03 and 15:03).</p>
+<ol>
+<li>**Decision A (LOG-ACTION 4 clear on SM-11-01 TV-DEC-1 only): leave</li>
+</ol>
+<p>unexecuted.** Restating only because it is pending: No-space was 0 at all eight runs and that unit&#x27;s storm refills its buffer in ~16 minutes — a clear remains a stopgap with no supporting data.</p>
+<ol>
+<li><strong>Switch password:</strong> tonight the R2–R8 pairs rejected the previously</li>
+</ol>
+<p>working password — Danny to confirm whether it was rotated; if so, post the new one as a fresh message in the Switch Password side chat so the cross-check resumes tomorrow night.</p>
+<ol>
+<li><strong>Room 1 switch pair (172.18.22.21 / .11):</strong> fourth consecutive evening of</li>
+</ol>
+<p>empty login responses — worth a daytime check of that pair&#x27;s management UI; until then Room 1 has no evening cross-check.</p>
+<ol>
+<li><strong>STP origin MAC 28:94:01:73:55:30:</strong> recurring fleet-wide topology-change</li>
+</ol>
+<p>source (2026-10-21 20:39/20:46, 2026-10-22 09:03) — one question to the network side, carried over from yesterday; no switch data tonight to re-verify.</p>
+</div></main>
+</body>
+</html>
