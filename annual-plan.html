@@ -35,7 +35,9 @@ main{max-width:1180px;margin:0 auto;padding:20px}
 .sec-head h2{margin:0;font-size:21px}
 .sec-head .sheet{background:var(--ink);color:#fff;border-radius:8px;padding:2px 9px;font-size:12.5px;font-weight:700}
 .sec-head small{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:16px;overflow:hidden;box-shadow:0 4px 14px rgba(15,23,42,.04)}
+.blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start;margin-bottom:16px}
+@media(max-width:980px){.blocks{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:0;overflow:hidden;box-shadow:0 4px 14px rgba(15,23,42,.04)}
 .card-h{padding:15px 18px 10px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .card-h h3{margin:0;font-size:16.5px}
 .badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
@@ -46,7 +48,7 @@ main{max-width:1180px;margin:0 auto;padding:20px}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 th{text-align:left;color:var(--muted);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;border-top:1px solid var(--line);background:#f8fafc;white-space:nowrap}
 td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top;white-space:pre-line;min-width:90px}
-td.task{min-width:260px}
+td.task{min-width:170px}
 tr:hover td{background:#fafbff}
 .pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
 .pill.done{background:var(--green-bg);color:var(--green);border:1px solid #a7f3d0}
@@ -77,6 +79,7 @@ body.editing td[contenteditable]{outline:1px dashed #c7d2fe;outline-offset:-2px;
 <div class="tool">
 <input type="search" id="q" placeholder="Search tasks, remarks, names…">
 <select id="owner"><option value="">All follow-ups</option></select>
+<select id="doneFilter"><option value="">All items</option><option value="hide">Hide completed</option><option value="only">Completed only</option></select>
 <button class="btn" id="editBtn">✏️ Edit mode</button>
 <button class="btn" id="expBtn">Export JSON</button>
 <button class="btn" id="impBtn">Import JSON</button>
@@ -95,11 +98,11 @@ body.editing td[contenteditable]{outline:1px dashed #c7d2fe;outline-offset:-2px;
 <script>
 const PUBLISHED = {"sections": [{"id": "projects", "sheet": "01", "name": "Projects", "planTitle": "Project Management Plan", "blocks": [{"title": "Shek Mun 12/F (Multipurpose Room and Meeting Room)", "target": "Dec 2026", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["23-Sep-2026", "02-Oct-2026", "Purchase order issued (Multipurpose Room)", "Done", "—"], ["23-Sep-2026", "14-Oct-2026", "Purchase order issued (Meeting Room)", "Done", "—"], ["13-Oct-2026", "30-Oct-2026", "Prepare and follow up the Trunk and node diagram", "Done", "Diagram (link)"], ["16-Oct-2026", "21-Oct-2026", "Check equipment delivery schedule with GBA/Broaden", "Done", "GBA provided on 20 Oct; Broaden provided on 22 Oct"], ["19-Oct-2026", "23-Oct-2026", "Check relocation cost from M+ to Shek Mun (TV + Lectern); Funding: ITSC Budget", "Ben", "TV x 4 to Shek Mun 12/F; Lectern to M1003"], ["19-Oct-2026", "30-Oct-2026", "Issue latest data node plan", "Done", "Link"], ["19-Oct-2026", "30-Oct-2026", "Prepare System requirement documents", "Ruby", "—"], ["03-Oct-2026", "30-Nov-2026", "Equipment Delivery", "", "—"]]}, {"title": "M1003 New LED Wall", "target": "Dec 2026", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["15-Oct-2026", "19-Oct-2026", "Check with TVS for vertical installation method for All-in-one LED", "Done", "—"], ["15-Oct-2026", "23-Oct-2026", "Collect reference cost for 220 inches", "Done", "Link"], ["20-Oct-2026", "20-Oct-2026", "Consultation meeting with CTL — Post Meeting notes: CTL prefers 163 inch only solution; Delon suggest to install TV at the back and display Glassboard (with PTZ Cam)", "Done", "Proposals"], ["23-Oct-2026", "23-Oct-2026", "Site visit arrangement with TVS", "Done", "Scheduled on 23 Oct"], ["21-Oct-2026", "26-Oct-2026", "Reference quotation collection (#1) — 163\" All-in-one with mount, installation and annual maintenance", "Done", "Link"], ["21-Oct-2026", "28-Oct-2026", "Reference quotation collection (#2) — Control System (Extron+Raspberry), Touch monitor x 1, PTZ Cameras x 3, Aver MT-300 x 1, AVoIP Devices (Encoder x 2 / Decoder x 4), PC/Laptop 3 display+audio, Mixer x 1, Network Switch x 1, 55\" TV x 2, Lectern (Redeploy from M+) x 0, Linear array speaker x 0, Microphone x 0, Amplifier x 0", "Done", "Consolidated purchase list (link)"], ["02-Nov-2026", "06-Nov-2026", "Issue RFQ", "Ben", "RFQ"], ["09-Nov-2026", "20-Nov-2026", "Issue PR", "", "—"], ["23-Nov-2026", "23-Nov-2026", "Issue PO", "", "—"], ["23-Nov-2026", "14-Dec-2026", "Product Delivery", "", "—"], ["15-Dec-2026", "31-Dec-2026", "Installation", "", "—"]]}, {"title": "Auditorium New LED Wall", "target": "Jun 2027", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "Erudite House", "target": "Jul 2027", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "ShekMun 9/F", "target": "Sep 2027", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "A404 LED Cave Expansion", "target": "Sep 2027", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "Renovation of The Always", "target": "Postponed", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": []}]}, {"id": "tasks", "sheet": "02", "name": "Tasks", "planTitle": "Task Management Plan", "blocks": [{"title": "ELC TV Installation", "target": "Oct 2026", "note": "Project costs to be charged to the English Department.", "cols": ["Start Date", "End Date", "Sub-Task", "Follow up", "Remarks"], "rows": [["10/9/2026", "10/20/2026", "PR Issued", "Done", "Approved on 16 Oct 2026"], ["10/21/2026", "10/21/2026", "PO Issued", "Done", "Confirmation issued to Broaden on 20 Oct 2026"], ["10/22/2026", "10/30/2026", "Check Delivery status", "Ben/Ruby", ""], ["10/27/2026", "10/30/2026", "Notify user for the new TV model information", "Ben", ""], ["10/25/2026", "11/13/2026", "Delivery", "", ""], ["11/14/2026", "11/30/2026", "Installation", "", "• Remind ELC to request Power bar\n• HDMI Cables"]]}, {"title": "A406/A408 TV Installation", "target": "Nov 2026", "note": "Project costs to be charged SBUS(50%)/University(50%).", "cols": ["Start Date", "End Date", "Sub-Task", "Follow up", "Remarks"], "rows": [["10/2/2026", "10/16/2026", "PR Issued", "Done", "Approved on 15 Oct 2026"], ["10/18/2026", "10/18/2026", "PO Issued", "Done", "Confirmation issued to TVS on 20 Oct 2026"], ["10/19/2026", "10/21/2026", "Check Delivery Status", "Done", "2-3 weeks (est install in 1st & 2nd week of Nov)"], ["10/19/2026", "11/6/2026", "Delivery", "", ""], ["11/9/2026", "11/13/2026", "Installation", "", "A408 HDMI cable arrangement may need to confirm with user on site during installation"]]}, {"title": "A307-A309 Steam Lab Equipment Installation", "target": "Nov 2026", "note": "", "cols": ["Start Date", "End Date", "Sub-Task", "Follow up", "Remarks"], "rows": [["10/14/2026", "10/19/2026", "Issue requirements to CDMO (Tak Gor)", "Done", "Node and trunk requirement"], ["10/14/2026", "10/23/2026", "Prepare equipment list", "Done", "Equipment List"], ["10/14/2026", "10/23/2026", "Collect quotations from Broaden", "Done", "Link"], ["10/26/2026", "10/28/2026", "Get CDMO Consent for the cost", "Ben", "Link ($52,345)"], ["10/26/2026", "11/2/2026", "Issue RFQ", "Ben", "Reference PPT"], ["11/3/2026", "11/13/2026", "Issue PR", "Ben", ""], ["11/14/2026", "11/14/2026", "Issue PO", "", ""], ["11/15/2026", "12/11/2026", "Delivery and Installation", "", ""]]}, {"title": "M3 Podium Speakers Reinstallation", "target": "Nov 2026", "note": "", "cols": ["Start Date", "End Date", "Sub-Task", "Follow up", "Remarks"], "rows": [["14 Oct 2026", "19 Oct 2026", "Check with CDMO for target reinstallation date", "Done", "CMDO advise on/after 27 Nov 2026"], ["19 Oct 2026", "23 Oct 2026", "Collect quotations", "Ben", "Reinstallation after 27 Nov 2026"], ["26 Oct 2026", "27 Oct 2026", "Get CDMO Consent for the cost", "Ben", ""], ["27 Oct 2026", "02 Nov 2026", "RFQ", "", ""], ["03 Dec 2026", "11 Dec 2026", "Issue PR", "", ""], ["12 Dec 2026", "12 Dec 2026", "Issue PO", "", ""], ["13 Dec 2026", "13 Dec 2026", "Installation", "", ""]]}, {"title": "Misc.", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Sub-Task", "Follow up", "Remarks"], "rows": [["22 Oct 2026", "20 Nov 2026", "ShekMun Room 1 Control System bug fix", "Ruby", "1. System On failure: Status light keep flashing\n2. Wrong Status light: Side TV\n3. GVE system on did not turn on TV for Room 1,2,7,8"], ["27 Oct 2026", "06 Nov 2026", "M+ Follow up", "Ruby / Broaden", "1. Broaden update the program change status\n2. Schedule the 1-room trial run for the new update"], ["01 Mar 2027", "31 Aug 2027", "SM9F Project Management Service (GBA)", "", ""], ["01 Feb 2027", "31 Aug 2027", "Companion / Streamdeck Implementation\n- 1 or 2 Bitwise replacement\n- ShekMun/M+", "", ""]]}]}, {"id": "internal", "sheet": "03", "name": "Internal Projects", "planTitle": "Internal Projects Management Plan", "blocks": [{"title": "Projector Upgrade", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "Network Switch Upgrade", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["10/15/2026", "10/23/2026", "Collect reference quotations", "Done", "2026/27 Budget for network switch:\n- Reference Model: Netgear G316EPP\n- Refernce Unit Price: $2500\n- Budget Quantity: 20\n- Total allowed budget: $55,000"], ["10/26/2026", "10/30/2026", "Issue RFQ", "Done", "Issued on 16 Oct, until 23 Oct"], ["10/20/2026", "10/30/2026", "Prepare room list for switch upgrade", "Ruby", "link"], ["11/2/2026", "11/13/2026", "Issue PR", "", ""], ["11/16/2026", "11/16/2026", "Issue PO", "", ""], ["11/16/2026", "12/18/2026", "Delivery", "", ""]]}, {"title": "Classroom Control System Upgrade", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "D801 Conference System Upgrade", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "Wireless Microphone System Upgrade", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Task", "Remarks"], "rows": []}, {"title": "Annual PC Procurement (Specifications)", "target": "TBD", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["10/20/2026", "10/30/2026", "Collect reference quotations", "Cibe", "Target: Tender board meeting 26 Jan 2027)\nBudget: 2026/27 ($2,139,500)\n- PC x 80: $1,320,000\n- Laptop x 20: $330,000\n- Laptop x 20: $330,000\n- Monitor 24\" x 50: $82,500\n- Monitor 27\" x 20: $77,000"], ["10/20/2026", "10/30/2026", "Collect reference quotations", "Cibe", "Tuition Fee enhancment\nShekMun\n- HighEnd computer with Monitor x 117\n- Computer with monitor x 50\nThe Create\n- HighEnd computer with Monitor x 41"], ["11/2/2026", "11/30/2026", "Tender request", "Cibe", "Specifications"], ["12/1/2026", "12/24/2026", "Tender close", "Cibe", ""], ["12/28/2026", "1/8/2027", "Tender evaluation", "Cibe", ""], ["1/11/2027", "1/22/2027", "Tender board paper", "Cibe", ""], ["1/26/2027", "1/26/2027", "Tender board meeting", "Cibe", ""]]}]}, {"id": "maintenance", "sheet": "04", "name": "Annual Maintenance", "planTitle": "Annual Maintenance Plan", "blocks": [{"title": "Main Campus Annual Maintenance (Payment)", "target": "Next: 20 Nov 2026", "note": "Contract Period: 1 April 2025 to 31 March 2027 · Total cost of Contract: HKD 425,000.00", "cols": ["Start Date", "End Date", "Follow up", "Remarks"], "rows": [["01 Apr 2025", "30 Jun 2025", "Done", "Payment 1: HKD 53,125.00"], ["01 Jul 2025", "30 Sep 2025", "Done", "Payment 2: HKD 53,125.00"], ["01 Oct 2025", "31 Dec 2026", "Cibe", "Payment 3: HKD 53,125.00"], ["01 Jan 2026", "31 Mar 2026", "", "Payment 4: HKD 53,125.00"], ["01 Apr 2026", "30 Jun 2026", "", "Payment 5: HKD 53,125.00"], ["01 Jul 2026", "30 Sep 2026", "", "Payment 6: HKD 53,125.00"], ["01 Oct 2026", "31 Dec 2026", "", "Payment 7: HKD 53,125.00"], ["01 Jan 2027", "31 Mar 2027", "", "Payment 8: HKD 53,125.00"]]}, {"title": "Main Campus Annual Maintenance (Contract Renewal)", "target": "Before: 31 Mar 2027", "note": "$425,000 (2-year contract)", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["01 Dec 2026", "31 Dec 2026", "Collect quotation for 2027-2028", "New Procurement Officer", "PO"], ["01 Jan 2027", "15 Jan 2027", "Prepare requirement specifications", "New Procurement Officer", ""], ["16 Jan 2027", "29 Jan 2027", "RFQ", "New Procurement Officer", ""], ["01 Feb 2027", "26 Feb 2027", "Issue PR", "New Procurement Officer", ""], ["01 Mar 2027", "01 Mar 2027", "Issue PO", "New Procurement Officer", ""]]}, {"title": "D201 Lighting System Maintenance", "target": "Before: 31 Aug 2027", "note": "", "cols": ["Start Date", "End Date", "Contact", "Remarks"], "rows": []}, {"title": "The Create Annual Maintenance (Contract Renewal)", "target": "Before: 09 Aug 2027", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["01 Dec 2026", "31 Dec 2026", "Collect quotation", "New Procurement Officer", ""], ["01 Jan 2027", "31 Jan 2027", "Prepare requirement specifications", "New Procurement Officer", ""], ["01 May 2027", "28 May 2027", "RFQ", "New Procurement Officer", ""], ["14 Jun 2027", "11 Jul 2027", "Issue PR", "New Procurement Officer", ""], ["12 Jul 2027", "31 Jul 2027", "Issue PO", "New Procurement Officer", ""]]}, {"title": "TeamViewer License Renewal", "target": "Before: 21 Nov 2026", "note": "", "cols": ["Start Date", "End Date", "Contact", "Remarks"], "rows": []}, {"title": "Lansweeper License Renewal", "target": "Before: 23 Feb 2027", "note": "", "cols": ["Start Date", "End Date", "Task", "Follow up", "Remarks"], "rows": [["01 Nov 2026", "30 Nov 2026", "Collect Quotation", "New Procurement Officer", ""], ["01 Jan 2027", "31 Jan 2027", "Issue PR", "New Procurement Officer", ""], ["23 Feb 2027", "23 Feb 2027", "Invoice received", "New Procurement Officer", ""], ["24 Feb 2027", "28 Feb 2027", "Settle payment", "New Procurement Officer", ""]]}]}]}
 ;
-const KEY = "supportPortalAnnualPlan.v1";
+const KEY = "supportPortalAnnualPlan.v2";
 let data;
 try { data = JSON.parse(localStorage.getItem(KEY)) || structuredClone(PUBLISHED); }
 catch(e){ data = structuredClone(PUBLISHED); }
-let editing = false, activeTab = "all", query = "", ownerFilter = "";
+let editing = false, activeTab = "all", query = "", ownerFilter = "", doneFilter = "";
 
 const fuIdx = b => b.cols.findIndex(c => /follow/i.test(c));
 function save(){ localStorage.setItem(KEY, JSON.stringify(data)); }
@@ -133,11 +136,14 @@ function renderTabs(){
 }
 
 function rowMatches(b, r){
+  if(doneFilter){ const i=fuIdx(b); const completed = i>=0 && (r[i]||"").trim()==="Done";
+    if(doneFilter==="hide" && completed) return false;
+    if(doneFilter==="only" && !completed) return false; }
   if(ownerFilter){ const i=fuIdx(b); if(i<0 || !(r[i]||"").includes(ownerFilter)) return false; }
   if(query){ const hay = (b.title+" "+r.join(" ")).toLowerCase(); if(!hay.includes(query)) return false; }
   return true;
 }
-function blockMatches(b){ return b.rows.some(r=>rowMatches(b,r)) || (!query && !ownerFilter); }
+function blockMatches(b){ return b.rows.some(r=>rowMatches(b,r)) || (!query && !ownerFilter && !doneFilter); }
 
 function render(){
   renderTabs(); renderStats();
@@ -145,13 +151,14 @@ function render(){
   data.sections.forEach((s,si)=>{
     if(activeTab!=="all" && activeTab!==s.id) return;
     const blocks = s.blocks.map((b,bi)=>({b,bi})).filter(x=>blockMatches(x.b));
-    if(!blocks.length && (query||ownerFilter)) return;
+    if(!blocks.length && (query||ownerFilter||doneFilter)) return;
+    const grid=document.createElement("div"); grid.className="blocks";
     const head=document.createElement("div"); head.className="sec-head";
     head.innerHTML = '<span class="sheet"></span><h2></h2><small></small>';
     head.querySelector(".sheet").textContent = "Worksheet "+s.sheet;
     head.querySelector("h2").textContent = s.planTitle;
     head.querySelector("small").textContent = s.blocks.length+" blocks";
-    app.appendChild(head);
+    app.appendChild(head); app.appendChild(grid);
     blocks.forEach(({b,bi})=>{
       const card=document.createElement("section"); card.className="card";
       const h=document.createElement("div"); h.className="card-h";
@@ -185,8 +192,13 @@ function render(){
               if(editing){ pill.contentEditable="true"; pill.addEventListener("input",()=>{ r[ci]=pill.textContent; save(); }); }
               td.appendChild(pill);
             } else {
-              td.textContent = v || (ci===fi ? "—" : "");
-              if(editing){ td.contentEditable="true"; td.addEventListener("input",()=>{ r[ci]=td.textContent.replace(/—$/,""); save(); }); }
+              const url = (!editing && b.links) ? b.links[ri+","+ci] : null;
+              if(url && v){
+                const a=document.createElement("a"); a.href=url; a.target="_blank"; a.rel="noopener"; a.textContent=v+" ↗"; td.appendChild(a);
+              } else {
+                td.textContent = v || (ci===fi ? "—" : "");
+              }
+              if(editing){ td.contentEditable="true"; td.addEventListener("input",()=>{ r[ci]=td.textContent.replace(/—$/,"").replace(/ ↗$/,""); save(); }); }
             }
             tr.appendChild(td);
           });
@@ -205,7 +217,7 @@ function render(){
         add.onclick=()=>{ b.rows.push(b.cols.map(()=>"")); save(); render(); };
         card.appendChild(add);
       }
-      app.appendChild(card);
+      grid.appendChild(card);
     });
     if(editing){
       const ab=document.createElement("button"); ab.className="btn addblock"; ab.textContent="＋ Add block to "+s.name;
@@ -218,6 +230,7 @@ function render(){
 
 document.getElementById("q").addEventListener("input", e=>{ query=e.target.value.trim().toLowerCase(); render(); });
 document.getElementById("owner").addEventListener("change", e=>{ ownerFilter=e.target.value; render(); });
+document.getElementById("doneFilter").addEventListener("change", e=>{ doneFilter=e.target.value; render(); });
 document.getElementById("editBtn").addEventListener("click", ()=>{
   editing=!editing; document.body.classList.toggle("editing", editing);
   document.getElementById("editBtn").textContent = editing ? "✅ Done editing" : "✏️ Edit mode";
