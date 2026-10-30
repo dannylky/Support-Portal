@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>已知問題案例處理 · 石門校園 · Support Portal</title>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:38px 20px 28px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:29px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:860px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
+.toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:10px 0}
+.toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
+.toc a{font-size:12.5px;font-weight:600;color:#3730a3;text-decoration:none;background:#eef2ff;border:1px solid #c7d2fe;padding:4px 10px;border-radius:999px}
+.toc a:hover{background:#e0e7ff}
+.intro{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px 22px;margin:18px 0 4px;line-height:1.65;color:#1f2937}
+.case{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px 24px;margin:16px 0;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.case h2{margin:0 0 6px;font-size:19px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{background:#1e1b4b;color:#fff;font-size:13px;font-weight:800;border-radius:8px;padding:3px 9px}
+.sev{font-size:11.5px;font-weight:800;letter-spacing:.04em;padding:3px 10px;border-radius:999px}
+.sev.crit{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+.sev.high{background:#ffedd5;color:#9a3412;border:1px solid #fed7aa}
+.sev.med{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
+.sev.none{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
+.case h3{margin:16px 0 6px;font-size:14px;letter-spacing:.05em;color:#3730a3}
+.case p{line-height:1.65;color:#1f2937;margin:6px 0}
+.case ol,.case ul{line-height:1.7;color:#1f2937;margin:6px 0 6px 20px;padding:0}
+.dont{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d;border-radius:11px;padding:10px 14px;margin:10px 0;line-height:1.6;font-size:14.5px}
+.esc{background:#eef2ff;border:1px solid #c7d2fe;color:#312e81;border-radius:11px;padding:10px 14px;margin:10px 0;line-height:1.6;font-size:14.5px}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:13px}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:8px 0 46px}
+.foot a{color:#3730a3}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>🛠️ 石門校園 — 已知問題案例處理</h1>
+<div class="sub">石門每個已知問題的逐個情境處理程序，彙編自 2026 年 10 月以來的實際運作經驗。案例<strong>按重要性排序</strong> — 先看對教學的影響，再看做錯一步可造成的傷害。每個案例均依同一模式：如何識別、逐步處理、不應做的事，以及如何結案。本頁是<a href="shekmun-campus-zh.html">石門校園標準操作程序</a>的配套頁面；此處每個操作均受該程序的批准規則（§8）管轄。 <a href="remote-campus.html">← Remote Campus</a></div>
+<div class="meta"><span class="ver">標準操作程序 v1.4 配套頁面</span><span>生效日期：2026 年 10 月 30 日</span><span>13 個案例</span><span>負責人／批准人：Danny LAM（ITSC）</span><span class="langsw"><a href="shekmun-case-handling.html">English</a><a class="on" href="shekmun-case-handling-zh.html">繁體中文</a></span></div>
+</div></header>
+<nav class="toc"><div class="wrap">
+<a href="#c1">1 面板閃爍</a><a href="#c2">2 未就緒 — 解碼器故障</a><a href="#c3">3 PC 訊源無信號</a><a href="#c4">4 不同步</a><a href="#c5">5 路線中斷</a><a href="#c6">6 需重啟的解碼器</a><a href="#c7">7 電視重啟</a><a href="#c8">8 解碼器循環</a><a href="#c9">9 USB 風暴</a><a href="#c10">10 Manager 當機</a><a href="#c11">11 交換機登入失敗</a><a href="#c12">12 遲醒</a><a href="#c13">13 Common Area 上線</a>
+</div></nav>
+<main class="wrap">
+<div class="intro"><strong>如何使用本頁。</strong> 找出與症狀吻合的案例，依其步驟次序處理 — 開首的步驟永遠是唯讀檢查。<span style="color:#991b1b"><strong>緊急</strong></span>案例可令一堂課或整個早上停頓，並已有預先議定的處理；<span style="color:#9a3412"><strong>高</strong></span>案例直接影響一間房的教學；<span style="color:#854d0e"><strong>中</strong></span>案例是已有明確補救方法、或已蓄意決定只作觀察的已知問題；最後一個案例<strong>完全無需任何行動</strong> — 它存在是為了避免有人去「修理」一個非故障。除非案例另有說明，任何更改裝置的步驟均須先經站點負責人確認（標準操作程序 §8）。</div>
+<article class="case" id="c1">
+<h2><span class="num">案例 1</span> 控制面板燈號閃爍／未定 <span class="sev crit">緊急</span></h2>
+<h3>如何識別</h3>
+<p>一間房的 Extron 面板按鈕（System ON／TV On — 房 1 另有 Side TV On）未能定住：相隔約 15 秒的兩次狀態取樣不一致，或一次按鍵後燈號仍在閃爍。由 07:05 晨早一輪、巡邏閃燈檢查發現，或由老師報告。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>以唯讀方式取樣兩次，相隔約 15 秒。兩次均定住開啟 → 並非本案例。兩次均為同一非開啟狀態 → 穩定關閉：直接報告為「電視熄咗（穩定、非閃爍）」並停止 — <em>只有閃爍的按鈕才足以支持 PCU 重啟</em>。</li>
+<li>如確認閃爍，先分清這是 07:05 晨早一輪，還是巡邏／其他時間 — 處理方式不同（第 3 步對第 4 步）。</li>
+<li><strong>晨早一輪（Option A，已預先授權）：</strong> 將該房的 PCU-AVRack <strong>插座 4</strong> 電源循環一次（關 → 約 10 秒 → 開）。待控制器開機並重新同步。如房間自行復原，即完成。如它穩定地關閉而電視開著，按 System ON <strong>一次</strong>。以兩次取樣 + PTZ 確認。其後仍閃爍 → 停止、報告、詢問負責人。</li>
+<li><strong>巡邏／任何其他時間：</strong> 為該房建立一張 USS Help Desk 記錄（閃爍個案已預先批准），並在報告中註明其 CaseID；其後<em>請求</em>負責人批准 PCU 循環 — 在晨早一輪以外，永不在未經批准下執行。</li>
+<li>在該輪的異常欄中將該房列在首位；閃爍屬異常準則之一。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 使用 PCU-Lectern 插座；每房每朝循環多於一次；為一間穩定關閉的房間提議 PCU 重啟。</div>
+<div class="esc"><strong>經驗註記：</strong> SM-11-01 是重複出現的房間（連續多個早上閃爍，均在該輪內依 Option A 處理定住；其 Help Desk 記錄同日已建立並解決）。連續三個早上無閃爍個案，Option A 預先授權即自動失效。</div>
+</article>
+<article class="case" id="c2">
+<h2><span class="num">案例 2</span> 上課前房間未就緒 — 解碼器／顯示側故障 <span class="sev crit">緊急</span></h2>
+<h3>如何識別</h3>
+<p>就緒第二階段將一間房判為 NOT READY：PC 訊源有即時畫面，但有顯示裝置黑屏、電視解碼器離線，或 AVoIP 證據顯示畫面未能到達螢幕。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>確認故障屬顯示／解碼器側而非來源側：PC 編碼器顯示即時畫面（如否，轉到案例 3）。</li>
+<li>按固定次序收集證據：AVoIP 縮圖 → PTZ 畫面 → 快照狀態／溫度。</li>
+<li>在主對話向負責人升級，附上房間、證據及建議的補救方法。<strong>等候確認</strong> — 就緒一輪永不自行行動。</li>
+<li>確認後，按房組別施行補救方法<strong>一次</strong>：房 02/07/08 → 「Reset all decoders」（Companion）。房 01/03/04/05/06 → 以 P3000 <code>#RESET</code> 逐部重啟該房的電視解碼器（音訊解碼器除外）。</li>
+<li>重跑該房的就緒證據，在 09:00 上課前報告 READY 或仍 NOT READY。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 按「Source: PC」作為補救；重置音訊解碼器；在未報告首次結果下重複重置。</div>
+</article>
+<article class="case" id="c3">
+<h2><span class="num">案例 3</span> PC 訊源無信號／黑畫面 — 來源側 <span class="sev high">高</span></h2>
+<h3>如何識別</h3>
+<p>房間的 PC 編碼器顯示 NO SIGNAL 或黑畫面，而解碼器及顯示裝置均健康。在報告中這是無視訊來源信號 — 屬來源問題，並非解碼器故障。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>檢查講台電腦已開機並已過 BIOS／開機程序（休眠或關機的電腦是最常見成因）。</li>
+<li>檢查 Windows 顯示模式：必須是 <strong>Duplicate</strong>。在 <em>Extend</em> 模式下，編碼器接收的是空白的延伸桌面，房間便會黑屏而表面上一切「運作正常」。</li>
+<li>檢查連入編碼器的 HDMI 線是否插穩，以及編碼器有否 PoE／網絡。</li>
+<li>如電腦甦醒並在下一個排程輪次前畫面回復，將其記錄（如符合遲醒模式，見案例 12）— 無需任何裝置操作。</li>
+<li>如訊源到上課時間仍無畫面，向負責人升級並附上已完成的檢查；下一步通常是實地檢查電腦。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 為來源側故障重置解碼器或 AV 處理器 — 這無濟於事，只會干擾房間。</div>
+<div class="esc"><strong>經驗註記：</strong> 2026-10-15 房 7 的 NOT READY 正是本案例 — Windows 處於 Extend 模式。此後它成為每個 PC 來源黑畫面個案的第一項檢查。</div>
+</article>
+<article class="case" id="c4">
+<h2><span class="num">案例 4</span> 多顯示不同步 <span class="sev high">高</span></h2>
+<h3>如何識別</h3>
+<p>在多顯示房間（SM-11-01、02、07、08），各螢幕狀態不一致：一部黑屏／關閉，而其他顯示內容或待機畫面。須綜合 PTZ + 解碼器狀態判定。</p>
+<h3>逐步處理</h3>
+<ol>
+<li><strong>先看房 1 例外：</strong> 在 SM-11-01，任何一部電視關閉／黑屏而任何其他一部開著 = 即時判為不同步／異常 — 不設第二輪等待。四部同時關閉屬正常一致關閉，並非本案例。</li>
+<li>其他房間：在連續兩輪巡邏中確認後，才判為不同步（單一畫面可能剛好捕捉到轉換訊源的一刻）。</li>
+<li>在升級為故障前，先排除無害成因：老師在課堂上手動關掉一組電視（在房 1 已多次確認 — 個案隨即以人手操作結案，並非故障）。</li>
+<li>檢查黑屏顯示裝置的解碼器：快照中在線？縮圖有即時畫面？溫度正常？如問題在解碼器本身，轉到案例 6。</li>
+<li>連同證據報告為異常；提出干擾最少的補救方法，並等候負責人確認。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 將房 1 個案降級為「檢查區域」，或在課堂時間內未先核查人手操作的解釋便提出顯示故障。</div>
+</article>
+<article class="case" id="c5">
+<h2><span class="num">案例 5</span> 路線中斷 — 監察路徑故障 <span class="sev high">高</span></h2>
+<h3>如何識別</h3>
+<p>看門狗發出「路線中斷」警示：連續兩輪探測中，攝影機子網及 AV 處理器<em>兩個</em>探測同時失敗。問題持續期間，遙距甚麼也看不到、檢查不到 — 但房間本身可能完全正常。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>不要從缺失的數據診斷房間故障：在路線復原前，任何巡邏／就緒結論均不成立。</li>
+<li>依次序調查路徑：操作員的安全遙距存取 → 站點子網路由器 → 兩個 AV 子網（172.18.2.0/24 及 172.18.22.0/24）。</li>
+<li>分清整條路線故障（兩個子網）與單一裝置故障（只有一個探測失敗 — 那是背景資料，並非本案例）。</li>
+<li>當一輪探測再次成功，看門狗會報告「路線已復原」；恢復正常排程，並在當日報告中註明缺口。</li>
+<li>如中斷將覆蓋 09:00 上課時間，立即通知負責人 — 因遙距就緒無法核實，可能需要實地支援。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 因監察當時看不到，便將房間標記為故障，或重跑已錯過的裝置操作。</div>
+<div class="esc"><strong>經驗註記：</strong> 2026-10-12 的子網中斷正是看門狗存在的原因；它只在狀態改變時發警示，所以一次中斷只會產生兩則訊息（中斷、復原）。</div>
+</article>
+<article class="case" id="c6">
+<h2><span class="num">案例 6</span> 解碼器正常但縮圖永遠 404 — 需要重啟 <span class="sev high">高</span></h2>
+<h3>如何識別</h3>
+<p>一部電視解碼器在快照數據中健康（在線、溫度正常），但其 Manager 縮圖永遠載入不到，而其他房間的縮圖正常。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>以武裝後重試方法重新擷取縮圖：首次請求會武裝擷取（出現 404 屬預期），每約 0.5 秒重試、最多 10 次。請求不得發送 <code>Connection: close</code> — Manager 對該等請求每次都回傳 404。</li>
+<li>如在任何一次重試中取得圖像，那只是擷取暖機 — 並非個案。無需記錄。</li>
+<li>如完成整個流程後仍 404 <em>而且</em>解碼器在快照中正常，將該解碼器分類為 <strong>NEEDS-RESTART（需要重啟）</strong>。</li>
+<li>在任何重啟<em>之前</em>，連同證據向負責人升級。</li>
+<li>經確認後，以 P3000 <code>#RESET</code> 重啟該一部解碼器（無需登入），並核實縮圖已復原。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 將首次嘗試的 404 報告為故障，或在升級前重啟 — 在武裝後重試行為被證實之前，正是這種誤讀造成了多次假警報。</div>
+<div class="esc"><strong>經驗註記：</strong> 已在 SM-11-01 TV-DEC-1 上證實 — 經 P3000 重啟後縮圖復原。假 404 的根源在我方（請求方式 + 擷取武裝），不在 Manager。</div>
+</article>
+<article class="case" id="c7">
+<h2><span class="num">案例 7</span> 電視於轉換訊源時重啟／偶發 KDS 信號中斷 <span class="sev med">中</span></h2>
+<h3>如何識別</h3>
+<p>Fujitsu IW862/IW982 電視（房 1、2、7、8）在轉換訊源時（PC ↔ 手提電腦、轉堂）重啟或失去畫面，或解碼器短暫失去信號（日誌中先出現視信來源終止、後出現視訊來源恢復）。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>確認鏈路每一環都遵守全站視訊規則：電腦及 AVoIP 裝置均為 <strong>1920×1080、50 Hz</strong>。60 Hz 是已知會令此等電視視訊不穩定的觸發因素。</li>
+<li>取出該時窗的解碼器日誌證據（每 2 小時的擷取通常已保存），並註明中斷是否自行重新鎖定。</li>
+<li>檢查解碼器的溫度及在線狀態，排除硬件故障（如有異常，轉到案例 6/2）。</li>
+<li>在問題調查檔案中追蹤個案：房間、時間、轉換訊源的背景、日誌摘錄。不要即興更改設定。</li>
+<li>已議定的緩解候選 — 提高電視解碼器的顯示行為延遲（休眠／關機延至約 300 秒，喚醒維持 0 秒）— 只在負責人決定時才施行。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 歸咎於 HDCP 或重新鎖定的頻繁 — 調查已排除兩者；觸發點是轉換訊源時進入 720p60 待機信號的格式轉換。</div>
+</article>
+<article class="case" id="c8">
+<h2><span class="num">案例 8</span> 解碼器陷於探索循環 <span class="sev med">中</span></h2>
+<h3>如何識別</h3>
+<p>一部電視解碼器在其日誌中重複重新探索／重新鎖定，而其鄰近裝置穩定；房間畫面可能以重複模式閃爍或中斷。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>從日誌擷取確認循環的只是單一部解碼器，並註明其循環速率。</li>
+<li>在 Manager 中檢查該解碼器的頻道指派：循環出現的充要條件是<strong>其頻道選擇延伸家族中至少一組未被指派（「null」）</strong> — 通常是 USB 家族。</li>
+<li>向負責人報告發現，附上確實的裝置及找到的未指派家族。</li>
+<li>補救方法（由負責人執行或指示）：在 Manager 中為該解碼器指派該等未指派的延伸家族。循環會於數秒內停止 — 無需重啟。</li>
+<li>在下一次日誌擷取中核實循環已消失，並記錄該裝置為已修復。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 將解碼器恢復出廠設定（重置亦可能重新啟用 CEC 閘道 — 見標準操作程序的已知問題），或更改 Manager 的頻道方案，那是正確的。</div>
+<div class="esc"><strong>經驗註記：</strong> 已在 SM-11-03 TV1 上證實 — 指派後數秒內循環停止。其餘循環中的裝置，在負責人選擇時以同一方法修復。</div>
+</article>
+<article class="case" id="c9">
+<h2><span class="num">案例 9</span> USB 錯誤風暴／解碼器日誌爆滿（「No space left on device」） <span class="sev med">中</span></h2>
+<h3>如何識別</h3>
+<p>一部電視解碼器的日誌充斥 USB 錯誤行（數十行一組地爆發），有時伴隨重複的 <em>「No space left on device」</em> 錯誤，通常在系統開啟時一次來源重新鎖定後隨即開始。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>從日誌擷取辨認裝置及風暴時窗；確認畫面及教學不受影響（通常不受影響）。</li>
+<li>只繼續觀察：在每 2 小時的擷取中追蹤風暴是否仍在運行。</li>
+<li><strong>不要</strong>清除日誌。LOG-ACTION 4 清除曾被評估並明確<em>不獲批准</em>：風暴運行期間日誌會重新填滿，清除只會毀掉證據而修復不了任何東西。</li>
+<li>持久的補救方法是為該解碼器作實地<strong>實體 USB 路徑檢查</strong>（線材、埠、所連裝置）— 如風暴持續，與負責人安排。</li>
+<li>在每日總結中報告新出現的風暴裝置；已知裝置仍在風暴中屬追蹤事項，不會重複升級，除非畫面受影響。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 清除日誌、將重置解碼器當作「修復」，或重複提議負責人已押後的實地檢查 — 只作觀察是常設決定。</div>
+</article>
+<article class="case" id="c10">
+<h2><span class="num">案例 10</span> Kramer Manager 網頁介面當機 <span class="sev med">中</span></h2>
+<h3>如何識別</h3>
+<p>Manager 的網頁介面無法載入（TCP 有連接、TLS 握手停滯），而各裝置繼續運作。縮圖及由 Manager 驅動的檢查均不可用。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>確認當機只限網頁服務：Manager 在 TCP 5000 仍回應 P3000 協議。</li>
+<li>在負責人指示下，經 P3000 <code>#RESET</code> 重啟 Manager — 該協議無需登入。</li>
+<li>等候約 80 秒待完全復原（網頁介面通常約 30 秒回復；P3000 先回應）。核實介面能載入、縮圖回復。</li>
+<li>在當日報告中註明事件及復原時間。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 拿網頁管理憑證去試 SSH（它們並非 SSH 憑證，嘗試會被拒絕），或將死掉的網頁介面視為艦隊故障 — AVoIP 裝置會繼續運行。</div>
+</article>
+<article class="case" id="c11">
+<h2><span class="num">案例 11</span> 交換機管理登入突然失敗 <span class="sev med">中</span></h2>
+<h3>如何識別</h3>
+<p>22:00 的交換機交叉核對開始將一間房的一對交換機報告為「空白／非 JSON 登入」，而我方並無作任何更改，交換機亦明顯仍然存活。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>先探測、後下結論：請求交換機的 HTTP 根路徑並查看原始回應。<strong>301/308 重新導向至 4443 埠 HTTPS 並帶空白內文</strong>，代表該交換機現已強制使用 HTTPS 管理 — 所謂「空白登入」其實是被解析的重新導向內文。</li>
+<li>經 HTTPS 檢查韌體版本及運行時間：在最後一次正常檢查與首次失敗之間發生升級 + 重啟，是連貫的成因（房 1 一對交換機於 2026-10-20 正是如此）。</li>
+<li>核實<em>同一個</em>密碼可經 HTTPS 4443 登入，且序號／型號與基線相符 — 同一裝置、新韌體、憑證無更改。</li>
+<li>擷取工具已能處理此情況：先 HTTP，整段擷取自動後備至 HTTPS 4443。如新的一對交換機出現同一症狀，在報告失敗前先確認後備已啟動。</li>
+<li>記錄升級後機對的數據注意事項（從屬機的緩衝日誌可能只回傳一行；主機記錄等級可能顯示 5 而非 6）— 屬注意事項，並非故障。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 報告密碼已被輪換、要求新憑證，或將交換機改回 HTTP 管理 — 該裝置端更改只屬負責人的決定。</div>
+</article>
+<article class="case" id="c12">
+<h2><span class="num">案例 12</span> 遲醒 — PC 訊源遲到，房間 READY <span class="sev none">無需行動 — 只作記錄</span></h2>
+<h3>如何識別</h3>
+<p>一間房的 PC 編碼器在就緒第一階段（08:15）顯示 NO SIGNAL，但送出即時畫面並在第二階段（08:20）判為 READY。該電腦只是甦醒得遲。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>在第二階段報告中將其記錄為<strong>遲醒</strong>：該房在遲醒欄的行、總結行，以及數據檔。</li>
+<li>如實記錄甦醒時間括弧：最後 NO SIGNAL 時間 → 首次有畫面時間。永不虛構確實的甦醒時刻。</li>
+<li>到此為止。遲醒是追蹤記錄，令此模式變得可量度（哪些房間、遲了多久）— 單次出現不會引發任何後續行動。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 將房間標記為異常、升級，或施行任何補救。不屬遲醒：<em>黑畫面</em>的 PC 來源（屬案例 3）、到判定時仍 NO SIGNAL 的房間（屬 NOT READY）、或已復原的縮圖 404。如第一階段數據缺失，當日早上不要作任何遲醒判定。</div>
+</article>
+<article class="case" id="c13">
+<h2><span class="num">案例 13</span> Common Area 意外重新上線 <span class="sev med">中 — 只作報告</span></h2>
+<h3>如何識別</h3>
+<p>Common Area 處於預定停用：其攝影機及解碼器離線是正常狀態，平常在巡邏報告中完全略去。本案例恰恰相反 — 其攝影機／裝置重新上線、房間有人使用、燈光開啟，或顯示裝置啟動。</p>
+<h3>逐步處理</h3>
+<ol>
+<li>在該輪巡邏報告中包括 Common Area（略去規則的唯一例外），並將狀態標示為<strong>預期外</strong>。</li>
+<li>如實報告所見（裝置上線、燈光、顯示、有人），不要判為故障 — 為活動而蓄意開機是較可能的解釋。</li>
+<li>不要作任何裝置操作。如狀態跨輪次持續且無解釋，在報告的注意事項行向負責人提及。</li>
+</ol>
+<div class="dont"><strong>切勿：</strong> 將任何裝置「熄回預定停用」，或在任何一輪中將其正常的離線狀態報告為故障。</div>
+</article>
+<p class="foot">已知問題案例處理 · <a href="shekmun-campus-zh.html">石門校園標準操作程序</a>的配套頁面（批准規則：程序 §8）· Remote Campus · Support Portal。每當有新情境被經歷並結案，便會加入案例；當某案例的影響改變時，會重新審視排序。</p>
+</main>
+</body>
+</html>

@@ -14,6 +14,9 @@ body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;backgrou
 .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
 .meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
 .toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:10px 0}
 .toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
 .toc a{font-size:12.5px;font-weight:600;color:#3730a3;text-decoration:none;background:#eef2ff;border:1px solid #c7d2fe;padding:4px 10px;border-radius:999px}
@@ -41,7 +44,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <header class="hero"><div class="wrap">
 <h1>🛠️ ShekMun Campus — Case Handling for Known Issues</h1>
 <div class="sub">Scenario-by-scenario handling procedures for every known issue at Shek Mun, compiled from live operating experience since October 2026. Cases are <strong>ordered by importance</strong> — impact on teaching first, then how much harm a wrong action can do. Each case follows the same pattern: how it is recognised, the step-by-step handling, what <em>not</em> to do, and how it closes. This page is the companion to the <a href="shekmun-campus.html">ShekMun Campus SOP</a>; the SOP's approval rules (§8) govern every action here. <a href="remote-campus.html">← Remote Campus</a></div>
-<div class="meta"><span class="ver">Companion to SOP v1.3</span><span>Effective 30 Oct 2026</span><span>13 cases</span><span>Owner / approver: Danny LAM (ITSC)</span></div>
+<div class="meta"><span class="ver">Companion to SOP v1.4</span><span>Effective 30 Oct 2026</span><span>13 cases</span><span>Owner / approver: Danny LAM (ITSC)</span><span class="langsw"><a class="on" href="shekmun-case-handling.html">English</a><a href="shekmun-case-handling-zh.html">繁體中文</a></span></div>
 </div></header>
 <nav class="toc"><div class="wrap">
 <a href="#c1">1 Flashing panel</a><a href="#c2">2 Not ready — decoder fault</a><a href="#c3">3 PC source no signal</a><a href="#c4">4 Out of sync</a><a href="#c5">5 Route down</a><a href="#c6">6 Needs-restart decoder</a><a href="#c7">7 TV restarts</a><a href="#c8">8 Decoder loop</a><a href="#c9">9 USB storm</a><a href="#c10">10 Manager hangs</a><a href="#c11">11 Switch login fails</a><a href="#c12">12 Late wake</a><a href="#c13">13 Common Area online</a>
