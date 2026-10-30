@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Handling for Known Issues · ShekMun Campus · Support Portal</title>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:38px 20px 28px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:29px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:860px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:10px 0}
+.toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
+.toc a{font-size:12.5px;font-weight:600;color:#3730a3;text-decoration:none;background:#eef2ff;border:1px solid #c7d2fe;padding:4px 10px;border-radius:999px}
+.toc a:hover{background:#e0e7ff}
+.intro{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px 22px;margin:18px 0 4px;line-height:1.65;color:#1f2937}
+.case{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px 24px;margin:16px 0;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.case h2{margin:0 0 6px;font-size:19px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{background:#1e1b4b;color:#fff;font-size:13px;font-weight:800;border-radius:8px;padding:3px 9px}
+.sev{font-size:11.5px;font-weight:800;letter-spacing:.04em;padding:3px 10px;border-radius:999px;text-transform:uppercase}
+.sev.crit{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+.sev.high{background:#ffedd5;color:#9a3412;border:1px solid #fed7aa}
+.sev.med{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
+.sev.none{background:#dcfce7;color:#166534;border:1px solid #bbf7d0}
+.case h3{margin:16px 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:#3730a3}
+.case p{line-height:1.65;color:#1f2937;margin:6px 0}
+.case ol,.case ul{line-height:1.7;color:#1f2937;margin:6px 0 6px 20px;padding:0}
+.dont{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d;border-radius:11px;padding:10px 14px;margin:10px 0;line-height:1.6;font-size:14.5px}
+.esc{background:#eef2ff;border:1px solid #c7d2fe;color:#312e81;border-radius:11px;padding:10px 14px;margin:10px 0;line-height:1.6;font-size:14.5px}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:13px}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:8px 0 46px}
+.foot a{color:#3730a3}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>🛠️ ShekMun Campus — Case Handling for Known Issues</h1>
+<div class="sub">Scenario-by-scenario handling procedures for every known issue at Shek Mun, compiled from live operating experience since October 2026. Cases are <strong>ordered by importance</strong> — impact on teaching first, then how much harm a wrong action can do. Each case follows the same pattern: how it is recognised, the step-by-step handling, what <em>not</em> to do, and how it closes. This page is the companion to the <a href="shekmun-campus.html">ShekMun Campus SOP</a>; the SOP's approval rules (§8) govern every action here. <a href="remote-campus.html">← Remote Campus</a></div>
+<div class="meta"><span class="ver">Companion to SOP v1.2</span><span>Effective 30 Oct 2026</span><span>13 cases</span><span>Owner / approver: Danny LAM (ITSC)</span></div>
+</div></header>
+<nav class="toc"><div class="wrap">
+<a href="#c1">1 Flashing panel</a><a href="#c2">2 Not ready — decoder fault</a><a href="#c3">3 PC source no signal</a><a href="#c4">4 Out of sync</a><a href="#c5">5 Route down</a><a href="#c6">6 Needs-restart decoder</a><a href="#c7">7 TV restarts</a><a href="#c8">8 Decoder loop</a><a href="#c9">9 USB storm</a><a href="#c10">10 Manager hangs</a><a href="#c11">11 Switch login fails</a><a href="#c12">12 Late wake</a><a href="#c13">13 Common Area online</a>
+</div></nav>
+<main class="wrap">
+<div class="intro"><strong>How to use this page.</strong> Find the case that matches the symptoms, then follow its steps in order — the early steps are always read-only checks. <span style="color:#991b1b"><strong>Critical</strong></span> cases can stop a class or a whole morning and have pre-agreed handling; <span style="color:#9a3412"><strong>High</strong></span> cases affect a room's teaching directly; <span style="color:#854d0e"><strong>Medium</strong></span> cases are known issues with a defined remedy or a deliberate observe-only decision; the final case needs <strong>no action at all</strong> — it exists so nobody “fixes” a non-fault. Unless a case says otherwise, any device-changing step needs the site owner's confirmation first (SOP §8).</div>
+<article class="case" id="c1">
+<h2><span class="num">Case 1</span> Control panel lights flashing / unsettled <span class="sev crit">Critical</span></h2>
+<h3>Recognise it</h3>
+<p>A room's Extron panel buttons (System ON / TV On — Room 1 also Side TV On) do not settle: two state samples ~15 s apart disagree, or a press ends with the lights still flashing. Found by the 07:05 morning run, by patrol flash checks, or reported by a teacher.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Take two read-only samples ~15 s apart. Both settled-on → not this case. Same non-on state twice → stable off: report plainly as “TV off (stable, not flashing)” and stop — <em>only a flashing button justifies a PCU reboot</em>.</li>
+<li>If flashing is confirmed, check whether this is the 07:05 morning run or a patrol/other time — the handling differs (steps 3 vs 4).</li>
+<li><strong>Morning run (Option A, pre-authorised):</strong> power-cycle the room's PCU-AVRack <strong>outlet 4</strong> once (OFF → ~10 s → ON). Wait for the controller to boot and re-sync. If the room self-restores, finish. If it is stably OFF with TVs on, press System ON <strong>once</strong>. Confirm with two samples + PTZ. Still flashing after that → stop, report, ask the owner.</li>
+<li><strong>Patrol / any other time:</strong> create one USS Help Desk record for the room (pre-approved for flashing cases) and note its CaseID in the report; then <em>request</em> the owner's approval for the PCU cycle — never perform it unapproved outside the morning run.</li>
+<li>Report the room first in the run's anomalies; flashing is an ABNORMAL criterion.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> use PCU-Lectern outlets; cycle more than once per room per morning; propose a PCU reboot for a stably-off room.</div>
+<div class="esc"><strong>Experience note:</strong> SM-11-01 is the repeat room (flashing on consecutive mornings, settled inside the run under Option A; its Help Desk record was filed and resolved the same day). Three consecutive flashing-free mornings retire the Option A pre-authorisation automatically.</div>
+</article>
+<article class="case" id="c2">
+<h2><span class="num">Case 2</span> Room NOT READY before class — decoder / display-side fault <span class="sev crit">Critical</span></h2>
+<h3>Recognise it</h3>
+<p>Readiness Stage 2 judges a room NOT READY: the PC source is live, but a display is dark, a TV decoder is offline, or the AVoIP evidence shows the picture is not reaching the screens.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Confirm the fault is display/decoder-side, not source-side: PC encoder shows a live image (if not, go to Case 3).</li>
+<li>Gather evidence in the fixed order: AVoIP thumbnails → PTZ view → snapshot status/temperatures.</li>
+<li>Escalate to the owner in the main chat with the room, the evidence and the proposed remedy. <strong>Wait for confirmation</strong> — the readiness run never acts by itself.</li>
+<li>After confirmation, apply the room-group remedy <strong>once</strong>: Rooms 02/07/08 → “Reset all decoders” (Companion). Rooms 01/03/04/05/06 → restart that room's TV decoders one by one via P3000 <code>#RESET</code> (audio decoder excluded).</li>
+<li>Re-run the readiness evidence for the room and report READY or still NOT READY before the 09:00 class start.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> press “Source: PC” as a remedy; reset the audio decoder; repeat the reset without reporting the first result.</div>
+</article>
+<article class="case" id="c3">
+<h2><span class="num">Case 3</span> PC source NO SIGNAL / black screen — source-side <span class="sev high">High</span></h2>
+<h3>Recognise it</h3>
+<p>The room's PC encoder shows NO SIGNAL or a black picture while decoders and displays are healthy. In reports this is 無視訊來源信號 (no video source signal) — a source problem, not a decoder fault.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Check the lectern PC is powered and past BIOS/boot (a sleeping or off PC is the most common cause).</li>
+<li>Check the Windows display mode: it must be <strong>Duplicate</strong>. In <em>Extend</em> mode the encoder is fed the blank extended desktop and the room shows black while everything “works”.</li>
+<li>Check the HDMI lead into the encoder is seated, and the encoder has PoE/network.</li>
+<li>If the PC wakes and the picture returns by the next scheduled round, record it (see Case 12 if it fits the late-wake pattern) — no device action needed.</li>
+<li>If the source stays dead into class time, escalate to the owner with the checks already done; an on-site PC check is the usual next step.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> reset decoders or the AV processor for a source-side fault — it cannot help and disrupts the room.</div>
+<div class="esc"><strong>Experience note:</strong> the 2026-10-15 Room 7 NOT READY was exactly this case — Windows was in Extend mode. It is now the first thing checked in every PC-source-black case.</div>
+</article>
+<article class="case" id="c4">
+<h2><span class="num">Case 4</span> Multi-display out of sync <span class="sev high">High</span></h2>
+<h3>Recognise it</h3>
+<p>In a multi-display room (SM-11-01, 02, 07, 08) the screens disagree: one dark/off while others show content or standby. Judged from PTZ + decoder status together.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li><strong>Room 1 exception first:</strong> in SM-11-01, any one TV off/dark while any other is on = OUT OF SYNC / ABNORMAL <em>immediately</em> — no second-run wait. All four off together is normal uniform off, not this case.</li>
+<li>Other rooms: confirm across two consecutive patrol runs before calling it out of sync (a single frame can catch a source change).</li>
+<li>Before escalating as a fault, rule out the benign cause: a teacher manually switching off one TV group during class (confirmed more than once in Room 1 — the case then closes as manual operation, no fault).</li>
+<li>Check the dark display's decoder: online in snapshot? thumbnail live? temperature normal? Route to Case 6 if the decoder itself is the problem.</li>
+<li>Report as ABNORMAL with the evidence; propose the least-disruptive remedy and wait for the owner's confirmation.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> downgrade a Room 1 case to “check region”, or raise a display fault before checking the manual-operation explanation during class hours.</div>
+</article>
+<article class="case" id="c5">
+<h2><span class="num">Case 5</span> Route down — monitoring path failure <span class="sev high">High</span></h2>
+<h3>Recognise it</h3>
+<p>The watchdog alerts “route down”: two consecutive probe rounds in which <em>both</em> the camera-subnet and AV-processor probes failed. Nothing remote can be seen or checked while it lasts — but the rooms themselves may be perfectly fine.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Do not diagnose room faults from missing data: no patrol/readiness conclusion is valid until the route recovers.</li>
+<li>Investigate the path in order: operator's secure remote access → site subnet router → the two AV subnets (172.18.2.0/24 and 172.18.22.0/24).</li>
+<li>Distinguish a full route failure (both subnets) from a single-device failure (one probe only — that is context, not this case).</li>
+<li>When a probe round succeeds again, the watchdog reports “route recovered”; resume normal schedules and note the gap in the day's reports.</li>
+<li>If the outage will cover the 09:00 class start, inform the owner promptly — on-site support may be needed because remote readiness cannot be verified.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> mark rooms faulty, or re-run missed device actions, because monitoring was blind.</div>
+<div class="esc"><strong>Experience note:</strong> the 2026-10-12 subnet outage is why the watchdog exists; it alerts only on state change so an outage produces exactly two messages (down, recovered).</div>
+</article>
+<article class="case" id="c6">
+<h2><span class="num">Case 6</span> Decoder normal but thumbnail always 404 — NEEDS-RESTART <span class="sev high">High</span></h2>
+<h3>Recognise it</h3>
+<p>A TV decoder is healthy in the snapshot data (online, normal temperature) but its Manager thumbnail never loads, while other rooms' thumbnails work.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Re-fetch the thumbnail with the arm-and-retry method: first request arms the capture (404 is expected), retry every ~0.5 s up to 10 times. Requests must not send <code>Connection: close</code> — the Manager answers those with 404 every time.</li>
+<li>If the image arrives on any retry, it was capture warm-up — not a case. Record nothing.</li>
+<li>If it is still 404 after the full pass <em>and</em> the decoder is normal in the snapshot, classify the decoder <strong>NEEDS-RESTART</strong>.</li>
+<li>Escalate to the owner with the evidence <em>before</em> any restart.</li>
+<li>On confirmation, restart that one decoder via P3000 <code>#RESET</code> (no login needed) and verify the thumbnail recovers.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> report a first-attempt 404 as a fault, or restart before escalating — this exact misread caused false alarms until the arm-and-retry behaviour was proven.</div>
+<div class="esc"><strong>Experience note:</strong> proven on SM-11-01 TV-DEC-1 — after its P3000 reset the thumbnail recovered. The root cause of the false 404s was on our side (request style + capture arming), not the Manager.</div>
+</article>
+<article class="case" id="c7">
+<h2><span class="num">Case 7</span> TVs restart on source change / occasional KDS signal loss <span class="sev med">Medium</span></h2>
+<h3>Recognise it</h3>
+<p>Fujitsu IW862/IW982 TVs (Rooms 1, 2, 7, 8) restart or lose the picture when the source changes (PC ↔ laptop, class changeover), or a decoder briefly loses its signal (視信來源終止 followed by 視訊來源恢復 in the logs).</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Confirm the site video rule everywhere in the chain: <strong>1920×1080 at 50 Hz</strong> on the PC and the AVoIP devices. 60 Hz is a known trigger for unstable video on these TVs.</li>
+<li>Pull the decoder log evidence for the window (the 2-hourly captures usually already hold it) and note whether the loss re-locks by itself.</li>
+<li>Check the decoder's temperature and online state to rule out a hardware fault (route to Case 6/2 if abnormal).</li>
+<li>Track the case in the problem-investigation file: room, time, source-change context, log excerpt. Do not improvise configuration changes.</li>
+<li>The agreed mitigation candidate — raising the TV decoders' display-behavior delays (sleep/shutdown to ~300 s, wake-up stays 0 s) — is applied only when the owner decides.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> blame HDCP or re-lock churn — the investigation exonerated both; the trigger is the format transition into the 720p60 standby signal on source change.</div>
+</article>
+<article class="case" id="c8">
+<h2><span class="num">Case 8</span> Decoder stuck in a discovery loop <span class="sev med">Medium</span></h2>
+<h3>Recognise it</h3>
+<p>One TV decoder repeatedly re-discovers / re-locks in its log while its neighbours are stable; the room's picture may flicker or drop in a repeating pattern.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Confirm from the log captures that the looping unit is a single decoder and note its loop rate.</li>
+<li>Check the decoder's channel assignment in the Manager: the loop occurs <strong>if and only if at least one of its channel-select extension families is unassigned (“null”)</strong> — the USB family is the usual one.</li>
+<li>Report the finding to the owner with the exact unit and the null families found.</li>
+<li>Remedy (owner performs or directs): assign the null extension families for that decoder in the Manager. The loop stops within seconds — no reboot needed.</li>
+<li>Verify in the next log capture that the loop is gone, and record the unit as fixed.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> factory-reset the decoder (a reset can also re-enable the CEC gateway — see the SOP's known issues) or change the Manager's channel scheme, which is correct.</div>
+<div class="esc"><strong>Experience note:</strong> proven on SM-11-03 TV1 — loop stopped within seconds of the assignment. Remaining looping units are fixed the same way whenever the owner chooses.</div>
+</article>
+<article class="case" id="c9">
+<h2><span class="num">Case 9</span> USB error storm / decoder log full (“No space left on device”) <span class="sev med">Medium</span></h2>
+<h3>Recognise it</h3>
+<p>A TV decoder's log fills with USB error lines (bursts of dozens), sometimes with repeated <em>“No space left on device”</em> errors, typically starting right after a source re-lock while the system is on.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Identify the unit and the storm window from the log captures; confirm the picture and teaching are unaffected (they usually are).</li>
+<li>Continue observation only: track whether the storm is still running at each 2-hourly capture.</li>
+<li>Do <strong>not</strong> clear the log. A LOG-ACTION 4 clear was evaluated and explicitly <em>not approved</em>: the log refills while the storm runs, so clearing destroys evidence without fixing anything.</li>
+<li>The durable remedy is an on-site <strong>physical USB-path field check</strong> for that decoder (cable, port, connected device) — schedule it with the owner if the storm persists.</li>
+<li>Report new storm units in the daily summary; a known unit still storming is tracked, not re-escalated, unless the picture is affected.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> clear logs, reset the decoder as a “fix”, or propose repeated field checks the owner has already deferred — observation is the standing decision.</div>
+</article>
+<article class="case" id="c10">
+<h2><span class="num">Case 10</span> Kramer Manager web interface hangs <span class="sev med">Medium</span></h2>
+<h3>Recognise it</h3>
+<p>The Manager's web UI will not load (TCP connects, the TLS handshake stalls) while devices keep working. Thumbnails and Manager-driven checks are unavailable.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Confirm the hang is the web service only: the Manager still answers the P3000 protocol on TCP 5000.</li>
+<li>With the owner's direction, reboot the Manager via P3000 <code>#RESET</code> — no login is required for the protocol.</li>
+<li>Wait ~80 s for full recovery (web UI typically back in ~30 s; P3000 answers first). Verify the UI loads and thumbnails return.</li>
+<li>Note the incident and the recovery time in the day's report.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> try the web-admin credentials on SSH (they are not SSH credentials and the attempt is refused), or treat a dead web UI as a fleet fault — the AVoIP devices keep running.</div>
+</article>
+<article class="case" id="c11">
+<h2><span class="num">Case 11</span> Switch management login suddenly fails <span class="sev med">Medium</span></h2>
+<h3>Recognise it</h3>
+<p>The 22:00 switch cross-check starts reporting a room's switch pair as “empty / non-JSON login” although nothing was changed on our side and the switches are clearly alive.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Probe before concluding: request the switch's HTTP root and look at the raw response. A <strong>301/308 redirect to HTTPS port 4443 with an empty body</strong> means the switch now enforces HTTPS management — the “empty login” is the redirect body being parsed.</li>
+<li>Check the firmware version and uptime over HTTPS: an upgrade + reboot between the last good check and the first failure is the coherent cause (exactly what happened to the Room 1 pair on 2026-10-20).</li>
+<li>Verify the <em>same</em> password logs in over HTTPS 4443 and that serial numbers/model match the baseline — same devices, new firmware, no credential change.</li>
+<li>The fetch tooling already handles this: HTTP first, automatic HTTPS-4443 fallback for the whole fetch. If a new pair shows the same symptom, confirm the fallback engaged before reporting a failure.</li>
+<li>Record the data caveats for upgraded pairs (satellite buffered log may return a single line; master logging level may read 5 instead of 6) — caveats, not faults.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> report a password rotation, ask for new credentials, or change the switch back to HTTP management — that device-side change is the owner's call only.</div>
+</article>
+<article class="case" id="c12">
+<h2><span class="num">Case 12</span> Late wake — PC source arrives late, room READY <span class="sev none">No action — record only</span></h2>
+<h3>Recognise it</h3>
+<p>A room's PC encoder showed NO SIGNAL in readiness Stage 1 (08:15) but feeds a live image and is judged READY by Stage 2 (08:20). The PC simply woke late.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Record it as <strong>late wake （遲醒）</strong> in the Stage 2 report: the room's row in the Late wake column, the summary line, and the data file.</li>
+<li>Record the wake bracket honestly: last NO SIGNAL time → first IMAGE time. Never invent the exact wake moment.</li>
+<li>Stop there. Late wake is a tracking record so the pattern becomes countable (which rooms, how late) — nothing else follows from a single occurrence.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> mark the room ABNORMAL, escalate it, or apply any remedy. Not late wake: a <em>black</em> PC source (that is Case 3), a room still NO SIGNAL at the verdict (that is NOT READY), or a recovered thumbnail 404. If Stage 1 data is missing, make no late-wake calls that morning.</div>
+</article>
+<article class="case" id="c13">
+<h2><span class="num">Case 13</span> Common Area comes back online unexpectedly <span class="sev med">Medium — report only</span></h2>
+<h3>Recognise it</h3>
+<p>The Common Area is under scheduled down: camera and decoders offline is its normal state and it is normally omitted from patrol reports entirely. This case is the opposite — its camera/devices come back online, the room is in use, lights are on, or a display is active.</p>
+<h3>Handle it — step by step</h3>
+<ol>
+<li>Include the Common Area in that patrol report (the one exception to the omission rule) and flag the state as <strong>unexpected</strong>.</li>
+<li>Report what is actually seen (devices online, lights, display, people) without judging it a fault — a deliberate power-up for an event is the likely explanation.</li>
+<li>Take no device action. If the state persists across runs and is unexplained, mention it to the owner in the report's attention line.</li>
+</ol>
+<div class="dont"><strong>Do NOT:</strong> switch anything off “back to scheduled down”, or report the normal offline state as a fault in any run.</div>
+</article>
+<p class="foot">Case Handling for Known Issues · Companion to the <a href="shekmun-campus.html">ShekMun Campus SOP</a> (approval rules: SOP §8) · Remote Campus · Support Portal. Cases are added when a new scenario is experienced and closed out; ordering is reviewed when a case's impact changes.</p>
+</main>
+</body>
+</html>
