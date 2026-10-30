@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote Campus · Support Portal</title>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:40px 20px 30px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+h1{margin:0 0 8px;font-size:32px;letter-spacing:-.02em}
+.sub{opacity:.88;line-height:1.6;max-width:840px}
+.hero a{color:#a5f3fc}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:24px 0 8px}
+.card{display:block;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px;color:inherit;text-decoration:none;box-shadow:0 6px 18px rgba(15,23,42,.05);transition:transform .15s,box-shadow .15s}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(15,23,42,.1)}
+.card h2{margin:0 0 8px;font-size:19px}
+.card p{margin:0;color:#64748b;line-height:1.6;font-size:14.5px}
+.tag{display:inline-block;margin-top:14px;background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+.card.soon{opacity:.65}
+h2.sec{font-size:21px;margin:30px 0 4px}
+.prin{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:14px 0 8px}
+.p{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px}
+.p h3{margin:0 0 6px;font-size:15.5px}
+.p p{margin:0;color:#64748b;font-size:13.5px;line-height:1.6}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:18px 0 46px}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>🏫 Remote Campus</h1>
+<div class="sub">Remote operations for satellite campus teaching spaces: automated monitoring, scheduled readiness checks, remote control workflows and standard operating procedures (SOPs) for each site. Every campus page documents how the site is monitored, what runs automatically, what needs human approval, and how incidents are handled and escalated. <a href="index.html">← Support Portal home</a></div>
+</div></header>
+<main class="wrap">
+<div class="grid">
+<a class="card" href="shekmun-campus.html">
+<h2>ShekMun Campus</h2>
+<p>Full SOP for the Shek Mun teaching block (rooms SM-11-01 – SM-11-08 plus Common Area): Kramer AVoIP, Extron control, PTZ patrols, two-stage morning readiness, AVoIP log capture, route watchdog, Quick Keypad manual operations, incident playbooks and the approval / escalation matrix.</p>
+<span class="tag">SOP v1.0 · 8 rooms · Mon–Sat automated operations</span>
+</a>
+<div class="card soon">
+<h2>More campuses</h2>
+<p>Additional remote campuses will be added here as their monitoring and SOP documentation is completed. Each site gets the same treatment: inventory, daily schedule, procedures, classification rules and escalation paths.</p>
+<span class="tag">Coming soon</span>
+</div>
+</div>
+<h2 class="sec">Operating principles — all remote campuses</h2>
+<div class="prin">
+<div class="p"><h3>🔍 Read-only by default</h3><p>Monitoring never changes a device. Patrols, readiness sweeps, log captures and watchdogs only observe; any action on a device follows the approval rules of the site SOP.</p></div>
+<div class="p"><h3>🧭 Evidence in a fixed order</h3><p>Faults are judged on the AV-over-IP evidence first, PTZ camera views in support, and the monitoring snapshot data to corroborate — never on a single signal.</p></div>
+<div class="p"><h3>✋ Human approval gate</h3><p>Resets, power cycles and control presses wait for the site owner's confirmation, except for the small number of standing authorisations written into the SOP (for example the morning TV-on run).</p></div>
+<div class="p"><h3>🗂️ Scheduled and logged</h3><p>Every routine check runs on a published schedule and produces a report, so the state of each room is reconstructable afterwards — what was seen, what was decided, and what was done.</p></div>
+</div>
+<p class="foot">Remote Campus is part of the Support Portal. Operational detail in each campus SOP reflects the live configuration agreed with the site owner; procedures change only through the document-control process at the end of each SOP.</p>
+</main>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShekMun Campus SOP · Remote Campus · Support Portal</title>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:38px 20px 28px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:880px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:10px 0}
+.toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
+.toc a{font-size:13px;font-weight:600;color:#3730a3;text-decoration:none;background:#eef2ff;border:1px solid #c7d2fe;padding:4px 11px;border-radius:999px}
+.toc a:hover{background:#e0e7ff}
+section.blk{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px 26px;margin:18px 0;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+section.blk h2{margin:0 0 12px;font-size:21px;letter-spacing:-.01em}
+section.blk h3{margin:20px 0 8px;font-size:16.5px;color:#1e1b4b}
+section.blk p{line-height:1.65;color:#1f2937;margin:8px 0}
+section.blk ul,section.blk ol{line-height:1.7;color:#1f2937;margin:8px 0 8px 20px;padding:0}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 6px}
+th,td{border-bottom:1px solid #e2e8f0;padding:8px 10px;text-align:left;vertical-align:top;line-height:1.5}
+th{background:#f8fafc;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#475569}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:13px}
+.callout{border-radius:12px;padding:13px 16px;margin:12px 0;line-height:1.6;font-size:14.5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
+.rule{background:#eef2ff;border:1px solid #c7d2fe;color:#312e81}
+.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#14532d}
+.proc{border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin:14px 0;background:#fcfcff}
+.proc h3{margin-top:0}
+.kv{font-size:13.5px;color:#475569}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:8px 0 46px}
+.small{font-size:13.5px;color:#64748b}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>ShekMun Campus — Standard Operating Procedure</h1>
+<div class="sub">Complete operating procedure for remote monitoring and control of the Shek Mun teaching block: platforms and inventory, the automated daily schedule, standard procedures, classification rules, manual operations, incident playbooks, and the approval &amp; escalation matrix. This SOP is the single reference for how the site is run day to day. <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal home</a></div>
+<div class="meta"><span class="ver">SOP v1.0</span><span>Effective 30 Oct 2026</span><span>Site owner / approver: Danny LAM (ITSC)</span><span>Operations: Mon–Sat</span><span>Timezone: Asia/Hong_Kong</span></div>
+</div></header>
+<nav class="toc"><div class="wrap">
+<a href="#s1">1 Overview</a><a href="#s2">2 Inventory</a><a href="#s3">3 Daily schedule</a><a href="#s4">4 Procedures</a><a href="#s5">5 Classification rules</a><a href="#s6">6 Manual operations</a><a href="#s7">7 Incident playbooks</a><a href="#s8">8 Approvals &amp; escalation</a><a href="#s9">9 Reporting</a><a href="#s10">10 Security &amp; safety</a><a href="#s11">11 Known issues</a><a href="#s12">12 Document control</a>
+</div></nav>
+<main class="wrap">
+<section class="blk" id="s1">
+<h2>1. Purpose, scope and system overview</h2>
+<p><strong>Purpose.</strong> This SOP defines how the Shek Mun campus teaching spaces are monitored, kept ready for classes, and recovered from faults — mostly remotely and automatically, with a human approval gate for anything that changes a device.</p>
+<p><strong>Scope.</strong> Rooms <strong>SM-11-01 to SM-11-08</strong> and the <strong>Common Area</strong>, covering: in-room displays and AV-over-IP (AVoIP) distribution, Extron room control and power control, PTZ observation cameras, the AVoIP management platform, network switches on the AV VLANs, and the automation/monitoring stack that watches them. Classes start at <strong>09:00</strong>; lectern PCs must be ready by <strong>08:30</strong>.</p>
+<h3>1.1 Platforms</h3>
+<table>
+<tr><th style="width:24%">Platform</th><th>Role in operations</th></tr>
+<tr><td><strong>Shek Mun AV Monitoring</strong> (v1.9.24)</td><td>Central monitoring web app for the site: per-room device status (<code>snapshot.json</code>), PTZ camera views, and the Kramer AVoIP thumbnail page used as the primary readiness evidence. Reached over the Tailscale network through the operator's tunnel proxy.</td></tr>
+<tr><td><strong>Kramer AVoIP</strong> (Manager + KDS encoders/decoders)</td><td>Video distribution: lectern PC / laptop sources to in-room displays. Managed centrally by the Kramer AVoIP Manager; devices also answer the P3000 control protocol for queries and resets.</td></tr>
+<tr><td><strong>Extron control</strong></td><td>Per-room controllers run the touch-panel (VTLP) interface used by teachers (System On/Off, TV On/Off, source selection). PCU power controllers (IPL T PCS4i) switch rack and lectern power per room.</td></tr>
+<tr><td><strong>Bitfocus Companion</strong></td><td>Per-room hosts expose simple press endpoints used for bulk decoder resets and source selection (PC / Laptop) under the manual-operations procedure.</td></tr>
+<tr><td><strong>Tailscale</strong></td><td>Secure overlay network through which all remote access reaches the site subnets (subnet router on the site gateway). No AV device is exposed to the public internet.</td></tr>
+<tr><td><strong>Automation (Muse)</strong></td><td>Scheduled jobs execute the procedures in §4 (morning TV-on, readiness, patrols, log captures, watchdog, backups) and report in Cantonese (Traditional Chinese) to the site owner's chats and by email.</td></tr>
+</table>
+<h3>1.2 Operating model</h3>
+<ul>
+<li><strong>Read-only by default.</strong> Every scheduled check observes only. Device-changing actions follow §8.</li>
+<li><strong>Evidence order.</strong> AVoIP page (Kramer thumbnails) is the primary evidence; PTZ views support; <code>snapshot.json</code> corroborates. Audio decoders are excluded from readiness/patrol judgements.</li>
+<li><strong>One owner, one gate.</strong> The site owner (Danny) approves resets, power cycles and control presses, except the standing authorisations listed in §8.2.</li>
+</ul>
+</section>
+<section class="blk" id="s2">
+<h2>2. Site and system inventory</h2>
+<h3>2.1 Rooms and displays</h3>
+<table>
+<tr><th>Room</th><th>Monitored displays</th><th>Notes</th></tr>
+<tr><td>SM-11-01</td><td>4 × LED TV</td><td>Two TV groups (main + side); multi-display sync is judged strictly — see §5.3.</td></tr>
+<tr><td>SM-11-02</td><td>2 × LED TV</td><td>Both TVs driven by the main TV group; the side-TV-off control is unused in this room.</td></tr>
+<tr><td>SM-11-03 … SM-11-06</td><td>1 × LED wall each</td><td>—</td></tr>
+<tr><td>SM-11-07, SM-11-08</td><td>2 × LED TV each</td><td>Multi-display sync applies.</td></tr>
+<tr><td>Common Area</td><td>1 × LED TV</td><td><strong>Scheduled down</strong> — camera and decoders offline by arrangement; see §5.4.</td></tr>
+</table>
+<p class="small">Spare “TV-Res” units, Dante encoders and the SM-11-02 USBMac speaker are excluded from all monitoring reports by the site owner's direction.</p>
+<h3>2.2 AVoIP fleet</h3>
+<table>
+<tr><th>Item</th><th>Detail</th></tr>
+<tr><td>Encoders</td><td>Kramer <strong>KDS-SW3-EN7</strong> (H/W 0.2) — PC and Laptop encoder per room.</td></tr>
+<tr><td>Decoders</td><td>Kramer <strong>KDS-DEC7</strong> (H/W 0.4) — TV decoders per display, plus one audio decoder per room (excluded from visual judgements).</td></tr>
+<tr><td>Firmware</td><td><strong>1.3.1</strong> across the sampled fleet — uniform, no drift.</td></tr>
+<tr><td>Manager</td><td>Kramer AVoIP Manager (KDS-7-MNGR) — channel assignments, device thumbnails, fleet configuration.</td></tr>
+<tr><td>Time sync</td><td>NTP server on the AV VLAN gateway; the whole fleet (16 encoders + 14 TV decoders) is clock-synced.</td></tr>
+<tr><td>Site video rule</td><td><strong>1920×1080 at 50 Hz</strong> for all PCs and AVoIP devices. 60 Hz causes unstable video on the Fujitsu TVs (see §11).</td></tr>
+<tr><td>Normal temperature</td><td>KDS operating temperature 33–45 °C; ≥ 49 °C is abnormal (§5.2).</td></tr>
+</table>
+<h3>2.3 Control, power and network — address plan</h3>
+<table>
+<tr><th>Block</th><th>Allocation</th></tr>
+<tr><td>Control subnet 172.18.2.0/24</td><td>PCU-AVRack <code>.11–.19</code> and PCU-Lectern <code>.21–.29</code> (room order SM-11-01…08, then Common Rm); Extron room controllers <code>.31–.38</code>; Companion hosts <code>.51–.58</code>; AV processor (AVProc snapshot host) <code>.57</code> area per-room mapping in the internal inventory.</td></tr>
+<tr><td>AV / camera subnet 172.18.22.0/24</td><td>Kramer Manager <code>.5</code>; AVoIP encoders/decoders; PTZ cameras (Room 1 camera <code>.101</code>, Common Area camera <code>.109</code>); AV network switches (16) serving the eight rooms.</td></tr>
+<tr><td>Power schedule</td><td>Campus AV power: <strong>On 07:00 / Off 12:01</strong> via PoE switch and PCUs.</td></tr>
+</table>
+<h3>2.4 PCU power controllers (Extron IPL T PCS4i, firmware 1.16)</h3>
+<p>Two <em>different</em> groups — never mix them up. <strong>PCU-AVRack</strong> powers the AV rack; <strong>PCU-Lectern</strong> powers the lectern. The AVRack outlet map is identical in every room:</p>
+<table>
+<tr><th>Outlet</th><th>Label</th><th>Role</th></tr>
+<tr><td>1</td><td>Mixer</td><td>Audio mixer</td></tr>
+<tr><td>2</td><td>AVoIP</td><td>AV-over-IP devices</td></tr>
+<tr><td>3</td><td>Mic</td><td>Microphone system (manual only, no schedule)</td></tr>
+<tr><td>4</td><td><strong>AVprocessor</strong></td><td><strong>The room's AV processor power switch</strong> — the outlet used by the approved power-cycle escalation (§7.6).</td></tr>
+</table>
+<div class="callout warn"><strong>Safety:</strong> no PCU outlet is ever switched by automation outside the approved escalation in §7.6 / §8. The Lectern group is never used for processor restarts.</div>
+</section>
+<section class="blk" id="s3">
+<h2>3. Automated daily schedule (Mon–Sat, HKT)</h2>
+<table>
+<tr><th style="width:13%">Time</th><th style="width:26%">Job</th><th>What it does</th><th style="width:22%">Output</th></tr>
+<tr><td>03:42 daily</td><td>Operations backup</td><td>Backs up the operations memory/configuration; only the most recent 30 versions are kept.</td><td>Backup archive</td></tr>
+<tr><td>07:05</td><td>Extron Morning TV ON</td><td>Per room SM-11-01…08: logs in to the room controller, syncs, and presses <strong>TV On</strong> (Room 1 also Side TV On) unless the TVs are already on. The panel's TV On triggers System ON automatically. Validates that TV On and System ON settle; retries a failed room exactly once; then re-checks every room with two samples ~15 s apart. Standing authorisation — see §8.2.</td><td>Per-room summary (Cantonese) to the Extron operations chat</td></tr>
+<tr><td>~07:00–22:35</td><td>Route watchdog</td><td>Every 10 minutes, read-only probes of the camera and AV-processor subnets via the tunnel. A round fails only if <em>both</em> probes fail; alerts only on state change (2 consecutive failed rounds = route down; next OK round = recovered).</td><td>Alert to the ShekMun chat on change only</td></tr>
+<tr><td>08:15</td><td>Readiness — Stage 1</td><td>Early sweep of the AVoIP thumbnail page; retries thumbnail 404s in quick rounds (arm-and-retry, §7.1) to clear capture warm-up effects before the formal verdict.</td><td>Stage 1 data file (no email by design)</td></tr>
+<tr><td>08:20</td><td>Readiness — Stage 2</td><td>Formal READY / NOT READY verdict per room from the AVoIP page (primary), PTZ (support) and snapshot data: PC source live, displays fed, decoders online. Records late-wake rooms (§5.5). Delivered by ~08:50, ahead of the 09:00 class start.</td><td>Verdict report (chat + email, labelled &amp; archived)</td></tr>
+<tr><td>07:30–22:30 hourly (:30)</td><td>Campus patrol</td><td>Read-only PTZ patrol of all rooms plus device status: lighting, in-use/idle, display state and multi-display sync, encoder/decoder online status and temperatures, and the control-panel flash check (§4.4). Judged against the week's classroom booking reference.</td><td>HTML report (chat + email, landscape A4 PDF attached); subject prefixed <em>Status OK</em> / <em>Status ABNORMAL</em></td></tr>
+<tr><td>08:00–22:00 every 2 h</td><td>AVoIP log capture</td><td>Read-only capture of decoder/encoder logs (30 targets, Rooms 1–8) with anomaly analysis. On a source-loss case, saves PTZ + Manager thumbnail evidence. The 22:00 run also writes the daily summary with a read-only cross-check of all 16 AV switches.</td><td>Per-run analysis; 22:00 daily summary</td></tr>
+</table>
+<p class="small">All scheduled deliveries are in Cantonese, Traditional Chinese characters only. Report emails go to the site owner's designated mailbox only and are labelled “ShekMun report” and archived by the sending job.</p>
+</section>
+<section class="blk" id="s4">
+<h2>4. Standard procedures</h2>
+<div class="proc">
+<h3>P1 — Morning TV ON (07:05)</h3>
+<p class="kv">Trigger: schedule · Scope: SM-11-01…08 (Common Area excluded) · Authority: standing authorisation (§8.2)</p>
+<ol>
+<li>For each room, log in to the Extron controller and sync panel state through the proven real-page route.</li>
+<li>If the room's TVs are already on, skip the room. Otherwise press <strong>TV On</strong> once (Room 1: TV On <em>and</em> Side TV On — both required). Never press System ON directly; TV On triggers it.</li>
+<li>Validate: the press is successful only when TV On <em>and</em> System ON have settled (flashing stopped, state settled at “on”) — Room 1 also requires the Side TV On state settled.</li>
+<li>A room that fails validation is retried exactly once (maximum 2 attempts per room per morning). Login failure or HTTP 502 = room failed with reason; never guess credentials.</li>
+<li>Final check: re-read <em>every</em> room read-only, two samples ~15 s apart. A room settled only if both samples agree on the settled-on state.</li>
+<li>Flashing/unsettled after retry → the Option A handling in §8.2 (morning run only). A room in a <em>stable</em> non-on state is reported plainly as “TV off (stable, not flashing)” with <strong>no</strong> power-cycle escalation.</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P2 — Morning readiness check (08:15 / 08:20)</h3>
+<p class="kv">Trigger: schedule · Scope: SM-11-01…08 · Goal: every room READY before 09:00 classes; lectern PCs ready by 08:30</p>
+<ol>
+<li><strong>Stage 1 (08:15)</strong> sweeps the AVoIP thumbnail page cell by cell; still-404 cells are re-probed in quick arm-and-retry rounds (up to 10). This stage makes no verdict.</li>
+<li><strong>Stage 2 (08:20)</strong> judges each room READY / NOT READY on the remaining evidence (up to 5 further rounds): PC encoder feeding a live image, TV decoders online and fed, corroborated by PTZ and snapshot data. Audio decoders ignored; Common Area excluded (scheduled down).</li>
+<li>Late-wake rooms are recorded per §5.5 — tracking only, never a fault.</li>
+<li>On a decoder/display-side fault, the run <strong>asks the site owner</strong> in the main chat — it never acts by itself. After his confirmation: Rooms 02/07/08 use “Reset all decoders” once; Rooms 01/03/04/05/06 restart that room's TV decoders one by one via P3000 (audio decoder excluded). Then re-check and report.</li>
+<li>A PC-source-black case is <em>not</em> a decoder fault: check the lectern PC's power and the Windows display mode — it must be <strong>Duplicate</strong>, not Extend (§7.4).</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P3 — Hourly campus patrol (07:30–22:30)</h3>
+<p class="kv">Trigger: schedule, hourly at :30 · Scope: all rooms (Common Area scanned but reported only on an unexpected case, §5.4)</p>
+<ol>
+<li>Capture each room's PTZ view and read device status from the monitoring snapshot.</li>
+<li>Per room record: lighting (ON / OFF / partial), in use or idle, display state per monitored inventory, multi-display sync for SM-11-01/02/07/08, every encoder and TV/audio decoder's online status, and the highest KDS temperature.</li>
+<li>Run the control-panel flash check (P4) for Rooms 01–08.</li>
+<li>Judge abnormalities strictly by §5.2 — “unknown” is never a fault, and lighting alone is never abnormal.</li>
+<li>Issue one merged room table (photo, status, lighting, display + sync, encoders, decoders, other observations) as the HTML report; email it with a landscape A4 PDF; prefix the subject with the run status.</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P4 — Control-panel flash check (within each patrol, and in P1's final check)</h3>
+<p class="kv">Method: read-only · Two samples ~15 s apart per room via the panel-state observer (observes sync frames only — sends no sync command, never clicks)</p>
+<ol>
+<li>Sample System ON and TV On states twice (Room 1 also Side TV On).</li>
+<li>Both samples settled-on → normal. Same non-on state in both samples → stable off: report plainly, not a fault.</li>
+<li>Samples differ, or an unsettled/flashing signature → <strong>flashing = ABNORMAL</strong>, named first in the report's anomalies.</li>
+<li>On a flashing room: create <strong>one</strong> USS Help Desk record for the room/case (pre-approved, §8.2) and report its CaseID; separately <em>request</em> the owner's approval for a PCU power cycle (§7.6) — the patrol never performs the cycle. (In the 07:05 morning run only, Option A §8.2 applies instead.)</li>
+<li>Login failure / HTTP 502 / credential-source failure = “check not possible” — a limitation of the check, never a fault and never abnormal by itself.</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P5 — AVoIP log capture and daily consolidation</h3>
+<p class="kv">Trigger: every 2 h, 08:00–22:00 · Scope: 30 log targets, Rooms 1–8 (Common Area excluded) · Read-only</p>
+<ol>
+<li>Query each unit's log state and tail its log over the P3000 protocol; analyse for source-loss events, re-locks, USB error storms, and “no space” errors.</li>
+<li>Source-loss case (a decoder buffer ending without re-lock, or 2+ source-loss events in a room in the window): save the room's PTZ snapshot and Manager thumbnails as evidence with the run.</li>
+<li>The 22:00 run additionally consolidates the day (daily summary) and cross-checks all 16 AV switches read-only (login state, logging levels, counters vs the morning baseline).</li>
+<li>Logs are never cleared by automation. A log clear (LOG-ACTION 4) needs the owner's explicit approval and is normally refused while an error storm is still running (§11).</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P6 — Route watchdog</h3>
+<p class="kv">Trigger: every 10 min in the operating window · Read-only probes of one PTZ camera and the AV processor via the tunnel</p>
+<ol>
+<li>A round fails only if <em>both</em> subnet probes fail (a single-probe failure is context, not an outage).</li>
+<li>Two consecutive failed rounds → “route down” alert to the ShekMun chat. The next OK round after that → “route recovered”. Silent otherwise.</li>
+<li>The watchdog never touches a device; it exists so a network-path failure is known before the next patrol or class.</li>
+</ol>
+</div>
+</section>
+<section class="blk" id="s5">
+<h2>5. Classification and judgement rules</h2>
+<h3>5.1 Evidence order</h3>
+<p>AVoIP page (Kramer thumbnails) first, PTZ in support, <code>snapshot.json</code> to corroborate. A single weak signal never decides a fault.</p>
+<h3>5.2 Abnormal criteria (patrol / readiness)</h3>
+<ul>
+<li>KDS device temperature ≥ 49 °C.</li>
+<li>An explicit device failure state in the monitoring data.</li>
+<li>A camera offline (except Common Area, §5.4).</li>
+<li>Confirmed out-of-sync multi-display state — strictly judged, normally requiring two consecutive runs — subject to the Room 1 exception (§5.3).</li>
+<li>Control-panel lights flashing / unsettled under the P4 check.</li>
+</ul>
+<p>Not abnormal by themselves: lighting state; a device whose status is “unknown” (unknown ≠ fail); a source-side NO SIGNAL (a PC that is off/asleep is not a decoder fault); a thumbnail that is still unavailable after the full arm-and-retry pass (that is “thumbnail unavailable” — but see §5.6).</p>
+<h3>5.3 Room 1 exception (SM-11-01)</h3>
+<div class="callout rule"><strong>Rule:</strong> in SM-11-01, any one TV off/dark while any other TV in the room is on (active or standby) is <strong>OUT OF SYNC / ABNORMAL immediately</strong> — no downgraded “check region”, no two-run wait. All four TVs off together is normal uniform off. (A teacher manually switching off the side TVs during class is the known benign explanation and closes the case when confirmed.)</div>
+<h3>5.4 Common Area — scheduled down</h3>
+<p>The Common Area camera and decoders are offline by arrangement. That state is expected and is <strong>omitted from patrol reports entirely</strong> (no row, no mention). It is reported only if an unexpected state appears — devices back online, room in use, lights on, or display active — and is then flagged as unexpected.</p>
+<h3>5.5 Late wake （遲醒）</h3>
+<p>A room is recorded as <em>late wake</em> when its PC encoder showed NO SIGNAL in readiness Stage 1 but feeds a live image and is READY by Stage 2. The record carries the wake bracket (last NO SIGNAL time → first IMAGE time; the exact moment is never invented). Late wake is <strong>tracking only</strong>: not a fault, never ABNORMAL, never an escalation, no remedy. Not late wake: a black PC source; a room still NO SIGNAL at the verdict (that is NOT READY); a recovered thumbnail 404. If Stage 1 data is missing/incomplete, no late-wake calls are made that morning.</p>
+<h3>5.6 Decoder that will not show a thumbnail</h3>
+<p>A decoder that is normal in the snapshot data but whose Manager thumbnail keeps returning 404 after the full arm-and-retry pass is classified <strong>NEEDS-RESTART</strong> and escalated to the owner <em>before</em> any restart. The proven remedy is a P3000 <code>#RESET</code> of that decoder (it accepts the command over the tunnel with no login).</p>
+<h3>5.7 Report terminology</h3>
+<table>
+<tr><th>Situation</th><th>Term used in reports</th></tr>
+<tr><td>Source signal absent</td><td>無視訊來源信號 (no video source signal)</td></tr>
+<tr><td>Source signal re-locked / recovered</td><td>視訊來源恢復 (video source recovered)</td></tr>
+<tr><td>Source stream ended</td><td>視信來源終止 (video source terminated)</td></tr>
+</table>
+</section>
+<section class="blk" id="s6">
+<h2>6. Manual operations — Room Quick Keypad</h2>
+<p>The owner operates rooms on demand through the Quick Keypad (in chat: send <code>q</code>). Each room SM-11-01…08 has <strong>eight independent actions</strong> (Common Area excluded). Chat codes are <em>room number + suffix</em>:</p>
+<table>
+<tr><th>Action</th><th>Code</th><th>Mechanism</th></tr>
+<tr><td>System ON</td><td><code>3on</code></td><td>Extron panel press (single click), validated by the settled-state rule</td></tr>
+<tr><td>System OFF</td><td><code>3off</code></td><td>Extron panel press with 3-second hold; PTZ room-idle check first</td></tr>
+<tr><td>TV ON / TV OFF</td><td><code>3tvon</code> / <code>3tvoff</code></td><td>Extron TV group presses (main + side groups; SM-11-02: main group only)</td></tr>
+<tr><td>Reset all decoders</td><td><code>3rst</code></td><td>Companion “reset all decoders” press on the room's host; verified in snapshot data. (Fallback: per-decoder P3000 resets, audio decoder untouched.)</td></tr>
+<tr><td>Source PC / Source Laptop</td><td><code>3pc</code> / <code>3lap</code></td><td>Companion source-selection presses; verified by response + PTZ</td></tr>
+<tr><td>Processor restart</td><td><code>3pcu</code></td><td>Approval-gated PCU-AVRack outlet 4 power cycle (§7.6)</td></tr>
+</table>
+<div class="callout rule"><strong>Gate:</strong> a code is a <em>request</em>, not a confirmation. The operator states the action, the owner confirms, the action executes <strong>once</strong>, is verified, and is reported with its processing time. Explicit-direction actions are state-checked first — if the room is already in the requested state, nothing is pressed and that is reported instead. The keypad queue never auto-executes.</div>
+</section>
+<section class="blk" id="s7">
+<h2>7. Incident playbooks</h2>
+<h3>7.1 Manager thumbnail returns 404</h3>
+<p>Thumbnails must be <em>armed</em>: the first request starts the capture and returns 404; retrying every ~0.5 s (up to 10 attempts) returns the image. Requests must not carry a <code>Connection: close</code> header (the Manager answers those with 404). A thumbnail still 404 after the full pass is “thumbnail unavailable”, not a device fault — unless §5.6 applies.</p>
+<h3>7.2 Decoder reset routes</h3>
+<ul>
+<li><strong>Primary (all rooms):</strong> the room's Companion “Reset all decoders” press; verify recovery in the snapshot data and thumbnails.</li>
+<li><strong>Fallback:</strong> per-decoder P3000 <code>#RESET</code> for TV decoders only, one by one; audio decoders are never reset by these routes.</li>
+<li>Either route requires the owner's confirmation first (§8), except inside an approved readiness remedy (P2 step 4).</li>
+</ul>
+<h3>7.3 Kramer Manager web interface hangs</h3>
+<p>If the Manager's web service hangs (TCP answers, TLS handshake stalls) the P3000 interface still answers on TCP 5000 with no login: a <code>#RESET</code> reboots the Manager, with full recovery in ~80 seconds (web UI ~30 s). Web-admin credentials are <em>not</em> SSH credentials and are never tried as such.</p>
+<h3>7.4 PC source black / NO SIGNAL at readiness</h3>
+<ol>
+<li>Check the lectern PC is powered (and not stuck before Windows).</li>
+<li>Check the Windows display mode: it must be <strong>Duplicate</strong>. In <em>Extend</em> mode the encoder is fed the blank extended desktop — the proven cause of the 2026-10-15 Room 7 case.</li>
+<li>Check HDMI into the encoder and the encoder's PoE/network state.</li>
+<li>Do not reset decoders for a source-side fault.</li>
+</ol>
+<h3>7.5 Switch management login failures</h3>
+<p>Fleet switches normally serve their API over HTTP. After the Room 1 pair's firmware upgrade (Oct 2026) those two switches redirect HTTP to HTTPS on port 4443 with an empty body, which reads as an “empty login” failure. The fetch tooling therefore falls back to HTTPS (TLS 1.2 via the tunnel) automatically; the same password works — a redirect/empty response is a transport change, not a credential change. Note: on the upgraded pair the satellite's buffered log may return only one line, and the master's logging level reads 5 (fleet masters otherwise 6) — data caveats, not faults.</p>
+<h3>7.6 AV processor power cycle (PCU escalation)</h3>
+<ol>
+<li>Preconditions: a flashing/unsettled panel case (§P4), or the owner's direct instruction.</li>
+<li>Use the room's <strong>PCU-AVRack outlet 4</strong> only (never PCU-Lectern): OFF → ~10 s → ON, via the unit's web SIS interface.</li>
+<li>Allow the controller to boot, re-sync the panel, and confirm with two samples ~15 s apart plus PTZ.</li>
+<li>Approval: the owner's per-case approval is required, except in the 07:05 morning run under Option A (§8.2: at most one cycle + one recovery System ON press per room per morning; still flashing after that = stop, report, ask).</li>
+</ol>
+<h3>7.7 USB error storm on a TV decoder</h3>
+<p>Repeated USB error lines (with “No space left on device” in severe cases) indicate a physical USB-path problem. Clearing the log (LOG-ACTION 4) only refills while the storm runs and is <strong>not approved</strong> as a fix; the durable remedy is an on-site USB-path field check. Continue observation and report; do not clear logs.</p>
+</section>
+<section class="blk" id="s8">
+<h2>8. Approvals and escalation</h2>
+<h3>8.1 The gate</h3>
+<p>Nothing that changes a device happens without the site owner's confirmation, other than the standing authorisations in §8.2. Proposals always name the exact device, the evidence, and the least-disruptive remedy, and wait.</p>
+<table>
+<tr><th>Action</th><th>Authority</th></tr>
+<tr><td>All read-only monitoring (patrols, readiness sweeps, log captures, watchdog, panel-state observation)</td><td>Autonomous (scheduled)</td></tr>
+<tr><td>Morning TV On presses (07:05 run, incl. one retry per room)</td><td>Standing authorisation (§8.2)</td></tr>
+<tr><td>Flashing-case handling inside the 07:05 run: one PCU-AVRack outlet-4 cycle + at most one recovery System ON press per room</td><td>Standing authorisation “Option A” (§8.2)</td></tr>
+<tr><td>USS Help Desk record for a control-panel flashing case (one per room per case)</td><td>Pre-approved (§8.2); all other Help Desk posts need per-case approval</td></tr>
+<tr><td>Quick Keypad actions</td><td>Owner confirms each queued action before execution</td></tr>
+<tr><td>Decoder resets (readiness remedy, keypad, ad-hoc)</td><td>Owner confirmation first</td></tr>
+<tr><td>PCU power cycle outside the morning run</td><td>Owner approval per case</td></tr>
+<tr><td>Kramer Manager changes (channel assignment, reboot) and log clears (LOG-ACTION 4)</td><td>Owner direction per case</td></tr>
+<tr><td>Any change during class time beyond the above</td><td>Owner approval; least-disruptive option first</td></tr>
+</table>
+<h3>8.2 Standing authorisations (owner-granted, in force)</h3>
+<ul>
+<li><strong>Morning TV ON (from 2026-10-13/15):</strong> the 07:05 run may press TV On as specified in P1 without per-morning approval.</li>
+<li><strong>Option A — flashing handling in the morning run (from 2026-10-23):</strong> a flashing trigger is handled end-to-end inside the run (one PCU cycle + at most one recovery press per room per morning; still flashing → stop, report, ask). Sunset: after <strong>3 consecutive mornings with no flashing case</strong>, this pre-authorisation expires and the run reverts to ask-first; only the owner can re-authorise it.</li>
+<li><strong>Flashing-case Help Desk records (from 2026-10-30):</strong> one record per room per flashing case is posted directly and its CaseID reported; this covers ticket creation only.</li>
+<li><strong>Scheduled report emails:</strong> the scheduled jobs send their report emails without a per-run approval prompt, to the designated distribution only.</li>
+</ul>
+<h3>8.3 Escalation paths</h3>
+<ul>
+<li><strong>Fault found by a scheduled run</strong> → reported in the run's report; remedy proposed to the owner (main chat) and executed only on confirmation, then re-checked and closed out in a follow-up report.</li>
+<li><strong>Control-panel flashing (patrol)</strong> → Help Desk record (CaseID format <code>U-YYYYMMDDHHMMSS</code>) + PCU approval request to the owner.</li>
+<li><strong>Route down (watchdog)</strong> → alert to the ShekMun chat; investigation follows the network path (tunnel → subnet router → switches) before any device action.</li>
+<li><strong>Teams access rule:</strong> browser access to Microsoft Teams is strictly limited to the USS Help Desk chat; no other chat is opened, and non-flashing posts need the owner's approval each time.</li>
+</ul>
+</section>
+<section class="blk" id="s9">
+<h2>9. Reporting and distribution</h2>
+<ul>
+<li><strong>Patrol reports:</strong> one merged room-based table per report (Room · Photo · Status &amp; observations · Lighting · Display + sync · Encoders · Decoders · Other), delivered to the ShekMun chat and emailed as self-contained HTML with a landscape A4 PDF attachment. Email subjects begin with the run status: <em>Status OK</em> or <em>Status ABNORMAL</em>.</li>
+<li><strong>Readiness reports:</strong> per-room verdict table with a late-wake column and a late-wake summary line; emailed and labelled/archived under the “ShekMun report” Gmail label.</li>
+<li><strong>Distribution:</strong> Shek Mun patrol and readiness report emails go to the owner's designated Gmail address only (changed 2026-10-11). The owner's work email is not on this distribution.</li>
+<li><strong>Language:</strong> all scheduled deliveries in Cantonese, Traditional Chinese characters only, using the terminology in §5.7.</li>
+<li><strong>Booking references:</strong> patrols are judged against the week's merged classroom booking reference (timetable images + booking spreadsheet), maintained under the patrol goal's files.</li>
+<li><strong>WhatsApp:</strong> patrol/report delivery over WhatsApp is not available from other chats; reports are delivered in the designated chats and by email.</li>
+</ul>
+</section>
+<section class="blk" id="s10">
+<h2>10. Security and safety</h2>
+<ul>
+<li>All remote access reaches the site only through the Tailscale overlay and the site subnet router; no management interface is exposed publicly.</li>
+<li>Credentials are used <strong>transiently at runtime</strong> from their secure sources and are never written into documents, memory files, reports or this SOP. Password guessing is prohibited: a login failure is reported as a failure with its reason.</li>
+<li>Monitoring jobs are read-only. The only scheduled device-changing job is the morning TV-on run, within its written limits (§8.2).</li>
+<li>Power switching is restricted to PCU-AVRack outlet 4 under §7.6. PCU-Lectern outlets are never switched for processor restarts.</li>
+<li>When in doubt, the automation stops and asks. A missed check is recoverable; an unauthorised device action during class is not.</li>
+</ul>
+</section>
+<section class="blk" id="s11">
+<h2>11. Known issues and standing decisions</h2>
+<table>
+<tr><th style="width:26%">Topic</th><th>Status / standing decision</th></tr>
+<tr><td>TV restarts on source change (Fujitsu IW862/IW982, Rooms 1/2/7/8)</td><td>Investigated Oct 2026: the trigger is the format transition into the 720p60 standby signal on source change (HDCP re-auth and re-lock churn exonerated). Standing mitigations: the 1080p50 site rule (§2.2); candidate fix — raise decoder display-behavior delays (sleep/shutdown to ~300 s, wake-up 0 s) on TV decoders, owner's decision pending. Occasional KDS signal loss is tracked with the same case file.</td></tr>
+<tr><td>Decoder discovery loop</td><td>Root-caused: a TV decoder loops when any of its channel-select extension families is unassigned (“null”) in the Manager. Remedy proven: assigning the null families in the Manager stops the loop within seconds. Remaining units are fixed when the owner chooses.</td></tr>
+<tr><td>USB error storms (e.g. SM-11-07 TV-DEC-1, SM-11-01 TV-DEC-1)</td><td>Observation only. Log clear (Decision A) explicitly <strong>not approved</strong>; durable fix is a physical USB-path field check (§7.7).</td></tr>
+<tr><td>CEC auto-on behaviour</td><td>Decoder-originated auto-CEC does not reach the TVs while the CEC gateway is disabled (verified) — the gateway state is the gate. Residual risk: re-enablement (including by factory reset). Mitigation candidate in the TV-restart row above.</td></tr>
+<tr><td>Room 1 switch pair management</td><td>Firmware-upgraded Oct 2026; management is HTTPS-only (port 4443) with automatic fallback in the tooling (§7.5). A device-side change back to HTTP management is the owner's call only — not done.</td></tr>
+<tr><td>SM-11-01 TV-DEC-1 log “No space left”</td><td>Occurred under a USB storm; see the USB row. No log clear approved.</td></tr>
+</table>
+</section>
+<section class="blk" id="s12">
+<h2>12. Document control</h2>
+<table>
+<tr><th>Version</th><th>Date</th><th>Change</th></tr>
+<tr><td>1.0</td><td>30 Oct 2026</td><td>Initial issue. Compiled from the live operating configuration: patrol, readiness, morning TV-on, log capture, watchdog and backup schedules; Quick Keypad manual operations; classification rules; incident playbooks; approval matrix and standing authorisations.</td></tr>
+</table>
+<p class="small">This SOP describes the configuration as agreed with the site owner at the version date. When a workflow, schedule or rule changes, the change is made in the operating configuration first and this document is re-issued with a new version.</p>
+</section>
+<p class="foot">ShekMun Campus SOP · Remote Campus · Support Portal. Prepared for ITSC operations. Times are Hong Kong time (Asia/Hong_Kong). <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal home</a></p>
+</main>
+</body>
+</html>
