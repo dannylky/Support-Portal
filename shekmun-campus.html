@@ -14,6 +14,9 @@ body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;backgrou
 .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
 .meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
 .toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:10px 0}
 .toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
 .toc a{font-size:13px;font-weight:600;color:#3730a3;text-decoration:none;background:#eef2ff;border:1px solid #c7d2fe;padding:4px 11px;border-radius:999px}
@@ -42,7 +45,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <header class="hero"><div class="wrap">
 <h1>ShekMun Campus — Standard Operating Procedure</h1>
 <div class="sub">Complete operating procedure for remote monitoring and control of the Shek Mun teaching block: platforms and inventory, the automated daily schedule, standard procedures, classification rules, manual operations, incident playbooks, and the approval &amp; escalation matrix. This SOP is the single reference for how the site is run day to day. <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal home</a> · <a href="shekmun-case-handling.html">Case Handling for Known Issues</a></div>
-<div class="meta"><span class="ver">SOP v1.2</span><span>Effective 30 Oct 2026</span><span>Site owner / approver: Danny LAM (ITSC)</span><span>Operations: Mon–Sat</span><span>Timezone: Asia/Hong_Kong</span></div>
+<div class="meta"><span class="ver">SOP v1.3</span><span>Effective 30 Oct 2026</span><span>Site owner / approver: Danny LAM (ITSC)</span><span>Operations: Mon–Sat</span><span>Timezone: Asia/Hong_Kong</span><span class="langsw"><a class="on" href="shekmun-campus.html">English</a><a href="shekmun-campus-zh.html">繁體中文</a></span></div>
 </div></header>
 <nav class="toc"><div class="wrap">
 <a href="#s1">1 Overview</a><a href="#s2">2 Inventory</a><a href="#s3">3 Daily schedule</a><a href="#s4">4 Procedures</a><a href="#s5">5 Classification rules</a><a href="#s6">6 Manual operations</a><a href="#s7">7 Incident playbooks</a><a href="#s8">8 Approvals &amp; escalation</a><a href="#s9">9 Reporting</a><a href="#s10">10 Security &amp; safety</a><a href="#s11">11 Known issues</a><a href="#s12">12 Document control</a>
@@ -333,6 +336,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <h2>12. Document control</h2>
 <table>
 <tr><th>Version</th><th>Date</th><th>Change</th></tr>
+<tr><td>1.3</td><td>30 Oct 2026</td><td>Added a full Traditional Chinese edition of this SOP (shekmun-campus-zh.html) with an English / 繁體中文 language switch at the top of both editions. No procedure changed.</td></tr>
 <tr><td>1.2</td><td>30 Oct 2026</td><td>Added the companion page “Case Handling for Known Issues” (13 scenarios ordered by importance, step-by-step handling) and linked it from §7 and the page header. No procedure changed.</td></tr>
 <tr><td>1.1</td><td>30 Oct 2026</td><td>Removed the remote-access technology details at the site owner's direction: the platform entry was deleted and all access-path wording generalised to “secure remote access”. No procedure changed.</td></tr>
 <tr><td>1.0</td><td>30 Oct 2026</td><td>Initial issue. Compiled from the live operating configuration: patrol, readiness, morning TV-on, log capture, watchdog and backup schedules; Quick Keypad manual operations; classification rules; incident playbooks; approval matrix and standing authorisations.</td></tr>

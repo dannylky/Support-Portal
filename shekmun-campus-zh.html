@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>石門校園標準操作程序 · Remote Campus · Support Portal</title>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:38px 20px 28px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:880px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.langsw{display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
+.toc{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);border-bottom:1px solid #e2e8f0;padding:10px 0}
+.toc .wrap{display:flex;gap:8px;flex-wrap:wrap}
+.toc a{font-size:13px;font-weight:600;color:#3730a3;text-decoration:none;background:#eef2ff;border:1px solid #c7d2fe;padding:4px 11px;border-radius:999px}
+.toc a:hover{background:#e0e7ff}
+section.blk{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:24px 26px;margin:18px 0;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+section.blk h2{margin:0 0 12px;font-size:21px;letter-spacing:-.01em}
+section.blk h3{margin:20px 0 8px;font-size:16.5px;color:#1e1b4b}
+section.blk p{line-height:1.65;color:#1f2937;margin:8px 0}
+section.blk ul,section.blk ol{line-height:1.7;color:#1f2937;margin:8px 0 8px 20px;padding:0}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0 6px}
+th,td{border-bottom:1px solid #e2e8f0;padding:8px 10px;text-align:left;vertical-align:top;line-height:1.5}
+th{background:#f8fafc;font-size:12px;letter-spacing:.05em;color:#475569}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:13px}
+.callout{border-radius:12px;padding:13px 16px;margin:12px 0;line-height:1.6;font-size:14.5px}
+.warn{background:#fef2f2;border:1px solid #fecaca;color:#7f1d1d}
+.rule{background:#eef2ff;border:1px solid #c7d2fe;color:#312e81}
+.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#14532d}
+.proc{border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;margin:14px 0;background:#fcfcff}
+.proc h3{margin-top:0}
+.kv{font-size:13.5px;color:#475569}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:8px 0 46px}
+.small{font-size:13.5px;color:#64748b}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>石門校園 — 標準操作程序</h1>
+<div class="sub">石門教學大樓遙距監察與控制的完整操作程序：平台與設備清單、自動化每日排程、標準程序、判定規則、手動操作、事故處理手冊，以及批准與升級矩陣。本程序是本站日常運作的單一參考文件。 <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal 主頁</a> · <a href="shekmun-case-handling.html">已知問題案例處理</a></div>
+<div class="meta"><span class="ver">SOP v1.3</span><span>生效日期：2026 年 10 月 30 日</span><span>站點負責人／批准人：Danny LAM（ITSC）</span><span>運作日子：星期一至六</span><span>時區：Asia/Hong_Kong</span><span class="langsw"><a href="shekmun-campus.html">English</a><a class="on" href="shekmun-campus-zh.html">繁體中文</a></span></div>
+</div></header>
+<nav class="toc"><div class="wrap">
+<a href="#s1">1 總覽</a><a href="#s2">2 設備清單</a><a href="#s3">3 每日排程</a><a href="#s4">4 標準程序</a><a href="#s5">5 判定規則</a><a href="#s6">6 手動操作</a><a href="#s7">7 事故手冊</a><a href="#s8">8 批准與升級</a><a href="#s9">9 報告</a><a href="#s10">10 保安與安全</a><a href="#s11">11 已知問題</a><a href="#s12">12 文件管制</a>
+</div></nav>
+<main class="wrap">
+<section class="blk" id="s1">
+<h2>1. 目的、範圍與系統總覽</h2>
+<p><strong>目的。</strong> 本程序界定石門校園教學空間如何被監察、如何保持課堂就緒，以及如何從故障中復原 — 主要以遙距及自動化方式進行，凡涉及更改裝置的操作，一律設有人手批准閘。</p>
+<p><strong>範圍。</strong> 課室 <strong>SM-11-01 至 SM-11-08</strong> 及 <strong>Common Area</strong>，涵蓋：房內顯示裝置與 AV-over-IP（AVoIP）分發、Extron 房間控制與電源控制、PTZ 觀察攝影機、AVoIP 管理平台、AV VLAN 上的網絡交換機，以及監察上述各項的自動化／監察系統。課堂於 <strong>09:00</strong> 開始；講台電腦須於 <strong>08:30</strong> 前就緒。</p>
+<h3>1.1 平台</h3>
+<table>
+<tr><th style="width:24%">平台</th><th>於運作中的角色</th></tr>
+<tr><td><strong>Shek Mun AV Monitoring</strong>（v1.9.24）</td><td>本站的中央監察網頁應用程式：每間房的裝置狀態（<code>snapshot.json</code>）、PTZ 攝影機畫面，以及作為主要就緒證據的 Kramer AVoIP 縮圖頁。經操作員的安全遙距存取連接。</td></tr>
+<tr><td><strong>Kramer AVoIP</strong>（Manager + KDS 編碼器／解碼器）</td><td>視訊分發：將講台電腦／手提電腦訊源送至房內顯示裝置。由 Kramer AVoIP Manager 中央管理；裝置亦支援 P3000 控制協議作查詢及重置。</td></tr>
+<tr><td><strong>Extron 控制</strong></td><td>每間房的控制器運行老師使用的觸控面板（VTLP）介面（系統開／關、電視開／關、訊源選擇）。PCU 電源控制器（IPL T PCS4i）負責每間房的機櫃及講台供電開關。</td></tr>
+<tr><td><strong>Bitfocus Companion</strong></td><td>每間房的主機提供簡單的按鍵端點，用於手動操作程序下的解碼器批量重置及訊源選擇（PC／手提電腦）。</td></tr>
+<tr><td><strong>自動化（Muse）</strong></td><td>排程工作執行 §4 的各項程序（晨早開電視、就緒檢查、巡邏、日誌擷取、看門狗、備份），並以廣東話（繁體中文）向站點負責人的對話及電郵匯報。</td></tr>
+</table>
+<h3>1.2 運作模式</h3>
+<ul>
+<li><strong>預設唯讀。</strong> 每項排程檢查只作觀察。更改裝置的操作依 §8 執行。</li>
+<li><strong>證據次序。</strong> AVoIP 頁（Kramer 縮圖）為主要證據；PTZ 畫面作支援；<code>snapshot.json</code> 作佐證。音訊解碼器不納入就緒／巡邏判定。</li>
+<li><strong>單一負責人、單一批准閘。</strong> 重置、電源循環及控制按鍵均由站點負責人（Danny）批准，§8.2 所列的常設授權除外。</li>
+</ul>
+</section>
+<section class="blk" id="s2">
+<h2>2. 站點與系統設備清單</h2>
+<h3>2.1 課室與顯示裝置</h3>
+<table>
+<tr><th>課室</th><th>受監察顯示裝置</th><th>備註</th></tr>
+<tr><td>SM-11-01</td><td>4 部 LED 電視</td><td>兩組電視（主組＋側組）；多顯示同步以嚴格準則判定 — 見 §5.3。</td></tr>
+<tr><td>SM-11-02</td><td>2 部 LED 電視</td><td>兩部電視均由主電視組驅動；本房的側電視關閉控制並無使用。</td></tr>
+<tr><td>SM-11-03 … SM-11-06</td><td>每間 1 幅 LED 顯示牆</td><td>—</td></tr>
+<tr><td>SM-11-07、SM-11-08</td><td>每間 2 部 LED 電視</td><td>適用多顯示同步判定。</td></tr>
+<tr><td>Common Area</td><td>1 部 LED 電視</td><td><strong>預定停用</strong> — 攝影機及解碼器按安排離線；見 §5.4。</td></tr>
+</table>
+<p class="small">備用「TV-Res」裝置、Dante 編碼器及 SM-11-02 的 USBMac 揚聲器，按站點負責人指示，不納入任何監察報告。</p>
+<h3>2.2 AVoIP 艦隊</h3>
+<table>
+<tr><th>項目</th><th>詳情</th></tr>
+<tr><td>編碼器</td><td>Kramer <strong>KDS-SW3-EN7</strong>（H/W 0.2）— 每間房各有 PC 及手提電腦編碼器。</td></tr>
+<tr><td>解碼器</td><td>Kramer <strong>KDS-DEC7</strong>（H/W 0.4）— 每個顯示裝置一部電視解碼器，另每間房一部音訊解碼器（不納入視覺判定）。</td></tr>
+<tr><td>韌體</td><td>抽樣全艦隊均為 <strong>1.3.1</strong> — 版本一致、無偏差。</td></tr>
+<tr><td>Manager</td><td>Kramer AVoIP Manager（KDS-7-MNGR）— 頻道指派、裝置縮圖、艦隊設定。</td></tr>
+<tr><td>時間同步</td><td>NTP 伺服器設於 AV VLAN 閘道；全艦隊（16 部編碼器 + 14 部電視解碼器）時鐘已同步。</td></tr>
+<tr><td>全站視訊規則</td><td>所有電腦及 AVoIP 裝置一律 <strong>1920×1080、50 Hz</strong>。60 Hz 會令 Fujitsu 電視視訊不穩定（見 §11）。</td></tr>
+<tr><td>正常溫度</td><td>KDS 運作溫度 33–45 °C；≥ 49 °C 為異常（§5.2）。</td></tr>
+</table>
+<h3>2.3 控制、供電與網絡 — 位址規劃</h3>
+<table>
+<tr><th>網段</th><th>分配</th></tr>
+<tr><td>控制子網 172.18.2.0/24</td><td>PCU-AVRack <code>.11–.19</code> 及 PCU-Lectern <code>.21–.29</code>（房間次序 SM-11-01…08，其後 Common Rm）；Extron 房間控制器 <code>.31–.38</code>；Companion 主機 <code>.51–.58</code>；AV 處理器（AVProc 快照主機）<code>.57</code> 一帶，逐房對應以內部清單為準。</td></tr>
+<tr><td>AV／攝影機子網 172.18.22.0/24</td><td>Kramer Manager <code>.5</code>；AVoIP 編碼器／解碼器；PTZ 攝影機（房 1 攝影機 <code>.101</code>、Common Area 攝影機 <code>.109</code>）；服務八間房的 AV 網絡交換機（16 部）。</td></tr>
+<tr><td>供電時間表</td><td>校園 AV 供電：<strong>開 07:00／關 12:01</strong>，經 PoE 交換機及 PCU 執行。</td></tr>
+</table>
+<h3>2.4 PCU 電源控制器（Extron IPL T PCS4i，韌體 1.16）</h3>
+<p>兩組裝置<strong>完全不同</strong> — 切勿混淆。<strong>PCU-AVRack</strong> 負責 AV 機櫃供電；<strong>PCU-Lectern</strong> 負責講台供電。AVRack 的插座對應在每間房均相同：</p>
+<table>
+<tr><th>插座</th><th>標籤</th><th>角色</th></tr>
+<tr><td>1</td><td>Mixer</td><td>混音器</td></tr>
+<tr><td>2</td><td>AVoIP</td><td>AV-over-IP 裝置</td></tr>
+<tr><td>3</td><td>Mic</td><td>咪高峰系統（只限手動，無排程）</td></tr>
+<tr><td>4</td><td><strong>AVprocessor</strong></td><td><strong>該房 AV 處理器的電源開關</strong> — 經批准的電源循環升級所使用的插座（§7.6）。</td></tr>
+</table>
+<div class="callout warn"><strong>安全：</strong> 除 §7.6／§8 經批准的升級外，自動化永不切換任何 PCU 插座。Lectern 組永不用於處理器重啟。</div>
+</section>
+<section class="blk" id="s3">
+<h2>3. 自動化每日排程（星期一至六，香港時間）</h2>
+<table>
+<tr><th style="width:13%">時間</th><th style="width:26%">工作</th><th>內容</th><th style="width:22%">產出</th></tr>
+<tr><td>每日 03:42</td><td>運作備份</td><td>備份運作記憶／設定；只保留最近 30 個版本。</td><td>備份封存檔</td></tr>
+<tr><td>07:05</td><td>Extron 晨早開電視</td><td>逐房 SM-11-01…08：登入房間控制器、同步，並按下 <strong>TV On</strong>（房 1 另加 Side TV On），電視已開著的房間除外。面板的 TV On 會自動觸發 System ON。驗證 TV On 與 System ON 均已定住；失敗的房間只重試一次；其後以約 15 秒間隔的兩次取樣覆查每間房。常設授權 — 見 §8.2。</td><td>逐房摘要（廣東話）至 Extron 運作對話</td></tr>
+<tr><td>約 07:00–22:35</td><td>路線看門狗</td><td>每 10 分鐘經遙距存取路徑對攝影機及 AV 處理器子網作唯讀探測。一輪探測只在<em>兩個</em>探測同時失敗時才算失敗；只在狀態改變時發出警示（連續兩輪失敗 = 路線中斷；其後首個正常輪次 = 已復原）。</td><td>只在狀態改變時向 ShekMun 對話發警示</td></tr>
+<tr><td>08:15</td><td>就緒檢查 — 第一階段</td><td>先行掃描 AVoIP 縮圖頁；以快速輪次重試回傳 404 的縮圖（武裝後重試，§7.1），在正式判定前消除擷取暖機效應。</td><td>第一階段數據檔（設計上不發電郵）</td></tr>
+<tr><td>08:20</td><td>就緒檢查 — 第二階段</td><td>按 AVoIP 頁（主要）、PTZ（支援）及快照數據，為每間房作正式 READY／NOT READY 判定：PC 訊源有即時畫面、顯示裝置有畫面、解碼器在線。記錄遲醒房間（§5.5）。約 08:50 前送達，早於 09:00 上課。</td><td>判定報告（對話 + 電郵，附標籤並歸檔）</td></tr>
+<tr><td>07:30–22:30 每小時（:30）</td><td>校園巡邏</td><td>對所有房間作唯讀 PTZ 巡邏並讀取裝置狀態：燈光、使用中／閒置、顯示狀態與多顯示同步、編碼器／解碼器在線狀態與溫度，以及控制面板閃燈檢查（§4.4）。按該星期的課室預訂參考判定。</td><td>HTML 報告（對話 + 電郵，附橫向 A4 PDF）；主旨以 <em>Status OK</em>／<em>Status ABNORMAL</em> 開頭</td></tr>
+<tr><td>08:00–22:00 每 2 小時</td><td>AVoIP 日誌擷取</td><td>唯讀擷取解碼器／編碼器日誌（30 個目標，房 1–8）並作異常分析。遇來源中斷個案，儲存 PTZ 及 Manager 縮圖作證據。22:00 一輪另寫每日總結，並對全部 16 部 AV 交換機作唯讀交叉核對。</td><td>逐輪分析；22:00 每日總結</td></tr>
+</table>
+<p class="small">所有排程送遞均以廣東話、繁體中文書寫。報告電郵只寄往站點負責人指定的信箱，並由發送工作加上「ShekMun report」標籤及歸檔。</p>
+</section>
+<section class="blk" id="s4">
+<h2>4. 標準程序</h2>
+<div class="proc">
+<h3>P1 — 晨早開電視（07:05）</h3>
+<p class="kv">觸發：排程 · 範圍：SM-11-01…08（Common Area 除外）· 權限：常設授權（§8.2）</p>
+<ol>
+<li>逐房登入 Extron 控制器，經已驗證的真實頁面路徑同步面板狀態。</li>
+<li>房間電視已開著則跳過。否則按 <strong>TV On</strong> 一次（房 1：TV On <em>及</em> Side TV On — 兩者皆須）。永不直接按 System ON；TV On 會自動觸發它。</li>
+<li>驗證：只有當 TV On <em>及</em> System ON 均已定住（閃爍停止、狀態穩定為「開」）才算成功 — 房 1 另須 Side TV On 狀態定住。</li>
+<li>驗證失敗的房間只重試一次（每房每朝最多 2 次嘗試）。登入失敗或 HTTP 502 = 該房失敗並記錄原因；永不猜測憑證。</li>
+<li>最後檢查：以唯讀方式重讀<em>每間</em>房，兩次取樣相隔約 15 秒。兩次取樣均顯示定住的開著狀態，該房才算定住。</li>
+<li>重試後仍閃爍／未定 → 依 §8.2 的 Option A 處理（只限晨早一輪）。處於<em>穩定</em>非開啟狀態的房間，會直接報告為「電視熄咗（穩定、非閃爍）」，<strong>不作</strong>電源循環升級。</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P2 — 晨早就緒檢查（08:15／08:20）</h3>
+<p class="kv">觸發：排程 · 範圍：SM-11-01…08 · 目標：每間房於 09:00 上課前 READY；講台電腦 08:30 前就緒</p>
+<ol>
+<li><strong>第一階段（08:15）</strong>逐格掃描 AVoIP 縮圖頁；仍回傳 404 的格以快速武裝後重試輪次再探測（最多 10 輪）。本階段不作判定。</li>
+<li><strong>第二階段（08:20）</strong>按其餘證據（最多再 5 輪）判定每間房 READY／NOT READY：PC 編碼器送出即時畫面、電視解碼器在線並有畫面，並以 PTZ 及快照數據佐證。音訊解碼器忽略；Common Area 除外（預定停用）。</li>
+<li>遲醒房間依 §5.5 記錄 — 只作追蹤，永不視為故障。</li>
+<li>遇解碼器／顯示側故障，本輪會在主對話<strong>詢問站點負責人</strong> — 絕不自行行動。經他確認後：房 02/07/08 使用「Reset all decoders」一次；房 01/03/04/05/06 以 P3000 逐部重啟該房的電視解碼器（音訊解碼器除外）。其後覆查並報告。</li>
+<li>PC 來源黑畫面個案<em>並非</em>解碼器故障：檢查講台電腦電源及 Windows 顯示模式 — 必須是 <strong>Duplicate</strong> 而非 Extend（§7.4）。</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P3 — 每小時校園巡邏（07:30–22:30）</h3>
+<p class="kv">觸發：排程，每小時 :30 · 範圍：所有房間（Common Area 會掃描，但只在出現預期外情況時報告，§5.4）</p>
+<ol>
+<li>擷取每間房的 PTZ 畫面，並從監察快照讀取裝置狀態。</li>
+<li>逐房記錄：燈光（開／關／局部）、使用中或閒置、按受監察清單的顯示狀態、SM-11-01/02/07/08 的多顯示同步、每個編碼器及電視／音訊解碼器的在線狀態，以及最高 KDS 溫度。</li>
+<li>為房 01–08 執行控制面板閃燈檢查（P4）。</li>
+<li>異常嚴格依 §5.2 判定 — 「未知」永不視為故障，燈光本身亦永不單獨構成異常。</li>
+<li>以一張合併房間表（相片、狀態、燈光、顯示 + 同步、編碼器、解碼器、其他觀察）發出 HTML 報告；以電郵附橫向 A4 PDF 寄出；主旨以該輪狀態開頭。</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P4 — 控制面板閃燈檢查（每次巡邏內，以及 P1 的最後檢查）</h3>
+<p class="kv">方法：唯讀 · 經面板狀態觀察工具逐房取樣兩次、相隔約 15 秒（只觀察同步訊框 — 不發送同步指令、永不點擊）</p>
+<ol>
+<li>取樣 System ON 及 TV On 狀態兩次（房 1 另加 Side TV On）。</li>
+<li>兩次取樣均為定住開啟 → 正常。兩次均為同一非開啟狀態 → 穩定關閉：直接報告，並非故障。</li>
+<li>兩次取樣不同，或出現未定／閃爍特徵 → <strong>閃爍 = 異常</strong>，在報告異常欄置頂列出。</li>
+<li>遇閃爍房間：為該房／個案建立<strong>一張</strong> USS Help Desk 記錄（已預先批准，§8.2）並報告其 CaseID；另行<em>請求</em>負責人批准 PCU 電源循環（§7.6）— 巡邏永不自行執行循環。（只在 07:05 晨早一輪，改依 §8.2 的 Option A。）</li>
+<li>登入失敗／HTTP 502／憑證來源讀取失敗 = 「未能檢查」 — 屬檢查本身的限制，永不視為故障，亦永不單獨構成異常。</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P5 — AVoIP 日誌擷取與每日整合</h3>
+<p class="kv">觸發：每 2 小時，08:00–22:00 · 範圍：30 個日誌目標，房 1–8（Common Area 除外）· 唯讀</p>
+<ol>
+<li>經 P3000 協議查詢每部裝置的日誌狀態並擷取其日誌尾段；分析來源中斷事件、重新鎖定、USB 錯誤風暴及「無空間」錯誤。</li>
+<li>來源中斷個案（解碼器緩衝以未重新鎖定作結，或一間房在時窗內有 2 次或以上來源中斷）：將該房的 PTZ 快照及 Manager 縮圖隨該輪儲存作證據。</li>
+<li>22:00 一輪另整合全日（每日總結），並對全部 16 部 AV 交換機作唯讀交叉核對（登入狀態、記錄等級、與晨早基線比較的計數）。</li>
+<li>自動化永不清除日誌。清除日誌（LOG-ACTION 4）須經負責人明確批准，且在錯誤風暴仍在運行時通常會被拒絕（§11）。</li>
+</ol>
+</div>
+<div class="proc">
+<h3>P6 — 路線看門狗</h3>
+<p class="kv">觸發：運作時窗內每 10 分鐘 · 經遙距存取路徑對一部 PTZ 攝影機及 AV 處理器作唯讀探測</p>
+<ol>
+<li>一輪探測只在<em>兩個</em>子網探測同時失敗時才算失敗（單一探測失敗屬背景資料，並非中斷）。</li>
+<li>連續兩輪失敗 → 向 ShekMun 對話發出「路線中斷」警示。其後首個正常輪次 → 「路線已復原」。其餘時間保持沉默。</li>
+<li>看門狗永不觸碰任何裝置；其存在是為了讓網絡路徑故障在下一輪巡邏或上課前已被知悉。</li>
+</ol>
+</div>
+</section>
+<section class="blk" id="s5">
+<h2>5. 分類與判定規則</h2>
+<h3>5.1 證據次序</h3>
+<p>先看 AVoIP 頁（Kramer 縮圖），PTZ 作支援，<code>snapshot.json</code> 作佐證。單一弱訊號永不足以判定故障。</p>
+<h3>5.2 異常準則（巡邏／就緒）</h3>
+<ul>
+<li>KDS 裝置溫度 ≥ 49 °C。</li>
+<li>監察數據中明確的裝置故障狀態。</li>
+<li>攝影機離線（Common Area 除外，§5.4）。</li>
+<li>經確認的多顯示不同步狀態 — 嚴格判定，通常須連續兩輪成立 — 房 1 例外除外（§5.3）。</li>
+<li>P4 檢查下控制面板燈閃爍／未定。</li>
+</ul>
+<p>以下各項本身不構成異常：燈光狀態；狀態為「未知」的裝置（未知 ≠ 故障）；來源側 NO SIGNAL（電腦關機／休眠並非解碼器故障）；完成整個武裝後重試流程後仍未能取得的縮圖（屬「縮圖未能提供」 — 但見 §5.6）。</p>
+<h3>5.3 房 1 例外（SM-11-01）</h3>
+<div class="callout rule"><strong>規則：</strong> 在 SM-11-01，任何一部電視關閉／黑屏、而房內任何其他電視開著（運作中或待機），即時判為 <strong>不同步／異常</strong> — 不設降級的「檢查區域」，不設兩輪等待。四部電視同時關閉屬正常一致關閉。（老師在課堂上手動關掉側邊電視是已知的無害解釋，經確認後個案即結案。）</div>
+<h3>5.4 Common Area — 預定停用</h3>
+<p>Common Area 的攝影機及解碼器按安排離線。此狀態屬預期之內，並會<strong>在巡邏報告中完全略去</strong>（不列行、不提及）。只在出現預期外狀態時才報告 — 裝置重新上線、房間有人使用、燈光開啟或顯示裝置啟動 — 並標示為預期外。</p>
+<h3>5.5 遲醒</h3>
+<p>如一間房的 PC 編碼器在就緒第一階段顯示 NO SIGNAL、但到第二階段已送出即時畫面並判為 READY，該房記錄為<em>遲醒</em>。記錄附上甦醒時間括弧（最後 NO SIGNAL 時間 → 首次有畫面時間；確實時刻永不虛構）。遲醒<strong>只作追蹤</strong>：並非故障、永不判為異常、永不升級、無補救措施。不屬遲醒：PC 來源黑畫面；到判定時仍 NO SIGNAL 的房間（屬 NOT READY）；已復原的縮圖 404。如第一階段數據缺失／不完整，當日早上不作任何遲醒判定。</p>
+<h3>5.6 不顯示縮圖的解碼器</h3>
+<p>解碼器在快照數據中正常、但完成整個武裝後重試流程後其 Manager 縮圖仍回傳 404，會分類為 <strong>NEEDS-RESTART</strong>，並在任何重啟<em>之前</em>先升級通知負責人。已驗證的補救方法是對該解碼器發出 P3000 <code>#RESET</code>（經內部網絡接受指令、無需登入）。</p>
+<h3>5.7 報告用語</h3>
+<table>
+<tr><th>情況</th><th>報告用語</th></tr>
+<tr><td>來源信號缺失</td><td>無視訊來源信號</td></tr>
+<tr><td>來源信號重新鎖定／復原</td><td>視訊來源恢復</td></tr>
+<tr><td>來源串流終止</td><td>視信來源終止</td></tr>
+</table>
+</section>
+<section class="blk" id="s6">
+<h2>6. 手動操作 — 房間快速鍵盤</h2>
+<p>負責人透過快速鍵盤按需要操作房間（在對話中傳送 <code>q</code>）。每間房 SM-11-01…08 有<strong>八個獨立動作</strong>（Common Area 除外）。對話代碼為<em>房號 + 後綴</em>：</p>
+<table>
+<tr><th>動作</th><th>代碼</th><th>機制</th></tr>
+<tr><td>System ON</td><td><code>3on</code></td><td>Extron 面板按鍵（單擊），以定住狀態規則驗證</td></tr>
+<tr><td>System OFF</td><td><code>3off</code></td><td>Extron 面板按鍵長按 3 秒；先作 PTZ 房間閒置檢查</td></tr>
+<tr><td>TV ON／TV OFF</td><td><code>3tvon</code>／<code>3tvoff</code></td><td>Extron 電視組按鍵（主組 + 側組；SM-11-02：只用主組）</td></tr>
+<tr><td>重置全部解碼器</td><td><code>3rst</code></td><td>在該房 Companion 主機按「reset all decoders」；以快照數據驗證。（後備：逐部 P3000 重置，音訊解碼器不觸碰。）</td></tr>
+<tr><td>訊源 PC／訊源手提電腦</td><td><code>3pc</code>／<code>3lap</code></td><td>Companion 訊源選擇按鍵；以回應 + PTZ 驗證</td></tr>
+<tr><td>處理器重啟</td><td><code>3pcu</code></td><td>須經批准的 PCU-AVRack 插座 4 電源循環（§7.6）</td></tr>
+</table>
+<div class="callout rule"><strong>批准閘：</strong> 代碼是<em>請求</em>，並非確認。操作員先述明動作，負責人確認後，動作只執行<strong>一次</strong>，經核實後連同處理時間一併報告。明確方向的動作會先檢查狀態 — 如房間已處於所要求的狀態，則不會按鍵，並會如此報告。鍵盤隊列永不自動執行。</div>
+</section>
+<section class="blk" id="s7">
+<h2>7. 事故處理手冊</h2>
+<p>每個已知問題的逐個案處理 — 症狀、逐步處理及不應做的事，按重要性排序 — 載於配套頁面 <a href="shekmun-case-handling.html"><strong>已知問題案例處理</strong></a>。以下手冊概述該等個案所依賴的關鍵技術。</p>
+<h3>7.1 Manager 縮圖回傳 404</h3>
+<p>縮圖必須先<em>武裝</em>：首次請求會啟動擷取並回傳 404；每約 0.5 秒重試（最多 10 次）即會回傳圖像。請求不得帶有 <code>Connection: close</code> 標頭（Manager 對該等請求一律回傳 404）。完成整個流程後仍 404 的縮圖屬「縮圖未能提供」，並非裝置故障 — §5.6 適用時除外。</p>
+<h3>7.2 解碼器重置路線</h3>
+<ul>
+<li><strong>主要（所有房間）：</strong> 在該房 Companion 按「Reset all decoders」；以快照數據及縮圖驗證復原。</li>
+<li><strong>後備：</strong> 只對電視解碼器逐部發出 P3000 <code>#RESET</code>；音訊解碼器永不經此等路線重置。</li>
+<li>兩條路線均須先經負責人確認（§8），已批准的就緒補救（P2 第 4 步）除外。</li>
+</ul>
+<h3>7.3 Kramer Manager 網頁介面當機</h3>
+<p>如 Manager 的網頁服務當機（TCP 有回應、TLS 握手停滯），P3000 介面在 TCP 5000 仍會回應且無需登入：發出 <code>#RESET</code> 即可重啟 Manager，約 80 秒完全復原（網頁介面約 30 秒）。網頁管理憑證<em>並非</em> SSH 憑證，永不會如此試用。</p>
+<h3>7.4 就緒時 PC 來源黑畫面／NO SIGNAL</h3>
+<ol>
+<li>檢查講台電腦已開機（且未卡在進入 Windows 之前）。</li>
+<li>檢查 Windows 顯示模式：必須是 <strong>Duplicate</strong>。在 <em>Extend</em> 模式下，編碼器接收的是空白的延伸桌面 — 此為 2026-10-15 房 7 個案的已證實成因。</li>
+<li>檢查連接編碼器的 HDMI 線及編碼器的 PoE／網絡狀態。</li>
+<li>來源側故障不要重置解碼器。</li>
+</ol>
+<h3>7.5 交換機管理登入失敗</h3>
+<p>艦隊交換機平常經 HTTP 提供其 API。房 1 一對交換機於 2026 年 10 月韌體升級後，會將 HTTP 重新導向至 4443 埠的 HTTPS 並回傳空白內文，表面上看似「空白登入」失敗。擷取工具因此會自動改用 HTTPS（TLS 1.2）；同一密碼仍然有效 — 重新導向／空白回應屬傳輸方式改變，並非憑證改變。注意：升級後的一對交換機，其從屬機的緩衝日誌可能只回傳一行，主機的記錄等級顯示為 5（艦隊其他主機為 6）— 屬數據注意事項，並非故障。</p>
+<h3>7.6 AV 處理器電源循環（PCU 升級）</h3>
+<ol>
+<li>先決條件：閃爍／未定的面板個案（§P4），或負責人的直接指示。</li>
+<li>只使用該房的 <strong>PCU-AVRack 插座 4</strong>（永不用 PCU-Lectern）：關 → 約 10 秒 → 開，經該裝置的網頁 SIS 介面操作。</li>
+<li>待控制器開機、重新同步面板，並以相隔約 15 秒的兩次取樣加 PTZ 確認。</li>
+<li>批准：須經負責人逐案批准，07:05 晨早一輪依 Option A 者除外（§8.2：每房每朝最多一次循環 + 一次復原 System ON 按鍵；其後仍閃爍 = 停止、報告、詢問）。</li>
+</ol>
+<h3>7.7 電視解碼器的 USB 錯誤風暴</h3>
+<p>重複的 USB 錯誤行（嚴重時伴隨「No space left on device」）顯示實體 USB 路徑出現問題。清除日誌（LOG-ACTION 4）在風暴仍運行時只會重新填滿，故<strong>不獲批准</strong>作為修復方法；持久的補救方法是實地檢查 USB 路徑。繼續觀察並報告；不要清除日誌。</p>
+</section>
+<section class="blk" id="s8">
+<h2>8. 批准與升級</h2>
+<h3>8.1 批准閘</h3>
+<p>除 §8.2 的常設授權外，任何更改裝置的操作均不會在未經站點負責人確認下進行。提案必定述明確實的裝置、證據及干擾最少的補救方法，並等候回覆。</p>
+<table>
+<tr><th>操作</th><th>權限</th></tr>
+<tr><td>所有唯讀監察（巡邏、就緒掃描、日誌擷取、看門狗、面板狀態觀察）</td><td>自動執行（排程）</td></tr>
+<tr><td>晨早 TV On 按鍵（07:05 一輪，包括每房一次重試）</td><td>常設授權（§8.2）</td></tr>
+<tr><td>07:05 一輪內的閃爍個案處理：一次 PCU-AVRack 插座 4 循環 + 每房最多一次復原 System ON 按鍵</td><td>常設授權「Option A」（§8.2）</td></tr>
+<tr><td>控制面板閃爍個案的 USS Help Desk 記錄（每房每個個案一張）</td><td>已預先批准（§8.2）；其他 Help Desk 發文須逐案批准</td></tr>
+<tr><td>快速鍵盤操作</td><td>負責人在執行前逐一確認每個排隊動作</td></tr>
+<tr><td>解碼器重置（就緒補救、鍵盤、臨時）</td><td>先經負責人確認</td></tr>
+<tr><td>晨早一輪以外的 PCU 電源循環</td><td>負責人逐案批准</td></tr>
+<tr><td>Kramer Manager 更改（頻道指派、重啟）及清除日誌（LOG-ACTION 4）</td><td>負責人逐案指示</td></tr>
+<tr><td>上課時間內超出以上的任何更改</td><td>負責人批准；先取干擾最少的方案</td></tr>
+</table>
+<h3>8.2 常設授權（負責人批出、現行有效）</h3>
+<ul>
+<li><strong>晨早 TV ON（由 2026-10-13/15 起）：</strong> 07:05 一輪可按 P1 所述按下 TV On，無須每朝批准。</li>
+<li><strong>Option A — 晨早一輪的閃爍處理（由 2026-10-23 起）：</strong> 閃爍觸發會在該輪內全程處理（一次 PCU 循環 + 每房每朝最多一次復原按鍵；其後仍閃爍 → 停止、報告、詢問）。日落條款：連續 <strong>3 個早上沒有閃爍個案</strong>後，此預先授權即告失效，該輪回復先問後做；只有負責人可重新授權。</li>
+<li><strong>閃爍個案 Help Desk 記錄（由 2026-10-30 起）：</strong> 每房每個閃爍個案直接建立一張記錄並報告其 CaseID；此授權只涵蓋建立記錄。</li>
+<li><strong>排程報告電郵：</strong> 排程工作寄出其報告電郵時無須逐輪批准提示，只寄往指定分發名單。</li>
+</ul>
+<h3>8.3 升級路徑</h3>
+<ul>
+<li><strong>排程一輪發現的故障</strong> → 在該輪報告中匯報；向負責人（主對話）提出補救建議，只在確認後執行，其後覆查並以跟進報告結案。</li>
+<li><strong>控制面板閃爍（巡邏）</strong> → Help Desk 記錄（CaseID 格式 <code>U-YYYYMMDDHHMMSS</code>）+ 向負責人提出 PCU 批准請求。</li>
+<li><strong>路線中斷（看門狗）</strong> → 向 ShekMun 對話發警示；在任何裝置操作前，先沿網絡路徑（遙距存取路徑 → 子網路由器 → 交換機）調查。</li>
+<li><strong>Teams 存取規則：</strong> 經瀏覽器存取 Microsoft Teams 嚴格只限 USS Help Desk 對話；不會開啟任何其他對話，非閃爍個案的發文每次均須負責人批准。</li>
+</ul>
+</section>
+<section class="blk" id="s9">
+<h2>9. 報告與分發</h2>
+<ul>
+<li><strong>巡邏報告：</strong> 每份報告一張合併的房間為本表格（房間 · 相片 · 狀態與觀察 · 燈光 · 顯示 + 同步 · 編碼器 · 解碼器 · 其他），送遞至 ShekMun 對話，並以電郵寄出自包含 HTML 連橫向 A4 PDF 附件。電郵主旨以該輪狀態開頭：<em>Status OK</em> 或 <em>Status ABNORMAL</em>。</li>
+<li><strong>就緒報告：</strong> 逐房判定表，附遲醒欄及遲醒總結行；以電郵寄出並在「ShekMun report」Gmail 標籤下加上標籤及歸檔。</li>
+<li><strong>分發：</strong> 石門巡邏及就緒報告電郵只寄往負責人指定的 Gmail 地址（2026-10-11 更改）。負責人的工作電郵不在此分發名單上。</li>
+<li><strong>語言：</strong> 所有排程送遞均以廣東話、繁體中文書寫，並使用 §5.7 的用語。</li>
+<li><strong>預訂參考：</strong> 巡邏按該星期的合併課室預訂參考（時間表圖像 + 預訂試算表）判定，該參考存放在巡邏目標的檔案下。</li>
+<li><strong>WhatsApp：</strong> 巡邏／報告不能從其他對話經 WhatsApp 送遞；報告在指定對話及以電郵送遞。</li>
+</ul>
+</section>
+<section class="blk" id="s10">
+<h2>10. 保安與安全</h2>
+<ul>
+<li>所有遙距存取只經安全遙距存取及站點子網路由器到達站點；沒有管理介面對外公開。</li>
+<li>憑證只會在運行時從其安全來源<strong>即時使用</strong>，永不寫入文件、記憶檔案、報告或本程序。禁止猜測密碼：登入失敗會連同原因如實報告為失敗。</li>
+<li>監察工作均為唯讀。唯一會更改裝置的排程工作是晨早開電視一輪，且在其書面限制之內（§8.2）。</li>
+<li>電源切換只限 §7.6 下的 PCU-AVRack 插座 4。PCU-Lectern 插座永不用於處理器重啟。</li>
+<li>有疑問時，自動化會停下並詢問。錯過一次檢查可以補回；上課期間未經授權的裝置操作則不能。</li>
+</ul>
+</section>
+<section class="blk" id="s11">
+<h2>11. 已知問題與常設決定</h2>
+<table>
+<tr><th style="width:26%">題目</th><th>狀態／常設決定</th></tr>
+<tr><td>電視在轉換訊源時重啟（Fujitsu IW862/IW982，房 1/2/7/8）</td><td>2026 年 10 月已調查：觸發點是轉換訊源時進入 720p60 待機信號的格式轉換（HDCP 重新驗證及重新鎖定頻繁已被排除）。常設緩解：1080p50 全站規則（§2.2）；候選修復 — 將電視解碼器的顯示行為延遲提高（休眠／關機延至約 300 秒，喚醒維持 0 秒），待負責人決定。偶發 KDS 信號中斷以同一個案檔案追蹤。</td></tr>
+<tr><td>解碼器探索循環</td><td>已找出根源：電視解碼器只要有任何一組頻道選擇延伸家族在 Manager 中未被指派（「null」），便會循環。已驗證的補救：在 Manager 中指派該等未指派家族，循環於數秒內停止。其餘裝置在負責人選擇時修復。</td></tr>
+<tr><td>USB 錯誤風暴（如 SM-11-07 TV-DEC-1、SM-11-01 TV-DEC-1）</td><td>只作觀察。清除日誌（決定 A）已明確<strong>不獲批准</strong>；持久修復是實體 USB 路徑的實地檢查（§7.7）。</td></tr>
+<tr><td>CEC 自動開啟行為</td><td>在 CEC 閘道停用時，源自解碼器的自動 CEC 不會到達電視（已驗證）— 閘道狀態就是開關。剩餘風險：被重新啟用（包括經出廠重置）。緩解候選見上電視重啟一行。</td></tr>
+<tr><td>房 1 交換機對的管理</td><td>2026 年 10 月已升級韌體；管理只經 HTTPS（4443 埠），工具已自動後備處理（§7.5）。在裝置端改回 HTTP 管理只屬負責人的決定 — 未有執行。</td></tr>
+<tr><td>SM-11-01 TV-DEC-1 日誌「No space left」</td><td>在 USB 風暴下發生；見 USB 一行。未有批准清除日誌。</td></tr>
+</table>
+</section>
+<section class="blk" id="s12">
+<h2>12. 文件管制</h2>
+<table>
+<tr><th>版本</th><th>日期</th><th>更改</th></tr>
+<tr><td>1.3</td><td>2026 年 10 月 30 日</td><td>新增本繁體中文版，並在英文版及中文版頁首加入語言切換（English／繁體中文）。程序內容無更改。</td></tr>
+<tr><td>1.2</td><td>2026 年 10 月 30 日</td><td>新增配套頁面「已知問題案例處理」（13 個情境按重要性排序、逐步處理），並在 §7 及頁首加入連結。程序內容無更改。</td></tr>
+<tr><td>1.1</td><td>2026 年 10 月 30 日</td><td>按站點負責人指示移除遙距存取技術的詳情：刪去該平台條目，所有存取路徑用語改為概括的「安全遙距存取」。程序內容無更改。</td></tr>
+<tr><td>1.0</td><td>2026 年 10 月 30 日</td><td>首版。按現行運作設定編製：巡邏、就緒、晨早開電視、日誌擷取、看門狗及備份排程；快速鍵盤手動操作；判定規則；事故手冊；批准矩陣及常設授權。</td></tr>
+</table>
+<p class="small">本程序描述版本日期當日與站點負責人議定的設定。當工作流程、排程或規則改變時，先在運作設定中作出更改，本文件再以新版本重新發行。</p>
+</section>
+<p class="foot">石門校園標準操作程序 · Remote Campus · Support Portal。為 ITSC 運作而編製。時間均為香港時間（Asia/Hong_Kong）。 <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal 主頁</a></p>
+</main>
+</body>
+</html>
