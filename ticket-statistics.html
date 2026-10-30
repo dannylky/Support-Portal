@@ -40,12 +40,24 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 .sharebar i{display:block;height:100%;background:linear-gradient(90deg,#3730a3,#0e7490)}
 .foot{color:#64748b;font-size:13px;line-height:1.6;padding:14px 0 46px}
 .empty{display:none;text-align:center;color:#64748b;padding:34px 10px;font-size:15px}
+.compare-shell{background:linear-gradient(180deg,#ffffff,#eef2ff);border:1px solid #c7d2fe;border-radius:18px;padding:20px;margin-top:22px;box-shadow:0 10px 26px rgba(55,48,163,.09)}
+.compare-shell h2{margin:0 0 5px;font-size:20px}
+.compare-shell .hint{max-width:850px}
+.compare-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.compare-controls{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.compare-note{margin:14px 0;padding:11px 13px;border-radius:11px;background:#e0e7ff;color:#312e81;font-size:14px;line-height:1.5}
+.compare-table{margin-top:12px;background:#fff;border-radius:12px;overflow:hidden}
+.compare-table td:first-child{font-weight:650;color:#334155}
+.delta-up{color:#b45309;font-weight:750}.delta-down{color:#15803d;font-weight:750}.delta-flat{color:#64748b;font-weight:700}
+.compare-charts{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:16px}
+.compare-charts .card{box-shadow:none}
+@media (max-width:900px){.compare-charts{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
-<div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more; every chart and figure updates together. Source data as read on 30 Oct 2026. <a href="index.html">← Support Portal home</a></div>
+<div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together. Source data as read on 30 Oct 2026. <a href="index.html">← Support Portal home</a></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -69,6 +81,26 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 
 <main class="wrap">
 <div class="empty" id="emptyMsg">No cases match the current filters. Try widening them.</div>
+
+<section class="compare-shell" aria-labelledby="compareTitle">
+<div class="compare-top">
+<div><h2 id="compareTitle">🔁 Recent two months comparison</h2><p class="hint">Compare any two months side by side. The default is the two most recent months in the data. This panel follows the category, severity, building, channel, requester and status filters above, but ignores the main Month filter so the two selected months can be compared directly.</p></div>
+<div class="compare-controls">
+<div class="fgroup"><label for="cmpA">Compare month A</label><select id="cmpA"></select></div>
+<div class="fgroup"><label for="cmpB">With month B</label><select id="cmpB"></select></div>
+<button class="reset" id="btnRecent" type="button">Recent two months</button>
+</div>
+</div>
+<div class="compare-note" id="cmpNote"></div>
+<div class="compare-table"><table><thead><tr><th>Metric</th><th id="cmpHeadA">Month A</th><th id="cmpHeadB">Month B</th><th>Change (B − A)</th></tr></thead><tbody id="cmpBody"></tbody></table></div>
+<div class="compare-charts">
+<section class="card"><h2>Category comparison</h2><p class="hint">Case count in each selected month, grouped by category.</p><div class="chartbox tall"><canvas id="cCmpCat"></canvas></div></section>
+<section class="card"><h2>Daily pattern comparison</h2><p class="hint">Cases by day of month, aligned so the rhythm of the two months can be compared.</p><div class="chartbox tall"><canvas id="cCmpDaily"></canvas></div></section>
+</div>
+<h2 style="margin-top:20px">Biggest category changes</h2><p class="hint">Categories with the largest absolute movement between the two selected months.</p>
+<div class="compare-table"><table><thead><tr><th>Category</th><th id="chgHeadA">Month A</th><th id="chgHeadB">Month B</th><th>Change</th><th>% change</th></tr></thead><tbody id="cmpChanges"></tbody></table></div>
+</section>
+
 <div class="grid">
 <section class="card wide"><h2>📈 Cases per day</h2><p class="hint">Daily case volume across the semester so far — the early-September start-of-term peak is clearly visible.</p><div class="chartbox"><canvas id="cTrend"></canvas></div></section>
 
@@ -109,6 +141,15 @@ fillSelect($("fBld"), counter(DATA, r=>r.b).map(e=>e[0]).sort());
 fillSelect($("fChan"), counter(DATA, r=>r.ch).map(e=>e[0]));
 fillSelect($("fReq"), counter(DATA, r=>r.req).map(e=>e[0]));
 fillSelect($("fStatus"), counter(DATA, r=>r.st).map(e=>e[0]));
+const MONTHS_CHRON = [...new Set(DATA.map(r=>r.m))].sort((a,b)=>{
+  const da = DATA.filter(r=>r.m===a).map(r=>r.d).sort()[0];
+  const db = DATA.filter(r=>r.m===b).map(r=>r.d).sort()[0];
+  return da < db ? -1 : 1;
+});
+fillSelect($("cmpA"), MONTHS_CHRON);
+fillSelect($("cmpB"), MONTHS_CHRON);
+$("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)];
+$("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1];
 function current(){ return DATA.filter(r =>
   (!$("fMonth").value || r.m === $("fMonth").value) &&
   (!$("fCat").value || r.cat === $("fCat").value) &&
@@ -120,6 +161,60 @@ function current(){ return DATA.filter(r =>
 function makeChart(id, cfg){ if(charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
 function barCfg(labels, values, horizontal, color){ return { type:"bar", data:{ labels, datasets:[{ data:values, backgroundColor: color || labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderRadius:6 }]}, options:{ indexAxis: horizontal ? "y" : "x", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ x:{ ticks:{ precision:0 } }, y:{ ticks:{ precision:0 } } } } }; }
 function doughCfg(labels, values){ return { type:"doughnut", data:{ labels, datasets:[{ data:values, backgroundColor: labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderColor:"#fff", borderWidth:2 }]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } } } }; }
+function comparisonRows(month){ return DATA.filter(r => r.m === month &&
+  (!$("fCat").value || r.cat === $("fCat").value) &&
+  (!$("fSev").value || r.sev === $("fSev").value) &&
+  (!$("fBld").value || r.b === $("fBld").value) &&
+  (!$("fChan").value || r.ch === $("fChan").value) &&
+  (!$("fReq").value || r.req === $("fReq").value) &&
+  (!$("fStatus").value || r.st === $("fStatus").value)); }
+function monthStats(rows){
+  const total = rows.length;
+  const resolved = rows.filter(r=>r.st==="Resolved").length;
+  const incidents = rows.filter(r=>r.sev.indexOf("Incident")===0).length;
+  const minutes = rows.reduce((s,r)=>s+r.dur,0);
+  return { total, resolvedRate: total ? resolved/total*100 : 0, incidents, incidentShare: total ? incidents/total*100 : 0, avg: total ? minutes/total : 0, hours: minutes/60 };
+}
+function fmtDelta(value, unit, digits){
+  const n = Math.round(value * Math.pow(10,digits)) / Math.pow(10,digits);
+  return (n > 0 ? "+" : "") + n.toFixed(digits) + (unit || "");
+}
+function pctText(a, b){ if(a === 0) return b === 0 ? "0.0%" : "New"; return fmtDelta((b-a)/a*100, "%", 1); }
+function deltaClass(value){ return value > 0 ? "delta-up" : (value < 0 ? "delta-down" : "delta-flat"); }
+function metricDeltaClass(value, goodWhenDown){ if(value === 0) return "delta-flat"; const good = goodWhenDown ? value < 0 : value > 0; return good ? "delta-down" : "delta-up"; }
+function renderComparison(){
+  const aMonth = $("cmpA").value, bMonth = $("cmpB").value;
+  const aRows = comparisonRows(aMonth), bRows = comparisonRows(bMonth);
+  const A = monthStats(aRows), B = monthStats(bRows);
+  $("cmpHeadA").textContent = aMonth; $("cmpHeadB").textContent = bMonth;
+  $("chgHeadA").textContent = aMonth; $("chgHeadB").textContent = bMonth;
+  $("cmpNote").innerHTML = aMonth === bMonth
+    ? "⚠️ The same month is selected twice, so every change is zero. Choose two different months for a meaningful comparison."
+    : "<strong>" + bMonth + " vs " + aMonth + ":</strong> " + B.total + " cases compared with " + A.total + " (" + fmtDelta(B.total-A.total, "", 0) + ", " + pctText(A.total, B.total) + "). October data currently runs to 30 Oct, so treat the latest month as month-to-date when comparing totals.";
+  const metricRows = [
+    ["Total cases", A.total.toFixed(0), B.total.toFixed(0), B.total-A.total, "", 0, pctText(A.total,B.total), true],
+    ["Resolved rate", A.resolvedRate.toFixed(1)+"%", B.resolvedRate.toFixed(1)+"%", B.resolvedRate-A.resolvedRate, " pp", 1, "", false],
+    ["Incidents", A.incidents.toFixed(0), B.incidents.toFixed(0), B.incidents-A.incidents, "", 0, pctText(A.incidents,B.incidents), true],
+    ["Incident share", A.incidentShare.toFixed(1)+"%", B.incidentShare.toFixed(1)+"%", B.incidentShare-A.incidentShare, " pp", 1, "", true],
+    ["Avg. handling time", A.avg.toFixed(1)+" min", B.avg.toFixed(1)+" min", B.avg-A.avg, " min", 1, pctText(A.avg,B.avg), true],
+    ["Total handling time", A.hours.toFixed(1)+" hrs", B.hours.toFixed(1)+" hrs", B.hours-A.hours, " hrs", 1, pctText(A.hours,B.hours), true]
+  ];
+  $("cmpBody").innerHTML = metricRows.map(r=>"<tr><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td><td class=\"" + metricDeltaClass(r[3], r[7]) + "\">" + fmtDelta(r[3], r[4], r[5]) + (r[6] ? " (" + r[6] + ")" : "") + "</td></tr>").join("");
+  const aCats = new Map(counter(aRows, r=>r.cat)), bCats = new Map(counter(bRows, r=>r.cat));
+  const catLabels = [...new Set([...aCats.keys(), ...bCats.keys()])].sort((x,y)=>((bCats.get(y)||0)+(aCats.get(y)||0))-((bCats.get(x)||0)+(aCats.get(x)||0)));
+  makeChart("cCmpCat", { type:"bar", data:{ labels:catLabels, datasets:[
+    { label:aMonth, data:catLabels.map(k=>aCats.get(k)||0), backgroundColor:"#3730a3", borderRadius:5 },
+    { label:bMonth, data:catLabels.map(k=>bCats.get(k)||0), backgroundColor:"#0e7490", borderRadius:5 }
+  ]}, options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ x:{ ticks:{ precision:0 } } } } });
+  const dayLabels = Array.from({length:31}, (_,i)=>String(i+1));
+  function byDayOfMonth(rows){ const arr = Array(31).fill(0); rows.forEach(r=>{ arr[parseInt(r.d.slice(8,10),10)-1]++; }); return arr; }
+  makeChart("cCmpDaily", { type:"line", data:{ labels:dayLabels, datasets:[
+    { label:aMonth, data:byDayOfMonth(aRows), borderColor:"#3730a3", backgroundColor:"rgba(55,48,163,.10)", fill:true, tension:.3, pointRadius:2 },
+    { label:bMonth, data:byDayOfMonth(bRows), borderColor:"#0e7490", backgroundColor:"rgba(14,116,144,.10)", fill:true, tension:.3, pointRadius:2 }
+  ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ ticks:{ precision:0 } } } } });
+  const changes = catLabels.map(k=>({ cat:k, a:aCats.get(k)||0, b:bCats.get(k)||0, d:(bCats.get(k)||0)-(aCats.get(k)||0) })).sort((x,y)=>Math.abs(y.d)-Math.abs(x.d)).slice(0,8);
+  $("cmpChanges").innerHTML = changes.map(r=>"<tr><td>" + r.cat + "</td><td>" + r.a + "</td><td>" + r.b + "</td><td class=\"" + deltaClass(r.d) + "\">" + fmtDelta(r.d, "", 0) + "</td><td>" + pctText(r.a, r.b) + "</td></tr>").join("");
+}
 function render(){
   const rows = current();
   $("emptyMsg").style.display = rows.length ? "none" : "block";
@@ -156,8 +251,11 @@ function render(){
   const dow = [0,0,0,0,0,0,0]; rows.forEach(r=>{ dow[new Date(r.d+"T00:00:00").getDay()]++; });
   const order = [1,2,3,4,5,6,0];
   makeChart("cDow", barCfg(order.map(i=>dowNames[i]), order.map(i=>dow[i]), false, "#15803d"));
+  renderComparison();
 }
 ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus"].forEach(id=>$(id).addEventListener("change", render));
+["cmpA","cmpB"].forEach(id=>$(id).addEventListener("change", render));
+$("btnRecent").addEventListener("click", ()=>{ $("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)]; $("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1]; render(); });
 $("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus"].forEach(id=>$(id).value=""); render(); });
 Chart.defaults.font.family = "\"Segoe UI\", system-ui, sans-serif";
 render();
