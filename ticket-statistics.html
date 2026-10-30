@@ -202,7 +202,8 @@ function renderComparison(){
   $("cmpBody").innerHTML = metricRows.map(r=>"<tr><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td><td class=\"" + metricDeltaClass(r[3], r[7]) + "\">" + fmtDelta(r[3], r[4], r[5]) + (r[6] ? " (" + r[6] + ")" : "") + "</td></tr>").join("");
   const aCats = new Map(counter(aRows, r=>r.cat)), bCats = new Map(counter(bRows, r=>r.cat));
   const catLabels = [...new Set([...aCats.keys(), ...bCats.keys()])].sort((x,y)=>((bCats.get(y)||0)+(aCats.get(y)||0))-((bCats.get(x)||0)+(aCats.get(x)||0)));
-  makeChart("cCmpCat", { type:"bar", data:{ labels:catLabels, datasets:[
+  const shortCat = k => ({ "Equipment - (Visualizer/Writing Pad/PTZ cam/Monitor)":"Equipment - (Visualizer/PTZ cam/Monitor)", "Online Meeting/Teaching Tools (MS Teams, Zoom, etc...)":"Online Meeting / Teaching Tools", "HSUHK Application (Moodle / Ecampus / VeriGuide / HSU App)":"HSUHK Application" })[k] || k;
+  makeChart("cCmpCat", { type:"bar", data:{ labels:catLabels.map(shortCat), datasets:[
     { label:aMonth, data:catLabels.map(k=>aCats.get(k)||0), backgroundColor:"#3730a3", borderRadius:5 },
     { label:bMonth, data:catLabels.map(k=>bCats.get(k)||0), backgroundColor:"#0e7490", borderRadius:5 }
   ]}, options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ x:{ ticks:{ precision:0 } } } } });
