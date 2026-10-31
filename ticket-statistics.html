@@ -24,6 +24,8 @@ body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;backgrou
 select{padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;background:#fff;max-width:250px}
 button.reset{padding:9px 16px;border-radius:10px;border:1px solid #3730a3;background:#eef2ff;color:#3730a3;font-weight:700;cursor:pointer;font-size:14px}
 button.reset:hover{background:#e0e7ff}
+button.csvdl{padding:9px 16px;border-radius:10px;border:1px solid #0e7490;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;font-size:14px}
+button.csvdl:hover{background:#cffafe}
 .count-note{font-size:13.5px;color:#475569;margin-left:auto;padding-bottom:8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:22px 0 8px}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
@@ -64,7 +66,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.3</span><span class="upd">Updated 30 Oct 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.4</span><span class="upd">Updated 31 Oct 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -83,6 +85,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <div class="fgroup"><label for="fReq">Requester</label><select id="fReq"><option value="">All requesters</option></select></div>
 <div class="fgroup"><label for="fStatus">Status</label><select id="fStatus"><option value="">All statuses</option></select></div>
 <button class="reset" id="btnReset" type="button">↺ Reset filters</button>
+<button class="csvdl" id="btnCsv" type="button">⬇ Download filtered data (CSV)</button>
 <span class="count-note" id="countNote"></span>
 </div></div>
 
@@ -130,7 +133,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 
 <section class="card wide"><h2>📅 Cases by weekday</h2><p class="hint">Which days of the week keep the team busiest.</p><div class="chartbox"><canvas id="cDow"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 30 Oct 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 31 Oct 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -265,6 +268,25 @@ function render(){
 ["cmpA","cmpB"].forEach(id=>$(id).addEventListener("change", render));
 $("btnRecent").addEventListener("click", ()=>{ $("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)]; $("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1]; render(); });
 $("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus"].forEach(id=>$(id).value=""); render(); });
+function csvCell(v){ const s = String(v == null ? "" : v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
+function downloadCsv(){
+  const rows = current();
+  const head = ["Id","Date","Staff","Report Channel","Duration Use [Mins]","Building","Location","Severity Levels","Categories","Case Description","Type of Requester","Status"];
+  const lines = [head.join(",")];
+  rows.forEach(r=>{
+    const parts = r.d.split("-");
+    const mdy = parseInt(parts[1],10) + "/" + parseInt(parts[2],10) + "/" + parts[0];
+    const id = DATA.indexOf(r) + 1;
+    lines.push([id, mdy, r.staff, r.ch, r.dur, r.b, r.loc, r.sev, r.cat, r.desc, r.req, r.st].map(csvCell).join(","));
+  });
+  const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "ticket-statistics-filtered.csv";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+}
+$("btnCsv").addEventListener("click", downloadCsv);
 Chart.defaults.font.family = "\"Segoe UI\", system-ui, sans-serif";
 render();
 </script>
