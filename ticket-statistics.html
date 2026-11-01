@@ -49,6 +49,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 .compare-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}
 .compare-controls{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
 .compare-note{margin:14px 0;padding:11px 13px;border-radius:11px;background:#e0e7ff;color:#312e81;font-size:14px;line-height:1.5}
+.compare-insight{margin:-6px 0 14px;padding:11px 13px;border-radius:11px;background:#fff7ed;color:#7c2d12;font-size:14px;line-height:1.5;border:1px solid #fed7aa}
 .compare-table{margin-top:12px;background:#fff;border-radius:12px;overflow:hidden}
 .compare-table td:first-child{font-weight:650;color:#334155}
 .delta-up{color:#b45309;font-weight:750}.delta-down{color:#15803d;font-weight:750}.delta-flat{color:#64748b;font-weight:700}
@@ -66,7 +67,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.4</span><span class="upd">Updated 31 Oct 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.5</span><span class="upd">Updated 1 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -102,6 +103,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 </div>
 </div>
 <div class="compare-note" id="cmpNote"></div>
+<div class="compare-insight" id="cmpInsight"></div>
 <div class="compare-table"><table><thead><tr><th>Metric</th><th id="cmpHeadA">Month A</th><th id="cmpHeadB">Month B</th><th>Change (B − A)</th></tr></thead><tbody id="cmpBody"></tbody></table></div>
 <div class="compare-charts">
 <section class="card"><h2>Category comparison</h2><p class="hint">Case count in each selected month, grouped by category.</p><div class="chartbox xl"><canvas id="cCmpCat"></canvas></div></section>
@@ -133,7 +135,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 
 <section class="card wide"><h2>📅 Cases by weekday</h2><p class="hint">Which days of the week keep the team busiest.</p><div class="chartbox"><canvas id="cDow"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 31 Oct 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 1 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -223,7 +225,13 @@ function renderComparison(){
     { label:aMonth, data:byDayOfMonth(aRows), borderColor:"#0057ff", backgroundColor:"rgba(0,87,255,.16)", fill:true, tension:.3, borderWidth:3, pointRadius:3, pointBackgroundColor:"#0057ff" },
     { label:bMonth, data:byDayOfMonth(bRows), borderColor:"#ff4d00", backgroundColor:"rgba(255,77,0,.16)", fill:true, tension:.3, borderWidth:3, pointRadius:3, pointBackgroundColor:"#ff4d00" }
   ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ ticks:{ precision:0 } } } } });
-  const changes = catLabels.map(k=>({ cat:k, a:aCats.get(k)||0, b:bCats.get(k)||0, d:(bCats.get(k)||0)-(aCats.get(k)||0) })).sort((x,y)=>Math.abs(y.d)-Math.abs(x.d)).slice(0,8);
+  const allChanges = catLabels.map(k=>({ cat:k, a:aCats.get(k)||0, b:bCats.get(k)||0, d:(bCats.get(k)||0)-(aCats.get(k)||0) }));
+  const rise = allChanges.filter(r=>r.d>0).sort((x,y)=>y.d-x.d)[0];
+  const fall = allChanges.filter(r=>r.d<0).sort((x,y)=>x.d-y.d)[0];
+  $("cmpInsight").innerHTML = aMonth === bMonth
+    ? "💡 <strong>Insight:</strong> pick two different months to see which category rose or fell the most."
+    : "💡 <strong>Insight:</strong> " + (rise ? "largest rise — <strong>" + rise.cat + "</strong> (" + rise.a + " → " + rise.b + ", " + fmtDelta(rise.d, "", 0) + ")" : "no category rose") + "; " + (fall ? "largest fall — <strong>" + fall.cat + "</strong> (" + fall.a + " → " + fall.b + ", " + fmtDelta(fall.d, "", 0) + ")" : "no category fell") + " between " + aMonth + " and " + bMonth + ".";
+  const changes = allChanges.slice().sort((x,y)=>Math.abs(y.d)-Math.abs(x.d)).slice(0,8);
   $("cmpChanges").innerHTML = changes.map(r=>"<tr><td>" + r.cat + "</td><td>" + r.a + "</td><td>" + r.b + "</td><td class=\"" + deltaClass(r.d) + "\">" + fmtDelta(r.d, "", 0) + "</td><td>" + pctText(r.a, r.b) + "</td></tr>").join("");
 }
 function render(){
