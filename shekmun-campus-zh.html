@@ -45,7 +45,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <header class="hero"><div class="wrap">
 <h1>石門校園 — 標準操作程序</h1>
 <div class="sub">石門教學大樓遙距監察與控制的完整操作程序：平台與設備清單、自動化每日排程、標準程序、判定規則、手動操作、事故處理手冊，以及批准與升級矩陣。本程序是本站日常運作的單一參考文件。 <a href="remote-campus.html">← Remote Campus</a> · <a href="index.html">Support Portal 主頁</a> · <a href="shekmun-case-handling.html">已知問題案例處理</a></div>
-<div class="meta"><span class="ver">SOP v1.4</span><span>生效日期：2026 年 10 月 30 日</span><span>站點負責人／批准人：Danny LAM（ITSC）</span><span>運作日子：星期一至六</span><span>時區：Asia/Hong_Kong</span><span class="langsw"><a href="shekmun-campus.html">English</a><a class="on" href="shekmun-campus-zh.html">繁體中文</a></span></div>
+<div class="meta"><span class="ver">SOP v1.5</span><span>生效日期：2026 年 11 月 3 日</span><span>站點負責人／批准人：Danny LAM（ITSC）</span><span>運作日子：星期一至六</span><span>時區：Asia/Hong_Kong</span><span class="langsw"><a href="shekmun-campus.html">English</a><a class="on" href="shekmun-campus-zh.html">繁體中文</a></span></div>
 </div></header>
 <nav class="toc"><div class="wrap">
 <a href="#s1">1 總覽</a><a href="#s2">2 設備清單</a><a href="#s3">3 每日排程</a><a href="#s4">4 標準程序</a><a href="#s5">5 判定規則</a><a href="#s6">6 手動操作</a><a href="#s7">7 事故手冊</a><a href="#s8">8 批准與升級</a><a href="#s9">9 報告</a><a href="#s10">10 保安與安全</a><a href="#s11">11 已知問題</a><a href="#s12">12 文件管制</a>
@@ -117,7 +117,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <table>
 <tr><th style="width:13%">時間</th><th style="width:26%">工作</th><th>內容</th><th style="width:22%">產出</th></tr>
 <tr><td>每日 03:42</td><td>運作備份</td><td>備份運作記憶／設定；只保留最近 30 個版本。</td><td>備份封存檔</td></tr>
-<tr><td>07:05</td><td>Extron 晨早開電視</td><td>逐房 SM-11-01…08：登入房間控制器、同步，並按下 <strong>TV On</strong>（房 1 另加 Side TV On），電視已開著的房間除外。面板的 TV On 會自動觸發 System ON。驗證 TV On 與 System ON 均已定住；失敗的房間只重試一次；其後以約 15 秒間隔的兩次取樣覆查每間房。常設授權 — 見 §8.2。</td><td>逐房摘要（廣東話）至 Extron 運作對話</td></tr>
+<tr><td>07:05</td><td>Extron 晨早開電視</td><td>逐房 SM-11-01…08：登入房間控制器、同步，並按下 <strong>TV On</strong>（房 1 另加 Side TV On），電視已開著的房間除外。面板的 TV On 會自動觸發 System ON。驗證 TV On 與 System ON 均已定住；失敗的房間最多重試兩次（合共 3 次嘗試，每次重試均使用全新瀏覽器）；3 次嘗試均失敗的房間會升級處理（P1）；其後以約 15 秒間隔的兩次取樣覆查每間房。常設授權 — 見 §8.2。</td><td>逐房摘要（廣東話）至 Extron 運作對話</td></tr>
 <tr><td>約 07:00–22:35</td><td>路線看門狗</td><td>每 10 分鐘經遙距存取路徑對攝影機及 AV 處理器子網作唯讀探測。一輪探測只在<em>兩個</em>探測同時失敗時才算失敗；只在狀態改變時發出警示（連續兩輪失敗 = 路線中斷；其後首個正常輪次 = 已復原）。</td><td>只在狀態改變時向 ShekMun 對話發警示</td></tr>
 <tr><td>08:15</td><td>就緒檢查 — 第一階段</td><td>先行掃描 AVoIP 縮圖頁；以快速輪次重試回傳 404 的縮圖（武裝後重試，§7.1），在正式判定前消除擷取暖機效應。</td><td>第一階段數據檔（設計上不發電郵）</td></tr>
 <tr><td>08:20</td><td>就緒檢查 — 第二階段</td><td>按 AVoIP 頁（主要）、PTZ（支援）及快照數據，為每間房作正式 READY／NOT READY 判定：PC 訊源有即時畫面、顯示裝置有畫面、解碼器在線。記錄遲醒房間（§5.5）。約 08:50 前送達，早於 09:00 上課。</td><td>判定報告（對話 + 電郵，附標籤並歸檔）</td></tr>
@@ -135,9 +135,10 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <li>逐房登入 Extron 控制器，經已驗證的真實頁面路徑同步面板狀態。</li>
 <li>房間電視已開著則跳過。否則按 <strong>TV On</strong> 一次（房 1：TV On <em>及</em> Side TV On — 兩者皆須）。永不直接按 System ON；TV On 會自動觸發它。</li>
 <li>驗證：只有當 TV On <em>及</em> System ON 均已定住（閃爍停止、狀態穩定為「開」）才算成功 — 房 1 另須 Side TV On 狀態定住。</li>
-<li>驗證失敗的房間只重試一次（每房每朝最多 2 次嘗試）。登入失敗或 HTTP 502 = 該房失敗並記錄原因；永不猜測憑證。</li>
+<li>驗證失敗的房間最多重試兩次 — <strong>每房每朝最多 3 次嘗試</strong>。每次重試均須使用<strong>全新瀏覽器</strong>（完全關閉瀏覽器後重新啟動、重新登入、重新載入頁面）。<strong>頁面錯誤防護：</strong>頁面在載入／同步期間若已錄得 JavaScript 錯誤（尤其「Cannot read properties of undefined (reading 'substring')」），永不在該頁面上按鍵 — 先重新載入全新頁面；此重載不計作一次嘗試。登入失敗或 HTTP 502 = 該房失敗並記錄原因（不計作按鍵嘗試）；永不猜測憑證。</li>
+<li><strong>頁面失敗（零反饋）分類：</strong>一次嘗試若頁面錄得 JavaScript 錯誤，<em>且</em>按鍵狀態與按下前完全無變化，<em>且</em>鏡頭所見房間無變化，即表示該次點擊死在頁面內、從未到達控制器。此乃<strong>頁面失敗，並非房間故障</strong>，報告須如此區分 — 此簽名於 2026 年 11 月 2–3 日在 SM-11-08 找出根源（§11）。</li>
 <li>最後檢查：以唯讀方式重讀<em>每間</em>房，兩次取樣相隔約 15 秒。兩次取樣均顯示定住的開著狀態，該房才算定住。</li>
-<li>重試後仍閃爍／未定 → 依 §8.2 的 Option A 處理（只限晨早一輪）。處於<em>穩定</em>非開啟狀態的房間，會直接報告為「電視熄咗（穩定、非閃爍）」，<strong>不作</strong>電源循環升級。</li>
+<li>重試後仍閃爍／未定 → 依 §8.2 的 Option A 處理（只限晨早一輪）。3 次嘗試均失敗但<em>沒有</em>閃爍的房間（頁面失敗及／或穩定非開啟狀態），會<strong>升級至站點負責人</strong>：報告會詢問是否對該房 AV 處理器作電源循環（PCU-AVRack 插座 4）— 該輪不會自行執行循環。未用盡嘗試次數而處於<em>穩定</em>非開啟狀態的房間，會直接報告為「電視熄咗（穩定、非閃爍）」。</li>
 </ol>
 </div>
 <div class="proc">
@@ -275,7 +276,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <table>
 <tr><th>操作</th><th>權限</th></tr>
 <tr><td>所有唯讀監察（巡邏、就緒掃描、日誌擷取、看門狗、面板狀態觀察）</td><td>自動執行（排程）</td></tr>
-<tr><td>晨早 TV On 按鍵（07:05 一輪，包括每房一次重試）</td><td>常設授權（§8.2）</td></tr>
+<tr><td>晨早 TV On 按鍵（07:05 一輪，包括每房最多兩次重試 — 合共 3 次嘗試，重試使用全新瀏覽器）</td><td>常設授權（§8.2）</td></tr>
 <tr><td>07:05 一輪內的閃爍個案處理：一次 PCU-AVRack 插座 4 循環 + 每房最多一次復原 System ON 按鍵</td><td>常設授權「Option A」（§8.2）</td></tr>
 <tr><td>控制面板閃爍個案的 USS Help Desk 記錄（每房每個個案一張）</td><td>已預先批准（§8.2）；其他 Help Desk 發文須逐案批准</td></tr>
 <tr><td>快速鍵盤操作</td><td>負責人在執行前逐一確認每個排隊動作</td></tr>
@@ -330,12 +331,14 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <tr><td>CEC 自動開啟行為</td><td>在 CEC 閘道停用時，源自解碼器的自動 CEC 不會到達電視（已驗證）— 閘道狀態就是開關。剩餘風險：被重新啟用（包括經出廠重置）。緩解候選見上電視重啟一行。</td></tr>
 <tr><td>房 1 交換機對的管理</td><td>2026 年 10 月已升級韌體；管理只經 HTTPS（4443 埠），工具已自動後備處理（§7.5）。在裝置端改回 HTTP 管理只屬負責人的決定 — 未有執行。</td></tr>
 <tr><td>SM-11-01 TV-DEC-1 日誌「No space left」</td><td>在 USB 風暴下發生；見 USB 一行。未有批准清除日誌。</td></tr>
+<tr><td>面板頁面按鍵失敗（零反饋）</td><td>2026 年 11 月 3 日找出根源（SM-11-08，連續兩朝）：面板網頁在載入時撞到 JavaScript 錯誤（「Cannot read properties of undefined (reading 'substring')」），TV On 的點擊從未到達控制器 — 房間、電視及解碼器全程健康，並由一次全新瀏覽器的按鍵一按即開所證實。常設處理見 P1：頁面錯誤防護、重試使用全新瀏覽器、「頁面失敗」與房間故障分開報告、3 次嘗試均失敗後升級至負責人。</td></tr>
 </table>
 </section>
 <section class="blk" id="s12">
 <h2>12. 文件管制</h2>
 <table>
 <tr><th>版本</th><th>日期</th><th>更改</th></tr>
+<tr><td>1.5</td><td>2026 年 11 月 3 日</td><td>因應 2026 年 11 月 2–3 日 SM-11-08 的調查，更新 P1（晨早開電視）：頁面錯誤防護（頁面已錄得 JavaScript 錯誤時永不在該頁按鍵）、重試使用全新瀏覽器、每房每朝嘗試上限由 2 次提高至 3 次、新增零反饋「頁面失敗」分類（與房間故障區分，§11）、3 次嘗試均失敗後升級至站點負責人（閃爍個案仍依 Option A 在該輪內處理）。</td></tr>
 <tr><td>1.4</td><td>2026 年 10 月 30 日</td><td>新增配套頁面「已知問題案例處理」的完整繁體中文版（shekmun-case-handling-zh.html），並在兩個案例頁面加入語言切換（English／繁體中文）。程序內容無更改。</td></tr>
 <tr><td>1.3</td><td>2026 年 10 月 30 日</td><td>新增本繁體中文版，並在英文版及中文版頁首加入語言切換（English／繁體中文）。程序內容無更改。</td></tr>
 <tr><td>1.2</td><td>2026 年 10 月 30 日</td><td>新增配套頁面「已知問題案例處理」（13 個情境按重要性排序、逐步處理），並在 §7 及頁首加入連結。程序內容無更改。</td></tr>
