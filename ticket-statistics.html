@@ -67,7 +67,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.5</span><span class="upd">Updated 1 Nov 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.6</span><span class="upd">Updated 2 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -85,6 +85,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <div class="fgroup"><label for="fChan">Report channel</label><select id="fChan"><option value="">All channels</option></select></div>
 <div class="fgroup"><label for="fReq">Requester</label><select id="fReq"><option value="">All requesters</option></select></div>
 <div class="fgroup"><label for="fStatus">Status</label><select id="fStatus"><option value="">All statuses</option></select></div>
+<div class="fgroup"><label for="fStaff">Staff</label><select id="fStaff"><option value="">All staff</option></select></div>
 <button class="reset" id="btnReset" type="button">↺ Reset filters</button>
 <button class="csvdl" id="btnCsv" type="button">⬇ Download filtered data (CSV)</button>
 <span class="count-note" id="countNote"></span>
@@ -95,7 +96,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 
 <section class="compare-shell" aria-labelledby="compareTitle">
 <div class="compare-top">
-<div><h2 id="compareTitle">🔁 Recent two months comparison</h2><p class="hint">Compare any two months side by side. The default is the two most recent months in the data. This panel follows the category, severity, building, channel, requester and status filters above, but ignores the main Month filter so the two selected months can be compared directly.</p></div>
+<div><h2 id="compareTitle">🔁 Recent two months comparison</h2><p class="hint">Compare any two months side by side. The default is the two most recent months in the data. This panel follows the category, severity, building, channel, requester, staff and status filters above, but ignores the main Month filter so the two selected months can be compared directly.</p></div>
 <div class="compare-controls">
 <div class="fgroup"><label for="cmpA">Compare month A</label><select id="cmpA"></select></div>
 <div class="fgroup"><label for="cmpB">With month B</label><select id="cmpB"></select></div>
@@ -135,7 +136,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 
 <section class="card wide"><h2>📅 Cases by weekday</h2><p class="hint">Which days of the week keep the team busiest.</p><div class="chartbox"><canvas id="cDow"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 1 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 2 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -153,6 +154,7 @@ fillSelect($("fBld"), counter(DATA, r=>r.b).map(e=>e[0]).sort());
 fillSelect($("fChan"), counter(DATA, r=>r.ch).map(e=>e[0]));
 fillSelect($("fReq"), counter(DATA, r=>r.req).map(e=>e[0]));
 fillSelect($("fStatus"), counter(DATA, r=>r.st).map(e=>e[0]));
+fillSelect($("fStaff"), [...new Set(DATA.flatMap(r=>r.staff.split(";").map(s=>s.trim())).filter(Boolean))].sort());
 const MONTHS_CHRON = [...new Set(DATA.map(r=>r.m))].sort((a,b)=>{
   const da = DATA.filter(r=>r.m===a).map(r=>r.d).sort()[0];
   const db = DATA.filter(r=>r.m===b).map(r=>r.d).sort()[0];
@@ -169,7 +171,8 @@ function current(){ return DATA.filter(r =>
   (!$("fBld").value || r.b === $("fBld").value) &&
   (!$("fChan").value || r.ch === $("fChan").value) &&
   (!$("fReq").value || r.req === $("fReq").value) &&
-  (!$("fStatus").value || r.st === $("fStatus").value)); }
+  (!$("fStatus").value || r.st === $("fStatus").value) &&
+  (!$("fStaff").value || r.staff.split(";").map(s=>s.trim()).includes($("fStaff").value))); }
 function makeChart(id, cfg){ if(charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
 function barCfg(labels, values, horizontal, color){ return { type:"bar", data:{ labels, datasets:[{ data:values, backgroundColor: color || labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderRadius:6 }]}, options:{ indexAxis: horizontal ? "y" : "x", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ x:{ ticks:{ precision:0 } }, y: horizontal ? { ticks:{ autoSkip:false, font:{ size:11 } } } : { ticks:{ precision:0 } } } } }; }
 function doughCfg(labels, values){ return { type:"doughnut", data:{ labels, datasets:[{ data:values, backgroundColor: labels.map((_,i)=>PALETTE[i%PALETTE.length]), borderColor:"#fff", borderWidth:2 }]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } } } }; }
@@ -179,7 +182,8 @@ function comparisonRows(month){ return DATA.filter(r => r.m === month &&
   (!$("fBld").value || r.b === $("fBld").value) &&
   (!$("fChan").value || r.ch === $("fChan").value) &&
   (!$("fReq").value || r.req === $("fReq").value) &&
-  (!$("fStatus").value || r.st === $("fStatus").value)); }
+  (!$("fStatus").value || r.st === $("fStatus").value) &&
+  (!$("fStaff").value || r.staff.split(";").map(s=>s.trim()).includes($("fStaff").value))); }
 function monthStats(rows){
   const total = rows.length;
   const resolved = rows.filter(r=>r.st==="Resolved").length;
@@ -272,10 +276,10 @@ function render(){
   makeChart("cDow", barCfg(order.map(i=>dowNames[i]), order.map(i=>dow[i]), false, "#15803d"));
   renderComparison();
 }
-["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus"].forEach(id=>$(id).addEventListener("change", render));
+["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).addEventListener("change", render));
 ["cmpA","cmpB"].forEach(id=>$(id).addEventListener("change", render));
 $("btnRecent").addEventListener("click", ()=>{ $("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)]; $("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1]; render(); });
-$("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus"].forEach(id=>$(id).value=""); render(); });
+$("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).value=""); render(); });
 function csvCell(v){ const s = String(v == null ? "" : v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
 function downloadCsv(){
   const rows = current();
