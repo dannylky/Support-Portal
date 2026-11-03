@@ -67,7 +67,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.6</span><span class="upd">Updated 2 Nov 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.7</span><span class="upd">Updated 3 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -135,8 +135,10 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <table><thead><tr><th>Location</th><th>Cases</th><th style="width:38%">Share</th></tr></thead><tbody id="locBody"></tbody></table></section>
 
 <section class="card wide"><h2>📅 Cases by weekday</h2><p class="hint">Which days of the week keep the team busiest.</p><div class="chartbox"><canvas id="cDow"></canvas></div></section>
+
+<section class="card wide"><h2>⏱️ Handling-time distribution</h2><p class="hint">How long cases take to handle, grouped into time buckets (Duration Use [Mins]). Follows the main filters above.</p><div class="chartbox"><canvas id="cDur"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 2 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 3 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -274,6 +276,9 @@ function render(){
   const dow = [0,0,0,0,0,0,0]; rows.forEach(r=>{ dow[new Date(r.d+"T00:00:00").getDay()]++; });
   const order = [1,2,3,4,5,6,0];
   makeChart("cDow", barCfg(order.map(i=>dowNames[i]), order.map(i=>dow[i]), false, "#15803d"));
+  const durBuckets = [0,0,0,0,0,0];
+  rows.forEach(r=>{ const d = r.dur; if(d <= 5) durBuckets[0]++; else if(d <= 10) durBuckets[1]++; else if(d <= 15) durBuckets[2]++; else if(d <= 30) durBuckets[3]++; else if(d <= 60) durBuckets[4]++; else durBuckets[5]++; });
+  makeChart("cDur", barCfg(["0–5 min","6–10 min","11–15 min","16–30 min","31–60 min","60+ min"], durBuckets, false, "#7c3aed"));
   renderComparison();
 }
 ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).addEventListener("change", render));
