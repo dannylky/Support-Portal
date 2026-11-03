@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Summary 2026-11-03 · ShekMun Campus · Support Portal</title>
+<style>body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:36px 20px 26px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:28px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:860px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
+.doc{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px 28px;margin:18px 0 40px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.doc h1{font-size:23px;margin:4px 0 12px}
+.doc h2{font-size:19px;margin:22px 0 8px;color:#1e1b4b}
+.doc h3{font-size:16px;margin:18px 0 6px}
+.doc p{line-height:1.7;color:#1f2937;margin:8px 0}
+.doc ul,.doc ol{line-height:1.75;color:#1f2937;margin:8px 0 8px 20px;padding:0}
+.doc li{margin:4px 0}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+th,td{border-bottom:1px solid #e2e8f0;padding:7px 9px;text-align:left;vertical-align:top;line-height:1.5}
+th{background:#f8fafc;color:#475569}
+code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6px;font-size:12.5px;word-break:break-all}
+hr{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
+.doc a{color:#3730a3}</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>📋 全日總結 — 2026-11-03</h1>
+<div class="sub">石門校園日終 AVoIP 總結，由 22:00 日誌擷取整合：全日八個擷取輪次的合併時間線、各問題狀態，以及唯讀的 16 部交換機交叉檢查。本頁為繁體中文版；英文版為同日的視覺儀表板報告。 <a href="shekmun-daily-reports.html">← 全部每日報告</a> · <a href="remote-campus.html">Remote Campus</a></div>
+<div class="meta"><span class="ver">2026-11-03</span><span>Tuesday · 星期二</span><span>繁體中文版</span><span class="langsw"><a href="daily-2026-11-03.html">English</a><a class="on" href="daily-2026-11-03-zh.html">繁體中文</a></span></div>
+</div></header>
+<main class="wrap"><div class="doc">
+<h1>全日總結 — 2026-11-03（星期二）AVoIP 日誌擷取</h1>
+<p>本日 8 個輪次（0800、1000、1200、1400、1600、1800、2000、2200）全部齊全，無缺失輪次。覆蓋：八個輪次全為 30/30 個目標完整可讀，合共 240/240 次單位讀取；全部輪次、全部單位 LOG-ACTION 皆為 1,3，無 ERR 012、無 LOG-ACTION 轉變、無無回應裝置。以下時間皆為香港時間；遺失判讀沿用各輪既定標準（最後一次「power save due to no data／e_video_enter_pwr_save」與最後一次視訊來源恢復段的先後定狀態；已待機下的重入不另計為新時段；緩衝被 USB 風暴填滿的單位以同輪證據縮圖判讀）。</p>
+<p><strong>全日最重要事件：SM-11-06 的來源停頓自 14:48:33 持續至日終未恢復、長逾 7 小時 14 分鐘，為全日最長單一停源；下午 SM-11-05 衛星交換器埠 0/1 及 0/4 於 15:09:50–15:14:05 反覆 Link Down／Up，並於 15:13:32 引發一次全艦隊 STP 拓撲變更（各房衛星及主交換器於 15:13:32–34 先後收到），同房 TV-DEC-1 同期爆發探索迴圈（15:13:53–15:14:09，200 行）後隨鏈路恢復而重鎖 — 連續第二日有解碼器迴圈爆發獲交換器鏈路事件逐秒印證。晚間 20:41–21:33 再有四房先後停源，連同 SM-11-02 於證據時刻判定待機，日終六房無視訊來源信號待機；三台已知解碼器（SM-11-01／02 TV-DEC-1、SM-11-08 TV-DEC-2）晚間 USB 風暴再現，但全日無任何「No space」；探索迴圈全日無持續個案。</strong> 交換器交叉檢查 16/16 登入成功，今日無交換器重啟。</p>
+<h2>全日時間線（已合併多輪次重複見到的同一事件）</h2>
+<ul>
+<li><strong>07:00 校園供電恢復、全艦隊冷啟動（0800 輪次）</strong>：SM-11-01 四台解碼器反覆經歷串流週期，最後一次進入省電為 07:27:52–53，擷取結束時仍待機，其後於 08:12 證據時刻確認已自行重鎖（四台同步顯示 Windows 鎖定畫面）。其餘七房約 07:10 先後進入省電等待，其後重鎖時刻：SM-11-08 07:46:14、SM-11-05 07:52:00、SM-11-02 08:00:44、SM-11-03 08:00:37、SM-11-04 08:00:38、SM-11-06 08:00:38、SM-11-07 08:05:54–59 — 講台 PC 來源今早於 07:46–08:06 間先後就緒，屬來源側時序。</li>
+<li><strong>07:03:50–07:11:46 SM-11-02 TV-DEC-1 早上 USB 風暴（0800 輪次，已停止）</strong>：303 行（約 0.64 行／秒），其後自停，該台於 08:00:44 成功重鎖。SM-11-01 TV-DEC-1 同期有 18 行小爆發（07:09:33–07:10:00）。兩台皆為已知易波動單位。</li>
+<li><strong>07:28:49–07:29:18 SM-11-08 短暫探索迴圈爆發（0800 輪次，已自停）</strong>：TV-DEC-1 275 行（約 9.8 行／秒）、TV-DEC-2 186 行（約 12.4 行／秒）；兩台其後於 07:46:13–14 重鎖在線。與昨日早上同房 07:27 的有界爆發形態相同：開機後來源搜尋期短暫迴圈，來源就緒後自停。</li>
+<li><strong>08:41–09:27 上午短暫遺失波次（1000 輪次）</strong>：SM-11-08 08:41:24 遺失 → 08:42:04 重鎖；SM-11-06 08:43:12 遺失即時重鎖；SM-11-07 TV-DEC-1 於重鎖時刻有 23 行 USB 小爆發（08:41:47–08:42:27）；SM-11-02 於 09:05:30 及 09:27:30 各遺失一次、每次約 8 秒內重鎖（課堂進行中）；SM-11-04 09:25:12 遺失 → 09:25:17 重鎖。</li>
+<li><strong>09:43:36–09:51:19 四房於八分鐘內先後遺失（1000 輪次）</strong>：SM-11-08 09:43:36、SM-11-06 09:44:49、SM-11-03 09:46:59、SM-11-01 09:51:19（四台同刻）；四房當時皆無人、證據縮圖連編碼器同為佔位圖，屬來源側。其後恢復：SM-11-08 10:43:08、SM-11-06 12:01:27、SM-11-03 12:06:18、SM-11-01 12:41:13–42（其中 12:41:39 有一次 1–3 秒瞬間遺失即重鎖）。</li>
+<li><strong>12:29:53 SM-11-05 遺失（1400 輪次）→ 15:14:26–28 恢復</strong>，停源約 2 小時 45 分鐘，恢復過程見 15:09–15:14 的鏈路／迴圈事件。</li>
+<li><strong>12:34:57 SM-11-08 遺失 → 12:50:34–36 恢復（1400 輪次）</strong>，停源約 16 分鐘。</li>
+<li><strong>13:18:08 SM-11-02 遺失（1400 輪次）→ 14:15:44–47 恢復（1600 輪次）</strong>，停源約 58 分鐘；恢復後 7 秒（14:15:54）再瞬間遺失，14:16:00–03 即再重鎖。</li>
+<li><strong>13:43:44 SM-11-01 第二次遺失（1400 輪次）→ 19:20:33–36 恢復（2000 輪次）</strong>，停源 5 小時 37 分鐘，為全日最長已恢復停源；期間 1600、1800 兩輪擷取結束時皆仍待機，證據縮圖皆為佔位圖。</li>
+<li><strong>14:48:33 SM-11-06 第二次遺失（1600 輪次）→ 日終未恢復</strong>，至 2200 輪擷取結束（約 22:02）已持續約 7 小時 14 分鐘，為全日最長單一停源；21:36:49–51 有一次待機重入（同一時段）。</li>
+<li><strong>14:59:51 SM-11-03 遺失 → 15:01:58–15:02:01 恢復（1600 輪次）</strong>，停源約 2 分鐘。</li>
+<li><strong>15:09:50–15:14:05 SM-11-05 衛星交換器鏈路反覆 + 全艦隊 STP 拓撲變更（1600 輪次＋交換器交叉檢查）</strong>：衛星交換器埠 0/1 及 0/4 四個 Down／Up 週期（15:09:50–53、15:12:54–58、15:13:28–34、15:14:05 最終 Up）；衛星交換器於 15:13:32 就埠 0/1 引發 STP 拓撲變更，各房衛星及主交換器於 15:13:32–34 先後收到 TCN。同房 TV-DEC-1 於 <strong>15:13:53–15:14:09 爆發探索迴圈 200 行（約 12.5 行／秒）</strong>，15:14:09 後停止，<strong>15:14:26–28 視訊來源恢復</strong> — 時序與「鏈路反覆中斷 → 解碼器探索爆發 → 鏈路穩定後重鎖」吻合，是繼昨日 SM-11-08 中午事件後第二個有交換器側印證的迴圈樣本。</li>
+<li><strong>15:54:29 及 15:54:50 SM-11-04 與 SM-11-03 近乎同刻遺失（1600 輪次）</strong>：兩房只差 21 秒、同屬 LED 牆房間。SM-11-04 → <strong>18:28:42–44 恢復</strong>（停源約 2 小時 34 分鐘）；SM-11-03 的恢復段已隨緩衝滾動消失（1800 輪擷取時已非待機，確實時刻不可考），其後 17:04:37 再遺失 → 17:05:14–17 恢復（約 40 秒）。</li>
+<li><strong>16:37:16 SM-11-07 遺失 → 16:37:56–58 恢復（1800 輪次）</strong>，停源約 42 秒。</li>
+<li><strong>17:42:22–17:43:32 SM-11-02 晚間連環事件（1800 輪次）</strong>：EN-Laptop 先於 17:42:22 出現 vhub_net_rx_pdu「receiving pdu failed」<em><strong>ERROR</strong></em> ×3；17:43:32 TV-DEC-2 遺失；17:43:33 起 TV-DEC-1 USB 風暴（1800 輪緩衝 600 行至 17:59:27 未停；2000 輪只餘尾段 158 行，18:30:53–18:34:50，<strong>18:34:50 後停止</strong>）。全房其後於 <strong>18:53:31–38 重鎖</strong>（TV-DEC-2 停源約 1 小時 10 分鐘）。18:07 證據時刻 EN-PC 縮圖仍有實際畫面而兩台解碼器為佔位圖 — 該段屬解碼器／USB 路徑側形態，與全日其他來源側個案不同。</li>
+<li><strong>18:11:00／02 SM-11-08 遺失 → 18:23:33／36 恢復（2000 輪次）</strong>，停源約 12.5 分鐘；重鎖當刻 EN-Laptop 有 1 行 USB-over-IP 錯誤（同類轉換噪音）。</li>
+<li><strong>18:23:13 SM-11-05 瞬間串流停止 → 18:23:14 即重鎖（2000 輪次）</strong>；其後 <strong>18:56:49 再度遺失 → 日終未恢復</strong>（至擷取結束約 3 小時 05 分鐘）。</li>
+<li><strong>19:22:59 SM-11-01 短暫遺失 → 19:34:31–37 恢復（2000 輪次）</strong>，停源約 11.5 分鐘；轉換時刻 EN-PC 及 EN-Laptop 均有 USB-over-IP 錯誤群（19:22:57–19:23:02 及 19:07:10／19:20:32／19:34:31）。</li>
+<li><strong>20:03:07 SM-11-02 TV-DEC-2 遺失 → 20:05:01 恢復（2200 輪次）</strong>，停源約 2 分鐘。</li>
+<li><strong>20:11:36 SM-11-01 遺失 → 20:11:53 恢復（2200 輪次）</strong>，停源 17 秒。</li>
+<li><strong>20:41:01 SM-11-04 第二次遺失（2200 輪次）→ 日終未恢復</strong>：21:39:06–07 有待機重入（同一時段）；至擷取結束約 1 小時 21 分鐘。</li>
+<li><strong>21:15:41 SM-11-07 遺失（2200 輪次）→ 日終未恢復</strong>：21:35:35–37 兩台同步待機重入（同一時段），TV-DEC-1 同期有 23 行 USB 小爆發（21:35:42–21:36:28）；至擷取結束約 47 分鐘。</li>
+<li><strong>21:33:17 SM-11-01 最後遺失（2200 輪次）→ 日終未恢復</strong>：此前 21:32:48–49 有 STOP_STREAM + 即時重鎖 flicker；EN-PC 於 21:33:04–05 先有 vhub_usbip_rx <em><strong>ERROR</strong></em> 18 行（遺失前約 13 秒）。TV-DEC-1 緩衝（21:41:31–21:56:55）全段被 USB 風暴填滿（727 行），結束狀態由同房三台及證據判定。至擷取結束約 30 分鐘。</li>
+<li><strong>21:33:59／21:34:01 SM-11-08 遺失 → 21:58:25–26 恢復（2200 輪次）</strong>，停源約 24 分鐘；EN-PC 同刻有 USB-over-IP <em><strong>ERROR</strong></em> 12 行（21:34:00–03）。TV-DEC-2 於重鎖後約 20 秒（21:58:46）起 USB 風暴，230 行至 22:05:21，擷取結束時仍在波動 — 串流已鎖定，風暴只在 USB 路徑。</li>
+<li><strong>21:42:35 SM-11-03 遺失 → 21:43:10 恢復（2200 輪次）</strong>，停源 35 秒。</li>
+<li><strong>21:47:17 起 SM-11-02 TV-DEC-1 USB 風暴再起（2200 輪次）</strong>：其緩衝（21:47:17–21:58:56）全段為風暴行 449 行；TV-DEC-2 緩衝（至 21:58:26）顯示 20:05 後無再遺失。<strong>22:08–22:09 證據：全房四張縮圖全部為佔位圖 — 該房於擷取結束後至證據時刻之間已落入待機（或其遺失藏於 TV-DEC-1 風暴填滿的緩衝），確實時刻不可考。</strong></li>
+<li><strong>日終位置（2200 輪次擷取結束約 22:05、證據 22:07–22:11 確認）</strong>：在線 — SM-11-03、SM-11-08（TV-DEC-2 USB 風暴進行中，串流已鎖定）；無視訊來源信號待機 — SM-11-06（14:48:33 起，約 7 小時 14 分鐘）、SM-11-05（18:56:49 起，約 3 小時 05 分鐘）、SM-11-04（20:41:01 起，約 1 小時 21 分鐘）、SM-11-07（21:15:41 起，約 47 分鐘）、SM-11-01（21:33:17 起，約 30 分鐘）、SM-11-02（證據時刻 22:08 判定，TV-DEC-1 風暴進行中）。</li>
+</ul>
+<h2>各問題全日狀態</h2>
+<ul>
+<li><strong>探索迴圈</strong>：全日無持續迴圈。兩段有界爆發：SM-11-08 早上開機段（07:28:49–07:29:18，275／186 行）及 SM-11-05 下午段（15:13:53–15:14:09，200 行，約 12.5 行／秒；1800 輪只餘其尾段殘段 26 行）。兩段都在來源／鏈路返回後即止，日終擷取時全艦隊迴圈 0 行。基線單位 R4／R6 TV-DEC-1、SM-11-02 TV-DEC-2 全日 0 行；SM-11-05 TV-DEC-1 本身屬昔日基線迴圈單位之一，其下午爆發有同房衛星交換器鏈路反覆逐秒對應（見交換器交叉檢查）。2026-10-14 已修復的 SM-11-03 保持無迴圈。日終無單位在迴圈，無需套用 Manager 通道指派修復。</li>
+<li><strong>儲存壓力</strong>：全日八輪全艦隊皆為 No space 0 行。三台晚間風暴（727／449／230 行）均未寫滿緩衝儲存。本日誌擷取無執行任何 LOG-ACTION 寫入，決策 A（LOG-ACTION 4 清除）仍未批准、未執行，今日數據亦無新增需要清除的理由。</li>
+<li><strong>LOG-ACTION</strong>：全日無轉變；全部單位於全部輪次皆為 1,3，無 ERR 012（覆蓋規則未被打破）。</li>
+<li><strong>覆蓋</strong>：八輪皆 30/30，合共 240/240。短緩衝備註：2000 輪 SM-11-02_EN-Laptop 只回傳 509 行、SM-11-04_EN-Laptop 只回傳 202 行；2200 輪 SM-11-01_EN-Laptop 只回傳 143 行、SM-11-07_EN-PC 只回傳 62 行 — 皆為 tick／mDNS 正常行、回覆完整，屬裝置側日誌輪替，結束狀態已由同輪 snapshot.json 及證據縮圖核對。</li>
+<li><strong>編碼器時鐘／NTP</strong>：0800 輪 24 台緩衝開頭含未同步 Jan 1 開機段（NTP 同步前），其後全部轉入已同步段；1000 輪起全艦隊時間戳皆為已同步段（1600 輪 SM-11-05_EN-PC 檔首有一段 Jan 1 舊開機殘段）。沒有單位於日間持續使用未同步裝置時間，無需新增 NTP 建議。</li>
+<li><strong>USB</strong>：早上 SM-11-02 TV-DEC-1 風暴 303 行（07:03:50–07:11:46，開機後自停）及 SM-11-01 TV-DEC-1 小爆發 18 行；日間只隨重鎖時刻出現小段（SM-11-07 TV-DEC-1 08:41 段 23 行、SM-11-01 TV-DEC-1 08:51 段 5 行）；傍晚 SM-11-02 TV-DEC-1 風暴自 17:43:33 起、18:34:50 停止，其後晚間 21:47:17 前再起（449 行，擷取時仍在波動）；晚間另有 SM-11-01 TV-DEC-1 風暴（727 行，21:41:31 前已在波動）及 SM-11-08 TV-DEC-2 風暴（230 行，21:58:46 起、擷取結束仍在波動），SM-11-07 TV-DEC-1 則有 23 行小爆發（21:35:42–21:36:28）。全日沒有新單位開始波動 — 四台已知易波動單位（R1 DEC-1、R2 DEC-1、R7 DEC-1、R8 DEC-2）今日全部有紀錄。</li>
+<li><strong>編碼器 USB-over-IP 先行形態（今日新觀察）</strong>：三宗傍晚／晚間遺失在同房編碼器上有一分鐘內的 vhub_usbip_rx 錯誤群 — SM-11-02 EN-Laptop 17:42:22（遺失前約 1 分鐘）、SM-11-01 EN-PC 21:33:04–05（遺失前約 13 秒）、SM-11-08 EN-PC 21:34:00–03（與遺失同刻）；SM-11-01 EN-PC 在 19:22–19:34 的短暫遺失／恢復轉換時刻亦有同類錯誤群。此形態只記錄為觀察項，今日證據（縮圖）顯示除 SM-11-02 傍晚段外，各房遺失時刻編碼器側同為佔位圖，未改變來源側分類。</li>
+<li><strong>新錯誤家族</strong>：SM-11-03／04 TV-DEC-1 的 on_1st_ff_done「No full frame?!」（1000 輪，隨重鎖出現，其後 SM-11-02 TV-DEC-2 亦見）、SM-11-01 EN-Laptop 的 react_reset／port_reset_complete 家族（1000 輪）、SM-11-05 相關的 store_LoopbackEnable 及 do_HOST_EVENT_DEL_CLIENT「already deleted?!」單次行（1600 輪）為本日新見家族，全部屬轉換時刻／單次提示，無串流影響。除此之外全日 <em><strong>ERROR</strong></em> 皆為已知家族（crt_setup／V1RxClient 隨遺失與重鎖、vhub／cb／usb_parse 隨 USB 路徑、socket／stub 隨串流拆除）。</li>
+<li><strong>解碼器側個案</strong>：只有 SM-11-02 傍晚段（17:43–18:53）屬解碼器／USB 路徑側形態（EN-PC 有畫面、解碼器待機加同房風暴）；其餘各房的恢復都緊隨來源返回，沒有一台在來源已返回時仍未自行重鎖。</li>
+<li><strong>HDCP／連結／重啟</strong>：HDCP 行只跟隨遺失與重鎖事件；AVoIP 日誌全日無 link down／up、無溫度警告；無裝置於日間重啟（07:00 冷啟動除外）。</li>
+</ul>
+<h2>交換器交叉檢查</h2>
+<ul>
+<li><strong>來源及方式</strong>：本輪次於運行期間即時讀取 Danny 的「Extron Password」側邊聊天室（chat_id 165028e8-578f-454a-ae21-48e1067cbac3）最新交換器訊息，只取「使用者／密碼」格式中斜線後的密碼部分，經本輪次自有管道本地餵給交換器驅動程式（switch_2200.py 逐台以 stdin 傳給 sw_fetch.py）；密碼只用於程序內，從未寫入任何檔案、日誌或報告，亦未引用其值。</li>
+<li><strong>結果：16／16 台交換器全部成功登入</strong>（約 22:10–22:13 取回）。原始 JSON 已存入 2026-11-03-switch 資料夾。</li>
+<li><strong>Uptime 核對：今日無任何交換器重啟。</strong> 16 台 uptime 介乎 4 日至 71 日，各較昨晚多一</li>
+</ul>
+<p>...[truncated 7059 chars]</p>
+</div></main>
+</body>
+</html>
