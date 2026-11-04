@@ -67,7 +67,7 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.7</span><span class="upd">Updated 3 Nov 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.8</span><span class="upd">Updated 4 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -134,11 +134,14 @@ th{color:#475569;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
 <section class="card"><h2>📍 Top locations</h2><p class="hint">Rooms and places generating the most cases under the current filters.</p>
 <table><thead><tr><th>Location</th><th>Cases</th><th style="width:38%">Share</th></tr></thead><tbody id="locBody"></tbody></table></section>
 
+<section class="card"><h2>🔥 Busiest days</h2><p class="hint">The five dates with the most cases under the current filters.</p>
+<table><thead><tr><th>Date</th><th>Cases</th><th style="width:38%">Share</th></tr></thead><tbody id="busyBody"></tbody></table></section>
+
 <section class="card wide"><h2>📅 Cases by weekday</h2><p class="hint">Which days of the week keep the team busiest.</p><div class="chartbox"><canvas id="cDow"></canvas></div></section>
 
 <section class="card wide"><h2>⏱️ Handling-time distribution</h2><p class="hint">How long cases take to handle, grouped into time buckets (Duration Use [Mins]). Follows the main filters above.</p><div class="chartbox"><canvas id="cDur"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 3 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 275 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 30 Oct 2026), last read on 4 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 275 total cases · 274 Resolved + 1 On Going (99.6%) · 131 incidents · average handling time 24.0 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -272,6 +275,10 @@ function render(){
   const locs = counter(rows, r=>r.loc).slice(0,10);
   const maxLoc = locs.length ? locs[0][1] : 1;
   $("locBody").innerHTML = locs.map(e=>"<tr><td>" + e[0] + "</td><td><strong>" + e[1] + "</strong></td><td><div class=\"sharebar\"><i style=\"width:" + Math.round(e[1]/maxLoc*100) + "%\"></i></div></td></tr>").join("");
+  const busy = counter(rows, r=>r.d).slice(0,5);
+  const maxBusy = busy.length ? busy[0][1] : 1;
+  const fmtBusy = iso => { const p = iso.split("-"); const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return parseInt(p[2],10) + " " + names[parseInt(p[1],10)-1] + " " + p[0]; };
+  $("busyBody").innerHTML = busy.map(e=>"<tr><td>" + fmtBusy(e[0]) + "</td><td><strong>" + e[1] + "</strong></td><td><div class=\"sharebar\"><i style=\"width:" + Math.round(e[1]/maxBusy*100) + "%\"></i></div></td></tr>").join("");
   const dowNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   const dow = [0,0,0,0,0,0,0]; rows.forEach(r=>{ dow[new Date(r.d+"T00:00:00").getDay()]++; });
   const order = [1,2,3,4,5,6,0];
