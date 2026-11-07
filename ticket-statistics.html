@@ -22,6 +22,8 @@ body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;backgrou
 .fgroup{display:flex;flex-direction:column;gap:4px}
 .fgroup label{font-size:11.5px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.04em}
 select{padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;background:#fff;max-width:250px}
+.loc-search{width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;background:#fff;margin:0 0 10px}
+.loc-search:focus{outline:2px solid #3730a3;outline-offset:1px;border-color:#3730a3}
 button.reset{padding:9px 16px;border-radius:10px;border:1px solid #3730a3;background:#eef2ff;color:#3730a3;font-weight:700;cursor:pointer;font-size:14px}
 button.reset:hover{background:#e0e7ff}
 button.csvdl{padding:9px 16px;border-radius:10px;border:1px solid #0e7490;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;font-size:14px}
@@ -83,7 +85,7 @@ body{background:#fff}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.10</span><span class="upd">Updated 6 Nov 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.11</span><span class="upd">Updated 7 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -147,7 +149,8 @@ body{background:#fff}
 
 <section class="card"><h2>🔧 Top issue types</h2><p class="hint">Most frequent Case Description values (excluding the form's “N/A — check description” placeholder).</p><div class="chartbox tall"><canvas id="cDesc"></canvas></div></section>
 
-<section class="card"><h2>📍 Top locations</h2><p class="hint">Rooms and places generating the most cases under the current filters.</p>
+<section class="card"><h2>📍 Top locations</h2><p class="hint">Rooms and places generating the most cases under the current filters. Use the search box to filter these rows by location name.</p>
+<input class="loc-search" id="locSearch" type="search" placeholder="🔍 Search locations…" aria-label="Search top locations">
 <table><thead><tr><th>Location</th><th>Cases</th><th style="width:38%">Share</th></tr></thead><tbody id="locBody"></tbody></table></section>
 
 <section class="card"><h2>🔥 Busiest days</h2><p class="hint">The five dates with the most cases under the current filters.</p>
@@ -157,7 +160,7 @@ body{background:#fff}
 
 <section class="card wide"><h2>⏱️ Handling-time distribution</h2><p class="hint">How long cases take to handle, grouped into time buckets (Duration Use [Mins]). Follows the main filters above.</p><div class="chartbox"><canvas id="cDur"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 280 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 6 Nov 2026), last read on 6 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 280 total cases · 279 Resolved + 1 On Going (99.6%) · 135 incidents · average handling time 23.6 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 280 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 6 Nov 2026), last read on 7 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 280 total cases · 279 Resolved + 1 On Going (99.6%) · 135 incidents · average handling time 23.6 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -260,6 +263,13 @@ function renderComparison(){
   const changes = allChanges.slice().sort((x,y)=>Math.abs(y.d)-Math.abs(x.d)).slice(0,8);
   $("cmpChanges").innerHTML = changes.map(r=>"<tr><td>" + r.cat + "</td><td>" + r.a + "</td><td>" + r.b + "</td><td class=\"" + deltaClass(r.d) + "\">" + fmtDelta(r.d, "", 0) + "</td><td>" + pctText(r.a, r.b) + "</td></tr>").join("");
 }
+function updateLocTable(rows){
+  const allLocs = counter(rows, r=>r.loc).slice(0,10);
+  const q = ($("locSearch").value || "").trim().toLowerCase();
+  const locs = q ? allLocs.filter(e=>e[0].toLowerCase().indexOf(q) !== -1) : allLocs;
+  const maxLoc = allLocs.length ? allLocs[0][1] : 1;
+  $("locBody").innerHTML = locs.length ? locs.map(e=>"<tr><td>" + e[0] + "</td><td><strong>" + e[1] + "</strong></td><td><div class=\"sharebar\"><i style=\"width:" + Math.round(e[1]/maxLoc*100) + "%\"></i></div></td></tr>").join("") : "<tr><td colspan=\"3\" style=\"color:#64748b\">No locations match your search.</td></tr>";
+}
 function render(){
   const rows = current();
   $("emptyMsg").style.display = rows.length ? "none" : "block";
@@ -289,9 +299,7 @@ function render(){
   makeChart("cStaff", barCfg(staffArr.map(e=>e[0]), staffArr.map(e=>e[1]), true, "#0e7490"));
   const descs = counter(rows.filter(r=>r.desc.indexOf("N/A")!==0), r=>r.desc).slice(0,10);
   makeChart("cDesc", barCfg(descs.map(e=>e[0]), descs.map(e=>e[1]), true, "#b45309"));
-  const locs = counter(rows, r=>r.loc).slice(0,10);
-  const maxLoc = locs.length ? locs[0][1] : 1;
-  $("locBody").innerHTML = locs.map(e=>"<tr><td>" + e[0] + "</td><td><strong>" + e[1] + "</strong></td><td><div class=\"sharebar\"><i style=\"width:" + Math.round(e[1]/maxLoc*100) + "%\"></i></div></td></tr>").join("");
+  updateLocTable(rows);
   const busy = counter(rows, r=>r.d).slice(0,5);
   const maxBusy = busy.length ? busy[0][1] : 1;
   const fmtBusy = iso => { const p = iso.split("-"); const names = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; return parseInt(p[2],10) + " " + names[parseInt(p[1],10)-1] + " " + p[0]; };
@@ -305,10 +313,11 @@ function render(){
   makeChart("cDur", barCfg(["0–5 min","6–10 min","11–15 min","16–30 min","31–60 min","60+ min"], durBuckets, false, "#7c3aed"));
   renderComparison();
 }
+$("locSearch").addEventListener("input", ()=>updateLocTable(current()));
 ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).addEventListener("change", render));
 ["cmpA","cmpB"].forEach(id=>$(id).addEventListener("change", render));
 $("btnRecent").addEventListener("click", ()=>{ $("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)]; $("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1]; render(); });
-$("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).value=""); render(); });
+$("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).value=""); $("locSearch").value=""; render(); });
 function csvCell(v){ const s = String(v == null ? "" : v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
 function downloadCsv(){
   const rows = current();
