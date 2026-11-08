@@ -24,6 +24,10 @@ body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;backgrou
 select{padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;background:#fff;max-width:250px}
 .loc-search{width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:10px;font-size:14px;background:#fff;margin:0 0 10px}
 .loc-search:focus{outline:2px solid #3730a3;outline-offset:1px;border-color:#3730a3}
+.trend-toggle{display:flex;gap:8px;margin:0 0 10px}
+.trend-btn{padding:7px 14px;border-radius:999px;border:1px solid #3730a3;background:#fff;color:#3730a3;font-weight:700;cursor:pointer;font-size:13.5px}
+.trend-btn:hover{background:#eef2ff}
+.trend-btn.active{background:#3730a3;color:#fff}
 button.reset{padding:9px 16px;border-radius:10px;border:1px solid #3730a3;background:#eef2ff;color:#3730a3;font-weight:700;cursor:pointer;font-size:14px}
 button.reset:hover{background:#e0e7ff}
 button.csvdl{padding:9px 16px;border-radius:10px;border:1px solid #0e7490;background:#ecfeff;color:#155e75;font-weight:700;cursor:pointer;font-size:14px}
@@ -85,7 +89,7 @@ body{background:#fff}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the new two-month comparison to see what changed between the most recent months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.11</span><span class="upd">Updated 7 Nov 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><span class="verpill">Version v1.12</span><span class="upd">Updated 8 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>
@@ -133,7 +137,7 @@ body{background:#fff}
 </section>
 
 <div class="grid">
-<section class="card wide"><h2>📈 Cases per day</h2><p class="hint">Daily case volume across the semester so far — the early-September start-of-term peak is clearly visible.</p><div class="chartbox"><canvas id="cTrend"></canvas></div></section>
+<section class="card wide"><h2>📈 Cases per day</h2><p class="hint">Case volume across the semester so far — the early-September start-of-term peak is clearly visible. Use the toggle to switch between daily counts and weekly totals (calendar weeks starting Monday, labelled by the Monday date).</p><div class="trend-toggle" role="group" aria-label="Trend chart grouping"><button class="trend-btn active" id="trendDaily" type="button">Daily</button><button class="trend-btn" id="trendWeekly" type="button">Weekly</button></div><div class="chartbox"><canvas id="cTrend"></canvas></div></section>
 
 <section class="card wide"><h2>🗂️ Cases by category</h2><p class="hint">What the team actually works on, by the form's Categories field.</p><div class="chartbox xl"><canvas id="cCat"></canvas></div></section>
 
@@ -160,7 +164,7 @@ body{background:#fff}
 
 <section class="card wide"><h2>⏱️ Handling-time distribution</h2><p class="hint">How long cases take to handle, grouped into time buckets (Duration Use [Mins]). Follows the main filters above.</p><div class="chartbox"><canvas id="cDur"></canvas></div></section>
 </div>
-<p class="foot">About this page: statistics are computed in your browser from the 280 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 6 Nov 2026), last read on 7 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 280 total cases · 279 Resolved + 1 On Going (99.6%) · 135 incidents · average handling time 23.6 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
+<p class="foot">About this page: statistics are computed in your browser from the 280 cases recorded on Sheet1 of “ITSC team ticket form (26-27 Semester 1).xlsx” (1 Sep 2026 – 6 Nov 2026), last read on 8 Nov 2026. At every refresh the totals are cross-checked against the workbook's own Dashboard: 280 total cases · 279 Resolved + 1 On Going (99.6%) · 135 incidents · average handling time 23.6 minutes — all match. Only statistics fields are published here; reporter emails, names and free-text details from the form are not included. Two category labels were width-truncated in the sheet view (“Classroom - System po…”) and are shown as “Classroom - System power”. “Classroom - Touch Pane” is reproduced as written in the form. Full version history: <a href="change-log.html">change log</a>.</p>
 </main>
 
 <script>
@@ -270,6 +274,8 @@ function updateLocTable(rows){
   const maxLoc = allLocs.length ? allLocs[0][1] : 1;
   $("locBody").innerHTML = locs.length ? locs.map(e=>"<tr><td>" + e[0] + "</td><td><strong>" + e[1] + "</strong></td><td><div class=\"sharebar\"><i style=\"width:" + Math.round(e[1]/maxLoc*100) + "%\"></i></div></td></tr>").join("") : "<tr><td colspan=\"3\" style=\"color:#64748b\">No locations match your search.</td></tr>";
 }
+let trendMode = "daily";
+function updateTrendButtons(){ $("trendDaily").className = "trend-btn" + (trendMode === "daily" ? " active" : ""); $("trendWeekly").className = "trend-btn" + (trendMode === "weekly" ? " active" : ""); }
 function render(){
   const rows = current();
   $("emptyMsg").style.display = rows.length ? "none" : "block";
@@ -282,8 +288,17 @@ function render(){
   $("kIncidents").textContent = inc;
   $("kAvg").textContent = rows.length ? (Math.round(totMin/rows.length*10)/10) + " min" : "–";
   $("kHours").textContent = (Math.round(totMin/60*10)/10) + " hrs";
-  const byDay = counter(rows, r=>r.d).sort((a,b)=>a[0]<b[0]?-1:1);
-  makeChart("cTrend", { type:"line", data:{ labels: byDay.map(e=>e[0].slice(5)), datasets:[{ data: byDay.map(e=>e[1]), borderColor:"#3730a3", backgroundColor:"rgba(55,48,163,.14)", fill:true, tension:.3, pointRadius:2 }]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ precision:0 } } } } });
+  let trendLabels, trendValues;
+  if(trendMode === "weekly"){
+    const weekMap = new Map();
+    rows.forEach(r=>{ const d = new Date(r.d + "T00:00:00"); const shift = (d.getDay() + 6) % 7; d.setDate(d.getDate() - shift); const wk = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); weekMap.set(wk, (weekMap.get(wk) || 0) + 1); });
+    const byWeek = [...weekMap.entries()].sort((a,b)=>a[0]<b[0]?-1:1);
+    trendLabels = byWeek.map(e=>e[0].slice(5)); trendValues = byWeek.map(e=>e[1]);
+  } else {
+    const byDay = counter(rows, r=>r.d).sort((a,b)=>a[0]<b[0]?-1:1);
+    trendLabels = byDay.map(e=>e[0].slice(5)); trendValues = byDay.map(e=>e[1]);
+  }
+  makeChart("cTrend", { type:"line", data:{ labels: trendLabels, datasets:[{ data: trendValues, borderColor:"#3730a3", backgroundColor:"rgba(55,48,163,.14)", fill:true, tension:.3, pointRadius:2 }]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } }, scales:{ y:{ ticks:{ precision:0 } } } } });
   const cats = counter(rows, r=>r.cat);
   makeChart("cCat", barCfg(cats.map(e=>e[0]), cats.map(e=>e[1]), true));
   const sevs = counter(rows, r=>r.sev);
@@ -314,6 +329,8 @@ function render(){
   renderComparison();
 }
 $("locSearch").addEventListener("input", ()=>updateLocTable(current()));
+$("trendDaily").addEventListener("click", ()=>{ trendMode = "daily"; updateTrendButtons(); render(); });
+$("trendWeekly").addEventListener("click", ()=>{ trendMode = "weekly"; updateTrendButtons(); render(); });
 ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).addEventListener("change", render));
 ["cmpA","cmpB"].forEach(id=>$(id).addEventListener("change", render));
 $("btnRecent").addEventListener("click", ()=>{ $("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)]; $("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1]; render(); });
