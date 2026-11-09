@@ -13,6 +13,9 @@
 .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
 .meta span.ver{background:#facc15;color:#0f172a;border-color:#facc15;font-weight:800}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
 .doc{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:26px 28px;margin:18px 0 40px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
 .doc h1{font-size:23px;margin:4px 0 12px}
 .doc h2{font-size:19px;margin:22px 0 8px;color:#1e1b4b}
@@ -194,7 +197,7 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:18px 0}
 </ul>
 <p>約 12–17 分鐘（風暴填滿），故晚間風暴起始時刻只能定在緩衝 起點之前某時，未能精確；全日時間線靠各輪合併補足。</p>
 <h2>交換器交叉檢查</h2>
-<p>來源：執行期即時讀取 Danny 的「Extron Password」側聊最新訊息， 按「/」後部分作密碼，經本輪自有 shell 會話內管道傳給交換器 驅動（未寫入任何檔案或報告，亦未使用任何外來傳入值；後備 「Switch Password」側聊未需動用）。結果：14/16 台登入成功； R1 衛星（172.18.22.21）與主交換器（172.18.22.11）登入失敗， 重現已知的 R1 空登入問題（上次成功為 2026-10-20 早晨基線）， 故 R1 全日事件無法以交換器佐證。</p>
+<p>來源：執行期即時取得密碼， 按「/」後部分作密碼，經本輪自有 shell 會話內管道傳給交換器 驅動（未寫入任何檔案或報告，亦未使用任何外來傳入值；後備 「Switch Password」側聊未需動用）。結果：14/16 台登入成功； R1 衛星（172.18.22.21）與主交換器（172.18.22.11）登入失敗， 重現已知的 R1 空登入問題（上次成功為 2026-10-20 早晨基線）， 故 R1 全日事件無法以交換器佐證。</p>
 <ul>
 <li>日誌級別（實測值）：R2、R3、R8 兩對均為 6 級；R4、R5、R6、</li>
 </ul>
