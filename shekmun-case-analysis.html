@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Analysis — USS Case Reports · ShekMun Campus · Support Portal</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:38px 20px 28px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:29px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:880px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 4px}
+.kpi{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.kpi .v{font-size:27px;font-weight:800;color:#1e1b4b;letter-spacing:-.02em}
+.kpi .l{font-size:12.5px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;line-height:1.45}
+.kpi.hot .v{color:#b91c1c}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px 24px;margin:16px 0;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.card h2{margin:0 0 6px;font-size:19px}
+.card h3{margin:18px 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:#3730a3}
+.card p{line-height:1.65;color:#1f2937;margin:6px 0}
+.card ol,.card ul{line-height:1.7;color:#1f2937;margin:6px 0 6px 20px;padding:0}
+.card li{margin:5px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.grid2 .card{margin:0}
+.chartbox{position:relative;height:260px;margin-top:10px}
+.chartbox.tall{height:300px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e2e8f0;line-height:1.5}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#64748b}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:12px 16px;line-height:1.65;font-size:14px;color:#334155;margin:12px 0}
+.warn{background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:12px 16px;line-height:1.65;font-size:14px;color:#713f12;margin:12px 0}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:8px 0 46px}
+.foot a{color:#3730a3}
+strong.k{color:#1e1b4b}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>📊 ShekMun Campus — Case Analysis</h1>
+<div class="sub">A professional analysis of the USS case reports for the Shek Mun classrooms: what is failing, where it concentrates, how the workload is trending, and what to do about it. All figures are recomputed from the case list in the source workbook <strong>USS_Case_Report_Inbox</strong> (SharePoint, ITSC intranet), read on 14 Nov 2026. Companion pages: the <a href="shekmun-campus.html">SOP</a> and <a href="shekmun-case-handling.html">Case Handling for Known Issues</a>. <a href="remote-campus.html">← Remote Campus</a></div>
+<div class="meta"><span>120 cases</span><span>5 Aug – 14 Nov 2026</span><span>Basis: Reported Date/Time</span><span>Statistics only — no reporter names or case descriptions</span><span class="langsw"><a class="on" href="shekmun-case-analysis.html">English</a><a href="shekmun-case-analysis-zh.html">繁體中文</a></span></div>
+</div></header>
+<main class="wrap">
+<div class="kpis">
+<div class="kpi"><div class="v">120</div><div class="l">Total cases analysed</div></div>
+<div class="kpi hot"><div class="v">87.5%</div><div class="l">Classroom – Display (105 of 120)</div></div>
+<div class="kpi hot"><div class="v">43</div><div class="l">Room 1 cases · 35.8% of all</div></div>
+<div class="kpi"><div class="v">12</div><div class="l">Peak day · 6 Nov 2026</div></div>
+<div class="kpi"><div class="v">65.8%</div><div class="l">Closed (Resolved + Done · 79)</div></div>
+<div class="kpi hot"><div class="v">41</div><div class="l">Still active · 34.2%</div></div>
+</div>
+
+<div class="grid2" style="margin-top:16px">
+<section class="card"><h2>📅 Cases by month</h2>
+<div class="chartbox"><canvas id="chMonth"></canvas></div>
+<p>November is a <strong class="k">partial month (1–14 Nov)</strong> yet already the largest month: 45 cases in 14 days (≈3.2/day) against 19 in the whole of October (≈0.6/day) — a five-fold rate increase. September (42) was the previous peak.</p>
+</section>
+<section class="card"><h2>🗂️ Cases by category</h2>
+<div class="chartbox"><canvas id="chCat"></canvas></div>
+<p>One category dominates: <strong class="k">Classroom – Display, 105 cases (87.5%)</strong>. Software and PC Hardware contribute 5 each; System 2; User Guide, User Training and Event support 1 each. This is an AV display-chain caseload, not a general IT pattern.</p>
+</section>
+</div>
+
+<div class="grid2" style="margin-top:16px">
+<section class="card"><h2>🏫 Cases by room</h2>
+<div class="chartbox tall"><canvas id="chRoom"></canvas></div>
+<p><strong class="k">Room 1 alone carries 43 cases (35.8%)</strong>; Rooms 1 + 2 together are 66 (55%). A further 13 cases sit at campus or shared locations (11/F, lecterns, “all classrooms”). Locations are normalised from free text — see Data &amp; method.</p>
+</section>
+<section class="card"><h2>📌 Status mix</h2>
+<div class="chartbox"><canvas id="chStatus"></canvas></div>
+<p>Resolved 69 and Done 10 give a <strong class="k">65.8% closure rate</strong>. The remaining <strong class="k">41 cases (34.2%)</strong> are In Progress (23), under Observation (8) or Open (10). Notably, the “Open” status appears only from November — the active queue is growing faster than it is being cleared.</p>
+</section>
+</div>
+
+<div class="grid2" style="margin-top:16px">
+<section class="card"><h2>🔌 Device incidents by type</h2>
+<div class="chartbox"><canvas id="chDevice"></canvas></div>
+<p>Counted with the workbook's own keyword formulas over titles and descriptions (a case can count in more than one class): <strong class="k">signal incidents lead with 25</strong> device counts, ahead of TV power-on (14) and TV restart (14). The signal path — encoder / decoder — generates more device incidents than TV power behaviour.</p>
+</section>
+<section class="card"><h2>🔁 Most recurring case titles</h2>
+<table>
+<tr><th>Case title</th><th class="n">Cases</th><th class="n">Share</th></tr>
+<tr><td>System ON Light Flashing</td><td class="n">26</td><td class="n">21.7%</td></tr>
+<tr><td>System ON Feedback Flashing</td><td class="n">3</td><td class="n">2.5%</td></tr>
+<tr><td>Decoder No Signal Restored</td><td class="n">3</td><td class="n">2.5%</td></tr>
+<tr><td>TV1 Unexpected Restart</td><td class="n">3</td><td class="n">2.5%</td></tr>
+<tr><td>All other titles (1–2 cases each)</td><td class="n">85</td><td class="n">70.8%</td></tr>
+</table>
+<p>The two flashing titles are one phenomenon: <strong class="k">29 cases (24.2%)</strong> — the largest single recurring theme in the inbox, matching the morning panel-flash pattern handled under Case 1 of the Case Handling page.</p>
+</section>
+</div>
+
+<section class="card"><h2>🔍 Observations</h2>
+<ol>
+<li><strong class="k">The problem set is the display chain.</strong> 105 of 120 cases (87.5%) are Classroom – Display; every other category combined is 15. Investment and root-cause effort belong in the AVoIP display path — panels, decoders, TVs and their power/signal behaviour — not in general classroom IT.</li>
+<li><strong class="k">Room 1 is the hotspot by a wide margin.</strong> 43 cases (35.8%), nearly double Room 2 (23). It is also the largest room (four TVs) and the repeat room for panel flashing, so exposure and failure rate compound there.</li>
+<li><strong class="k">Flashing is the single biggest recurring theme.</strong> 29 cases (24.2%) under two titles describe the same System ON flashing phenomenon. Counted as one programme rather than 29 incidents, it is the clearest mitigation target in the data.</li>
+<li><strong class="k">November shows a step change, not a drift.</strong> 45 cases in 14 days (≈3.2/day) after October's 19 in 31 days (≈0.6/day); the peak day, 6 Nov, alone produced 12 cases — 10% of the entire period's caseload. Something changed at the start of November (term load, morning start-up pattern, reporting practice) and the data cannot separate those causes — but the rate itself is unambiguous.</li>
+<li><strong class="k">The active queue is the operational risk.</strong> 41 cases (34.2%) remain In Progress, under Observation or Open, and “Open” appears only from November. Even if the underlying faults are minor, an unreviewed queue hides the few that are not.</li>
+<li><strong class="k">Signal beats power.</strong> Signal device counts (25) exceed TV power-on (14) and TV restart (14) counts, so encoder/decoder signal stability deserves at least as much attention as TV power behaviour — the same ordering the workbook's October diagnosis view showed for its month.</li>
+<li><strong class="k">The workbook's own dashboards no longer describe its data.</strong> The older dashboard's findings text still speaks of 57 cases and a 6-case peak day; the October-only diagnosis view has a broken daily table (#N/A). Anyone reading those sheets today is misled — the figures on this page are recomputed from the case list itself.</li>
+</ol>
+</section>
+
+<section class="card"><h2>✅ Suggestions</h2>
+<ol>
+<li><strong class="k">Run Room 1 as a root-cause programme.</strong> With over a third of all cases, Room 1 should get the first dedicated review: panel-flash mitigation (the decoder display-behaviour delay change already identified), TV power behaviour, and its four-decoder chain — before equivalent effort is spread across other rooms.</li>
+<li><strong class="k">Manage flashing as one programme.</strong> One title taxonomy, one mitigation, one tracked burn-down — reviewed against the morning flash checks until they run clean, instead of a fresh case per morning.</li>
+<li><strong class="k">Triage the 41 active cases weekly, oldest first.</strong> Each gets an explicit close-or-observe decision; the November “Open” batch in particular should not age silently.</li>
+<li><strong class="k">Standardise the intake fields.</strong> A fixed Location list (SM-11-01…08 plus campus options), one definition for closed (merge “Done” into “Resolved”, or define the difference), and a controlled Case Title list. Location alone is currently written in at least six spellings for the same room, which is what makes reports like this one need manual normalisation.</li>
+<li><strong class="k">Retire or rebuild the in-workbook dashboards.</strong> Publish from the case list (as this page does) so the headline numbers can never drift a whole era behind the data again.</li>
+<li><strong class="k">Set a rate trigger.</strong> If daily intake stays above ~3 cases/day, escalate from per-case handling to a fleet-level review (firmware state, power schedule, panel behaviour) — November's rate already crosses that line.</li>
+</ol>
+</section>
+
+<section class="card"><h2>🧾 Data &amp; method</h2>
+<div class="note"><strong>Source.</strong> USS_Case_Report_Inbox workbook (SharePoint, ITSC intranet), “Case Reports” sheet, read read-only on 14 Nov 2026. The workbook table holds 121 rows including one blank row; <strong>120 substantive cases</strong> are analysed, dated by Reported Date/Time (5 Aug – 14 Nov 2026).</div>
+<div class="note"><strong>Normalisation.</strong> Locations were normalised from free text to rooms: the same room appears as “Shek Mun Room 1”, “SM1101”, “SM-11-01” and more. One case covers both Room 5 and Room 6 and is counted once in each room's bar, so room bars sum to 108 counts over 107 distinct room cases; the remaining 13 cases are campus/shared locations. Device counts use the workbook's own keyword formulas (TV Power-On / Signal Device / TV Restart counts); a case can score in more than one class.</div>
+<div class="warn"><strong>Privacy.</strong> Published figures are statistics only. Reporter names (Reported By) and the free-text Case Description are excluded; case titles are published only as aggregate counts of recurring titles.</div>
+</section>
+
+<p class="foot">Case Analysis · ShekMun Campus · Remote Campus · Support Portal. Data snapshot 14 Nov 2026; this page is a static analysis, refreshed when a new analysis is commissioned. See also the <a href="shekmun-campus.html">SOP</a> and <a href="shekmun-case-handling.html">Case Handling for Known Issues</a>.</p>
+</main>
+<script>
+const PALETTE = ["#3730a3","#0057ff","#ff4d00","#00a651","#9333ea","#e6007e","#00acc1"];
+if (window.Chart) {
+Chart.defaults.font.family = '"Segoe UI",system-ui,-apple-system,sans-serif';
+new Chart(document.getElementById("chMonth"), {type:"bar", data:{labels:["Aug 2026","Sep 2026","Oct 2026","Nov 2026 (1–14)"], datasets:[{label:"Cases", data:[14,42,19,45], backgroundColor:["#3730a3","#3730a3","#3730a3","#ff4d00"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, title:{display:true, text:"Cases"}}}}});
+new Chart(document.getElementById("chCat"), {type:"doughnut", data:{labels:["Classroom – Display","Software","PC Hardware","System","User Guide","User Training","Event support"], datasets:[{data:[105,5,5,2,1,1,1], backgroundColor:PALETTE}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"right", labels:{boxWidth:12, font:{size:11.5}}}}}});
+new Chart(document.getElementById("chRoom"), {type:"bar", data:{labels:["Room 1","Room 2","Room 3","Room 4","Room 5","Room 6","Room 7","Room 8"], datasets:[{label:"Cases", data:[43,23,12,7,3,1,9,10], backgroundColor:["#dc2626","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3"]}]}, options:{indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, title:{display:true, text:"Cases"}}}}});
+new Chart(document.getElementById("chStatus"), {type:"doughnut", data:{labels:["Resolved","Done","In Progress","Observation","Open"], datasets:[{data:[69,10,23,8,10], backgroundColor:["#00a651","#00acc1","#ff4d00","#9333ea","#dc2626"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"right", labels:{boxWidth:12, font:{size:11.5}}}}}});
+new Chart(document.getElementById("chDevice"), {type:"bar", data:{labels:["Signal (encoder/decoder)","TV power-on","TV restart"], datasets:[{label:"Device counts", data:[25,14,14], backgroundColor:["#0057ff","#3730a3","#9333ea"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, title:{display:true, text:"Device counts"}}}}});
+}
+</script>
+</body>
+</html>

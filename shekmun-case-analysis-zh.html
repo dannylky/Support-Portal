@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>案例分析 — USS 案例報告 · 石門校園 · Support Portal</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;margin:0;background:#f1f5f9;color:#0f172a}
+.hero{background:linear-gradient(120deg,#0f172a,#1e1b4b 55%,#155e75);color:#fff;padding:38px 20px 28px}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+.hero h1{margin:0 0 8px;font-size:29px;letter-spacing:-.02em}
+.hero .sub{opacity:.88;line-height:1.6;max-width:880px}
+.hero a{color:#a5f3fc}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.meta span{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.meta span.langsw{background:none;border:none;padding:0;display:flex;gap:6px;margin-left:auto}
+.langsw a{color:#fff;text-decoration:none;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.35);padding:4px 13px;border-radius:999px;font-size:13px;font-weight:700}
+.langsw a.on{background:#facc15;color:#0f172a;border-color:#facc15}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 4px}
+.kpi{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:16px 18px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.kpi .v{font-size:27px;font-weight:800;color:#1e1b4b;letter-spacing:-.02em}
+.kpi .l{font-size:12.5px;font-weight:700;color:#64748b;letter-spacing:.03em;margin-top:3px;line-height:1.45}
+.kpi.hot .v{color:#b91c1c}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:22px 24px;margin:16px 0;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+.card h2{margin:0 0 6px;font-size:19px}
+.card p{line-height:1.65;color:#1f2937;margin:6px 0}
+.card ol,.card ul{line-height:1.7;color:#1f2937;margin:6px 0 6px 20px;padding:0}
+.card li{margin:5px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px}
+.grid2 .card{margin:0}
+.chartbox{position:relative;height:260px;margin-top:10px}
+.chartbox.tall{height:300px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #e2e8f0;line-height:1.5}
+th{font-size:12px;letter-spacing:.05em;color:#64748b}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.note{background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:12px 16px;line-height:1.65;font-size:14px;color:#334155;margin:12px 0}
+.warn{background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:12px 16px;line-height:1.65;font-size:14px;color:#713f12;margin:12px 0}
+.foot{color:#64748b;font-size:13px;line-height:1.6;padding:8px 0 46px}
+.foot a{color:#3730a3}
+strong.k{color:#1e1b4b}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+<h1>📊 石門校園 — 案例分析</h1>
+<div class="sub">石門課室 USS 案例報告嘅專業分析：邊度出問題、集中喺邊、工作量走勢點、以及應該點處理。所有數字都係由來源工作簿 <strong>USS_Case_Report_Inbox</strong>（SharePoint，ITSC 內聯網）嘅案例清單重新計算，於 2026 年 11 月 14 日讀取。配套頁面：<a href="shekmun-campus-zh.html">標準操作程序</a>及<a href="shekmun-case-handling-zh.html">已知問題處理手冊</a>。<a href="remote-campus-zh.html">← 遙距校園</a></div>
+<div class="meta"><span>120 宗案例</span><span>2026 年 8 月 5 日 – 11 月 14 日</span><span>基準：呈報日期／時間</span><span>只刊統計 — 不含呈報人姓名及案例描述</span><span class="langsw"><a href="shekmun-case-analysis.html">English</a><a class="on" href="shekmun-case-analysis-zh.html">繁體中文</a></span></div>
+</div></header>
+<main class="wrap">
+<div class="kpis">
+<div class="kpi"><div class="v">120</div><div class="l">分析案例總數</div></div>
+<div class="kpi hot"><div class="v">87.5%</div><div class="l">課室顯示類（120 宗中 105 宗）</div></div>
+<div class="kpi hot"><div class="v">43</div><div class="l">房 1 案例 · 佔總數 35.8%</div></div>
+<div class="kpi"><div class="v">12</div><div class="l">單日高峰 · 2026 年 11 月 6 日</div></div>
+<div class="kpi"><div class="v">65.8%</div><div class="l">已關閉（已解決 + 已完成 · 79 宗）</div></div>
+<div class="kpi hot"><div class="v">41</div><div class="l">仍然處理中 · 34.2%</div></div>
+</div>
+
+<div class="grid2" style="margin-top:16px">
+<section class="card"><h2>📅 每月案例量</h2>
+<div class="chartbox"><canvas id="chMonth"></canvas></div>
+<p>11 月只係<strong class="k">半個月（11 月 1–14 日）</strong>已經係最大月份：14 日 45 宗（約每日 3.2 宗），對比 10 月成個月 19 宗（約每日 0.6 宗）— 速率升咗五倍。9 月（42 宗）係之前嘅高峰。</p>
+</section>
+<section class="card"><h2>🗂️ 按類別</h2>
+<div class="chartbox"><canvas id="chCat"></canvas></div>
+<p>一個類別佔絕大多數：<strong class="k">課室 — 顯示，105 宗（87.5%）</strong>。軟件同 PC 硬件各 5 宗；系統 2 宗；用戶指南、用戶培訓同活動支援各 1 宗。呢批係 AV 顯示鏈嘅個案量，唔係一般 IT 支援嘅形態。</p>
+</section>
+</div>
+
+<div class="grid2" style="margin-top:16px">
+<section class="card"><h2>🏫 按房間</h2>
+<div class="chartbox tall"><canvas id="chRoom"></canvas></div>
+<p><strong class="k">房 1 一間就佔 43 宗（35.8%）</strong>；房 1 加房 2 合共 66 宗（55%）。另有 13 宗屬於校園或共用位置（11 樓、講台、「所有課室」）。位置係由自由文字正規化得出 — 見「數據與方法」。</p>
+</section>
+<section class="card"><h2>📌 狀態分佈</h2>
+<div class="chartbox"><canvas id="chStatus"></canvas></div>
+<p>已解決 69 宗加已完成 10 宗，<strong class="k">關閉率 65.8%</strong>。其餘 <strong class="k">41 宗（34.2%）</strong>係處理中（23）、觀察中（8）或開啟（10）。值得留意：「開啟」呢個狀態只由 11 月開始出現 — 待處理隊列增長得快過清理速度。</p>
+</section>
+</div>
+
+<div class="grid2" style="margin-top:16px">
+<section class="card"><h2>🔌 按裝置事故類型</h2>
+<div class="chartbox"><canvas id="chDevice"></canvas></div>
+<p>以工作簿本身嘅關鍵字公式喺標題同描述上計算（一宗案例可以同時計入多於一類）：<strong class="k">信號事故以 25 宗裝置計數領先</strong>，高過電視開機（14）同電視重啟（14）。信號路徑 — 編碼器／解碼器 — 產生嘅裝置事故，比電視電源行為更多。</p>
+</section>
+<section class="card"><h2>🔁 最常重複嘅案例標題</h2>
+<table>
+<tr><th>案例標題</th><th class="n">宗數</th><th class="n">佔比</th></tr>
+<tr><td>System ON Light Flashing</td><td class="n">26</td><td class="n">21.7%</td></tr>
+<tr><td>System ON Feedback Flashing</td><td class="n">3</td><td class="n">2.5%</td></tr>
+<tr><td>Decoder No Signal Restored</td><td class="n">3</td><td class="n">2.5%</td></tr>
+<tr><td>TV1 Unexpected Restart</td><td class="n">3</td><td class="n">2.5%</td></tr>
+<tr><td>其他標題（每個 1–2 宗）</td><td class="n">85</td><td class="n">70.8%</td></tr>
+</table>
+<p>兩個閃爍標題其實係同一現象：<strong class="k">合共 29 宗（24.2%）</strong> — 成個收件箱最大嘅單一重複主題，同處理手冊案例 1 處理嘅早上控制板閃爍模式吻合。</p>
+</section>
+</div>
+
+<section class="card"><h2>🔍 觀察</h2>
+<ol>
+<li><strong class="k">問題集中喺顯示鏈。</strong>120 宗入面 105 宗（87.5%）係課室 — 顯示；其他所有類別加埋得 15 宗。資源同根源分析應該投放喺 AVoIP 顯示路徑 — 控制板、解碼器、電視同佢哋嘅電源／信號行為 — 而唔係一般課室 IT。</li>
+<li><strong class="k">房 1 係明顯熱點。</strong>43 宗（35.8%），接近房 2（23 宗）嘅兩倍。房 1 同時係最大嘅房（四部電視），又係控制板閃爍嘅重複房間，暴露面同故障率喺嗰度疊加。</li>
+<li><strong class="k">閃爍係最大嘅單一重複主題。</strong>29 宗（24.2%）分兩個標題，講嘅係同一個 System ON 閃爍現象。當佢係一個計劃而唔係 29 宗獨立事故咁睇，佢係數據入面最清晰嘅緩解目標。</li>
+<li><strong class="k">11 月係階梯式變化，唔係漸變。</strong>14 日 45 宗（約每日 3.2 宗），對比 10 月 31 日 19 宗（約每日 0.6 宗）；單日高峰 11 月 6 日一日就有 12 宗 — 佔成段時期個案量一成。11 月初有啲嘢改變咗（學期負荷、早上開機模式、呈報習慣），數據本身分辨唔到邊個原因 — 但速率本身冇歧義。</li>
+<li><strong class="k">待處理隊列係運作風險。</strong>41 宗（34.2%）仍然係處理中、觀察中或開啟，而「開啟」只由 11 月開始出現。就算底層故障大多輕微，一個冇人覆核嘅隊列會埋藏少數嚴重個案。</li>
+<li><strong class="k">信號多過電源。</strong>信號裝置計數（25）高過電視開機（14）同電視重啟（14），編碼器／解碼器嘅信號穩定性，值得至少同電視電源行為同等重視 — 工作簿 10 月診斷頁對該月亦得出相同排序。</li>
+<li><strong class="k">工作簿自身嘅儀表板已經唔再描述佢嘅數據。</strong>舊儀表板嘅結論文字段落仲講緊 57 宗案例同單日高峰 6 宗；10 月專用診斷頁嘅每日表又壞咗（#N/A）。今日睇嗰兩張表會被誤導 — 本頁數字係由案例清單本身重新計算。</li>
+</ol>
+</section>
+
+<section class="card"><h2>✅ 建議</h2>
+<ol>
+<li><strong class="k">房 1 以根源計劃方式處理。</strong>佔總數三分之一以上，房 1 應該第一個做專門覆核：控制板閃爍緩解（已識別嘅解碼器顯示行為延遲調整）、電視電源行為、同佢四部解碼器條鏈 — 先做呢間，先好將同等力度分散去其他房。</li>
+<li><strong class="k">閃爍當一個計劃管理。</strong>一個標題分類、一個緩解措施、一條追蹤清單 — 以早上閃爍檢查做覆核基準，直至連續乾淨為止，而唔係每個早上開一宗新案例。</li>
+<li><strong class="k">41 宗處理中案例每週分流，最舊先處理。</strong>每宗都要有一個明確嘅關閉或觀察決定；11 月嗰批「開啟」尤其唔應該靜靜老化。</li>
+<li><strong class="k">統一輸入欄位。</strong>位置用固定清單（SM-11-01…08 加校園選項）、關閉狀態一個定義（將「已完成」併入「已解決」，或者寫明兩者分別）、案例標題用受控清單。而家同一個房間嘅位置寫法至少有六種，呢個正係本頁呢類報告需要人手正規化嘅原因。</li>
+<li><strong class="k">停用或重建工作簿入面嘅儀表板。</strong>改由案例清單直接發佈（好似本頁咁），標題數字就唔會再落後成個時代。</li>
+<li><strong class="k">設定速率觸發線。</strong>如果每日入件量持續高過約 3 宗，就由逐宗處理升級做全隊覆核（韌體狀態、電源時間表、控制板行為）— 11 月嘅速率已經過咗呢條線。</li>
+</ol>
+</section>
+
+<section class="card"><h2>🧾 數據與方法</h2>
+<div class="note"><strong>來源。</strong>USS_Case_Report_Inbox 工作簿（SharePoint，ITSC 內聯網）「Case Reports」工作表，於 2026 年 11 月 14 日唯讀讀取。工作簿表格有 121 行，包括一行空白；實際分析 <strong>120 宗案例</strong>，以呈報日期／時間為準（2026 年 8 月 5 日 – 11 月 14 日）。</div>
+<div class="note"><strong>正規化。</strong>位置由自由文字正規化到房間：同一個房間出現過「Shek Mun Room 1」、「SM1101」、「SM-11-01」等多種寫法。有一宗案例同時涵蓋房 5 同房 6，喺兩間房嘅柱各自計一次，所以房間柱合計 108 個計數、涵蓋 107 宗房間案例；其餘 13 宗屬校園／共用位置。裝置計數用工作簿本身嘅關鍵字公式（電視開機／信號裝置／電視重啟計數）；一宗案例可以同時計入多於一類。</div>
+<div class="warn"><strong>私隱。</strong>刊出嘅只係統計數字。呈報人姓名（Reported By）同自由文字嘅案例描述唔會刊出；案例標題只以重複標題嘅合計數量刊出。</div>
+</section>
+
+<p class="foot">案例分析 · 石門校園 · 遙距校園 · Support Portal。數據快照 2026 年 11 月 14 日；本頁係靜態分析，有新分析委託時先更新。另見<a href="shekmun-campus-zh.html">標準操作程序</a>及<a href="shekmun-case-handling-zh.html">已知問題處理手冊</a>。</p>
+</main>
+<script>
+const PALETTE = ["#3730a3","#0057ff","#ff4d00","#00a651","#9333ea","#e6007e","#00acc1"];
+if (window.Chart) {
+Chart.defaults.font.family = '"Segoe UI",system-ui,-apple-system,sans-serif';
+new Chart(document.getElementById("chMonth"), {type:"bar", data:{labels:["2026 年 8 月","2026 年 9 月","2026 年 10 月","2026 年 11 月（1–14 日）"], datasets:[{label:"案例", data:[14,42,19,45], backgroundColor:["#3730a3","#3730a3","#3730a3","#ff4d00"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, title:{display:true, text:"宗數"}}}}});
+new Chart(document.getElementById("chCat"), {type:"doughnut", data:{labels:["課室 — 顯示","軟件","PC 硬件","系統","用戶指南","用戶培訓","活動支援"], datasets:[{data:[105,5,5,2,1,1,1], backgroundColor:PALETTE}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"right", labels:{boxWidth:12, font:{size:11.5}}}}}});
+new Chart(document.getElementById("chRoom"), {type:"bar", data:{labels:["房 1","房 2","房 3","房 4","房 5","房 6","房 7","房 8"], datasets:[{label:"案例", data:[43,23,12,7,3,1,9,10], backgroundColor:["#dc2626","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3"]}]}, options:{indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, title:{display:true, text:"宗數"}}}}});
+new Chart(document.getElementById("chStatus"), {type:"doughnut", data:{labels:["已解決","已完成","處理中","觀察中","開啟"], datasets:[{data:[69,10,23,8,10], backgroundColor:["#00a651","#00acc1","#ff4d00","#9333ea","#dc2626"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"right", labels:{boxWidth:12, font:{size:11.5}}}}}});
+new Chart(document.getElementById("chDevice"), {type:"bar", data:{labels:["信號（編碼器／解碼器）","電視開機","電視重啟"], datasets:[{label:"裝置計數", data:[25,14,14], backgroundColor:["#0057ff","#3730a3","#9333ea"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, title:{display:true, text:"裝置計數"}}}}});
+}
+</script>
+</body>
+</html>
