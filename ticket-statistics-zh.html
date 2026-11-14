@@ -119,8 +119,8 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 <body>
 <header class="hero"><div class="wrap">
 <h1>🎫 工單統計</h1>
-<div class="sub">ITSC 團隊工單表格 · 2026–27 第一學期 — 互動統計，數據來自工單工作簿的 Sheet1。用篩選器按月份、類別等切分數據，或用雙月比較查看最近兩個月的變化。所有圖表與數字會同步更新。</div>
-<div class="toplinks"><a href="index.html">← Support Portal 首頁</a><a href="change-log-zh.html">📋 更新日誌</a><a href="ticket-statistics.html">🌐 English</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 深色模式</button><span class="verpill">版本 v1.18</span><span class="upd">更新日期 2026年11月13日 · 每日 20:00 HKT 刷新</span></div>
+<div class="sub">ITSC 團隊工單表格 · 2026–27 第一學期 — 互動統計，數據來自工單工作簿的 Sheet1。用篩選器按月份、類別等切分數據，或用多月比較（2–6 個月）查看各月之間的變化。所有圖表與數字會同步更新。</div>
+<div class="toplinks"><a href="index.html">← Support Portal 首頁</a><a href="change-log-zh.html">📋 更新日誌</a><a href="ticket-statistics.html">🌐 English</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 深色模式</button><span class="verpill">版本 v1.19</span><span class="upd">更新日期 2026年11月14日 · 每日 20:00 HKT 刷新</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">個案總數（已篩選）</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">已解決比率</div></div>
@@ -149,22 +149,27 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 
 <section class="compare-shell" aria-labelledby="compareTitle">
 <div class="compare-top">
-<div><h2 id="compareTitle">🔁 最近兩個月比較</h2><p class="hint">並排比較任意兩個月份，預設為數據中最近的兩個月。此面板跟隨上方的類別、嚴重程度、大樓、渠道、申請人、同事及狀態篩選，但忽略主「月份」篩選，讓所選兩個月可以直接比較。</p></div>
+<div><h2 id="compareTitle">🔁 多月比較（2–6 個月）</h2><p class="hint">並排比較 2 至 6 個月 — 先選比較月數，再逐個揀月份，預設為數據中最近的兩個月。此面板跟隨上方的類別、嚴重程度、大樓、渠道、申請人、同事及狀態篩選，但忽略主「月份」篩選，讓所選月份可以直接比較。</p></div>
 <div class="compare-controls">
-<div class="fgroup"><label for="cmpA">比較月份 A</label><select id="cmpA"></select></div>
-<div class="fgroup"><label for="cmpB">與月份 B</label><select id="cmpB"></select></div>
-<button class="reset" id="btnRecent" type="button">最近兩個月</button>
+<div class="fgroup"><label for="cmpCount">比較月數</label><select id="cmpCount"></select></div>
+<div class="fgroup" id="cmpG0"><label for="cmpM0">月份 1</label><select id="cmpM0"></select></div>
+<div class="fgroup" id="cmpG1"><label for="cmpM1">月份 2</label><select id="cmpM1"></select></div>
+<div class="fgroup" id="cmpG2"><label for="cmpM2">月份 3</label><select id="cmpM2"></select></div>
+<div class="fgroup" id="cmpG3"><label for="cmpM3">月份 4</label><select id="cmpM3"></select></div>
+<div class="fgroup" id="cmpG4"><label for="cmpM4">月份 5</label><select id="cmpM4"></select></div>
+<div class="fgroup" id="cmpG5"><label for="cmpM5">月份 6</label><select id="cmpM5"></select></div>
+<button class="reset" id="btnRecent" type="button">最近月份</button>
 </div>
 </div>
 <div class="compare-note" id="cmpNote"></div>
 <div class="compare-insight" id="cmpInsight"></div>
-<div class="compare-table"><table><thead><tr><th>指標</th><th id="cmpHeadA">Month A</th><th id="cmpHeadB">Month B</th><th>變化 (B − A)</th></tr></thead><tbody id="cmpBody"></tbody></table></div>
+<div class="compare-table"><table><thead><tr id="cmpHeadRow"></tr></thead><tbody id="cmpBody"></tbody></table></div>
 <div class="compare-charts">
-<section class="card"><h2>類別比較</h2><p class="hint">所選兩個月按類別劃分的個案數。</p><div class="chartbox xl"><canvas id="cCmpCat"></canvas></div></section>
-<section class="card"><h2>每日走勢比較</h2><p class="hint">按每月第幾日對齊的個案數，方便比較兩個月的節奏。</p><div class="chartbox tall"><canvas id="cCmpDaily"></canvas></div></section>
+<section class="card"><h2>類別比較</h2><p class="hint">所選各月按類別劃分的個案數。</p><div class="chartbox xl"><canvas id="cCmpCat"></canvas></div></section>
+<section class="card"><h2>每日走勢比較</h2><p class="hint">按每月第幾日對齊的個案數，方便比較所選月份的節奏。</p><div class="chartbox tall"><canvas id="cCmpDaily"></canvas></div></section>
 </div>
-<h2 style="margin-top:20px">類別變化最大</h2><p class="hint">所選兩個月之間絕對變化最大的類別。</p>
-<div class="compare-table"><table><thead><tr><th>類別</th><th id="chgHeadA">Month A</th><th id="chgHeadB">Month B</th><th>變化</th><th>變化 %</th></tr></thead><tbody id="cmpChanges"></tbody></table></div>
+<h2 style="margin-top:20px">類別變化最大</h2><p class="hint">所選首月與尾月之間絕對變化最大的類別。</p>
+<div class="compare-table"><table><thead><tr id="chgHeadRow"></tr></thead><tbody id="cmpChanges"></tbody></table></div>
 </section>
 
 <div class="grid">
@@ -195,7 +200,7 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 
 <section class="card wide"><h2>⏱️ 處理時間分佈</h2><p class="hint">按時間段分組的個案處理時長（Duration Use [Mins]），跟隨上方主篩選。</p><div class="chartbox"><canvas id="cDur"></canvas></div></section>
 </div>
-<p class="foot">關於本頁：統計由瀏覽器即時計算，數據來自「ITSC team ticket form (26-27 Semester 1).xlsx」Sheet1 記錄的 299 宗個案（2026年9月1日 – 2026年11月12日），最後讀取日期 2026年11月13日。每次刷新都會與工作簿自身的 Dashboard 交叉核對：共 299 宗 · 298 已解決 + 1 處理中（99.7%）· 142 宗事故 · 平均處理時間 25.2 分鐘 — 全部吻合。本頁只發佈統計欄位；不包括表格中的報告人電郵、姓名及自由文字詳情。兩個類別標籤在試算表檢視時被寬度截斷（「Classroom - System po…」），本頁顯示為「Classroom - System power」。「Classroom - Touch Pane」按表格原文刊出。完整版本歷史：<a href="change-log-zh.html">更新日誌</a>。</p>
+<p class="foot">關於本頁：統計由瀏覽器即時計算，數據來自「ITSC team ticket form (26-27 Semester 1).xlsx」Sheet1 記錄的 299 宗個案（2026年9月1日 – 2026年11月12日），最後讀取日期 2026年11月14日。每次刷新都會與工作簿自身的 Dashboard 交叉核對：共 299 宗 · 298 已解決 + 1 處理中（99.7%）· 142 宗事故 · 平均處理時間 25.2 分鐘 — 全部吻合。本頁只發佈統計欄位；不包括表格中的報告人電郵、姓名及自由文字詳情。兩個類別標籤在試算表檢視時被寬度截斷（「Classroom - System po…」），本頁顯示為「Classroom - System power」。「Classroom - Touch Pane」按表格原文刊出。完整版本歷史：<a href="change-log-zh.html">更新日誌</a>。</p>
 </main>
 
 <script>
@@ -219,10 +224,15 @@ const MONTHS_CHRON = [...new Set(DATA.map(r=>r.m))].sort((a,b)=>{
   const db = DATA.filter(r=>r.m===b).map(r=>r.d).sort()[0];
   return da < db ? -1 : 1;
 });
-fillSelect($("cmpA"), MONTHS_CHRON);
-fillSelect($("cmpB"), MONTHS_CHRON);
-$("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)];
-$("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1];
+const CMP_COLORS = ["#0057ff","#ff4d00","#00a651","#9333ea","#e6007e","#00acc1"];
+const CMP_MAX = Math.min(6, MONTHS_CHRON.length);
+for(let i=0;i<6;i++) fillSelect($("cmpM"+i), MONTHS_CHRON);
+fillSelect($("cmpCount"), Array.from({length:Math.max(0,CMP_MAX-1)}, (_,i)=>String(i+2)));
+$("cmpCount").value = "2";
+function cmpN(){ return parseInt($("cmpCount").value, 10) || 2; }
+function cmpRecent(){ const n = cmpN(); const recent = MONTHS_CHRON.slice(-n); for(let i=0;i<6;i++){ if(i<n) $("cmpM"+i).value = recent[i]; $("cmpG"+i).style.display = i<n ? "" : "none"; } }
+function cmpMonths(){ const out = []; for(let i=0;i<cmpN();i++) out.push($("cmpM"+i).value); return out; }
+cmpRecent();
 function current(){ return DATA.filter(r =>
   (!$("fMonth").value || r.m === $("fMonth").value) &&
   (!$("fCat").value || r.cat === $("fCat").value) &&
@@ -259,44 +269,41 @@ function pctText(a, b){ if(a === 0) return b === 0 ? "0.0%" : "新"; return fmtD
 function deltaClass(value){ return value > 0 ? "delta-up" : (value < 0 ? "delta-down" : "delta-flat"); }
 function metricDeltaClass(value, goodWhenDown){ if(value === 0) return "delta-flat"; const good = goodWhenDown ? value < 0 : value > 0; return good ? "delta-down" : "delta-up"; }
 function renderComparison(){
-  const aMonth = $("cmpA").value, bMonth = $("cmpB").value;
-  const aRows = comparisonRows(aMonth), bRows = comparisonRows(bMonth);
-  const A = monthStats(aRows), B = monthStats(bRows);
-  $("cmpHeadA").textContent = aMonth; $("cmpHeadB").textContent = bMonth;
-  $("chgHeadA").textContent = aMonth; $("chgHeadB").textContent = bMonth;
-  $("cmpNote").innerHTML = aMonth === bMonth
-    ? "⚠️ 選了同一個月份兩次，所有變化都是零。請選兩個不同月份作比較。"
-    : "<strong>" + bMonth + " 與 " + aMonth + " 比較：</strong>" + B.total + " 宗，對比 " + A.total + " 宗（" + fmtDelta(B.total-A.total, "", 0) + "，" + pctText(A.total, B.total) + "）。最新月份尚未完結，比較總數時請視為月至今。";
+  const months = cmpMonths();
+  const rowsArr = months.map(comparisonRows);
+  const stats = rowsArr.map(monthStats);
+  const A = stats[0], B = stats[stats.length - 1];
+  const aMonth = months[0], bMonth = months[months.length - 1];
+  $("cmpHeadRow").innerHTML = "<th>\u6307\u6a19</th>" + months.map(m=>"<th>" + m + "</th>").join("") + "<th>\u8b8a\u5316\uff08\u5c3e\u6708 \u2212 \u9996\u6708\uff09</th>";
+  $("chgHeadRow").innerHTML = "<th>\u985e\u5225</th>" + months.map(m=>"<th>" + m + "</th>").join("") + "<th>\u8b8a\u5316</th><th>\u8b8a\u5316 %</th>";
+  const dup = new Set(months).size !== months.length;
+  $("cmpNote").innerHTML = dup
+    ? "\u26a0\ufe0f \u540c\u4e00\u500b\u6708\u4efd\u88ab\u9078\u4e86\u8d85\u904e\u4e00\u6b21\u3002\u8acb\u9078\u4e0d\u540c\u6708\u4efd\u4f5c\u6bd4\u8f03\u3002"
+    : "<strong>" + bMonth + " \u8207 " + aMonth + " \u6bd4\u8f03\uff1a</strong>" + B.total + " \u5b97\uff0c\u5c0d\u6bd4 " + A.total + " \u5b97\uff08" + fmtDelta(B.total-A.total, "", 0) + "\uff0c" + pctText(A.total, B.total) + "\uff09\uff0c\u5171\u6bd4\u8f03 " + months.length + " \u500b\u6708\uff08" + months.join("\u3001") + "\uff09\u3002\u6700\u65b0\u6708\u4efd\u53ef\u80fd\u5c1a\u672a\u5b8c\u7d50\uff0c\u6bd4\u8f03\u7e3d\u6578\u6642\u8acb\u8996\u70ba\u6708\u81f3\u4eca\u3002";
   const metricRows = [
-    ["個案總數", A.total.toFixed(0), B.total.toFixed(0), B.total-A.total, "", 0, pctText(A.total,B.total), true],
-    ["已解決比率", A.resolvedRate.toFixed(1)+"%", B.resolvedRate.toFixed(1)+"%", B.resolvedRate-A.resolvedRate, " pp", 1, "", false],
-    ["事故", A.incidents.toFixed(0), B.incidents.toFixed(0), B.incidents-A.incidents, "", 0, pctText(A.incidents,B.incidents), true],
-    ["事故佔比", A.incidentShare.toFixed(1)+"%", B.incidentShare.toFixed(1)+"%", B.incidentShare-A.incidentShare, " pp", 1, "", true],
-    ["平均處理時間", A.avg.toFixed(1)+" 分鐘", B.avg.toFixed(1)+" 分鐘", B.avg-A.avg, " 分鐘", 1, pctText(A.avg,B.avg), true],
-    ["總處理時間", A.hours.toFixed(1)+" 小時", B.hours.toFixed(1)+" 小時", B.hours-A.hours, " 小時", 1, pctText(A.hours,B.hours), true]
+    ["\u500b\u6848\u7e3d\u6578", stats.map(s=>s.total.toFixed(0)), B.total-A.total, "", 0, pctText(A.total,B.total), true],
+    ["\u5df2\u89e3\u6c7a\u6bd4\u7387", stats.map(s=>s.resolvedRate.toFixed(1)+"%"), B.resolvedRate-A.resolvedRate, " pp", 1, "", false],
+    ["\u4e8b\u6545", stats.map(s=>s.incidents.toFixed(0)), B.incidents-A.incidents, "", 0, pctText(A.incidents,B.incidents), true],
+    ["\u4e8b\u6545\u4f54\u6bd4", stats.map(s=>s.incidentShare.toFixed(1)+"%"), B.incidentShare-A.incidentShare, " pp", 1, "", true],
+    ["\u5e73\u5747\u8655\u7406\u6642\u9593", stats.map(s=>s.avg.toFixed(1)+" \u5206\u9418"), B.avg-A.avg, " \u5206\u9418", 1, pctText(A.avg,B.avg), true],
+    ["\u7e3d\u8655\u7406\u6642\u9593", stats.map(s=>s.hours.toFixed(1)+" \u5c0f\u6642"), B.hours-A.hours, " \u5c0f\u6642", 1, pctText(A.hours,B.hours), true]
   ];
-  $("cmpBody").innerHTML = metricRows.map(r=>"<tr><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + "</td><td class=\"" + metricDeltaClass(r[3], r[7]) + "\">" + fmtDelta(r[3], r[4], r[5]) + (r[6] ? " (" + r[6] + ")" : "") + "</td></tr>").join("");
-  const aCats = new Map(counter(aRows, r=>r.cat)), bCats = new Map(counter(bRows, r=>r.cat));
-  const catLabels = [...new Set([...aCats.keys(), ...bCats.keys()])].sort((x,y)=>((bCats.get(y)||0)+(aCats.get(y)||0))-((bCats.get(x)||0)+(aCats.get(x)||0)));
+  $("cmpBody").innerHTML = metricRows.map(r=>"<tr><td>" + r[0] + "</td>" + r[1].map(v=>"<td>" + v + "</td>").join("") + "<td class=\"" + metricDeltaClass(r[2], r[6]) + "\">" + fmtDelta(r[2], r[3], r[4]) + (r[5] ? " (" + r[5] + ")" : "") + "</td></tr>").join("");
+  const catMaps = rowsArr.map(rows=>new Map(counter(rows, r=>r.cat)));
+  const catLabels = [...new Set(catMaps.flatMap(mp=>[...mp.keys()]))].sort((x,y)=>catMaps.reduce((s,mp)=>s+(mp.get(y)||0),0)-catMaps.reduce((s,mp)=>s+(mp.get(x)||0),0));
   const shortCat = k => ({ "Equipment - (Visualizer/Writing Pad/PTZ cam/Monitor)":"Equipment - (Visualizer/PTZ cam/Monitor)", "Online Meeting/Teaching Tools (MS Teams, Zoom, etc...)":"Online Meeting / Teaching Tools", "HSUHK Application (Moodle / Ecampus / VeriGuide / HSU App)":"HSUHK Application" })[k] || k;
-  makeChart("cCmpCat", { type:"bar", data:{ labels:catLabels.map(shortCat), datasets:[
-    { label:aMonth, data:catLabels.map(k=>aCats.get(k)||0), backgroundColor:"#0057ff", borderColor:"#003ec2", borderWidth:1, borderRadius:5 },
-    { label:bMonth, data:catLabels.map(k=>bCats.get(k)||0), backgroundColor:"#ff4d00", borderColor:"#d63d00", borderWidth:1, borderRadius:5 }
-  ]}, options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ x:{ ticks:{ precision:0 } }, y:{ ticks:{ autoSkip:false, font:{ size:11 } } } } } });
+  makeChart("cCmpCat", { type:"bar", data:{ labels:catLabels.map(shortCat), datasets:months.map((m,i)=>({ label:m, data:catLabels.map(k=>catMaps[i].get(k)||0), backgroundColor:CMP_COLORS[i], borderColor:CMP_COLORS[i], borderWidth:1, borderRadius:5 })) }, options:{ indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ x:{ ticks:{ precision:0 } }, y:{ ticks:{ autoSkip:false, font:{ size:11 } } } } } });
   const dayLabels = Array.from({length:31}, (_,i)=>String(i+1));
   function byDayOfMonth(rows){ const arr = Array(31).fill(0); rows.forEach(r=>{ arr[parseInt(r.d.slice(8,10),10)-1]++; }); return arr; }
-  makeChart("cCmpDaily", { type:"line", data:{ labels:dayLabels, datasets:[
-    { label:aMonth, data:byDayOfMonth(aRows), borderColor:"#0057ff", backgroundColor:"rgba(0,87,255,.16)", fill:true, tension:.3, borderWidth:3, pointRadius:3, pointBackgroundColor:"#0057ff" },
-    { label:bMonth, data:byDayOfMonth(bRows), borderColor:"#ff4d00", backgroundColor:"rgba(255,77,0,.16)", fill:true, tension:.3, borderWidth:3, pointRadius:3, pointBackgroundColor:"#ff4d00" }
-  ]}, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ ticks:{ precision:0 } } } } });
-  const allChanges = catLabels.map(k=>({ cat:k, a:aCats.get(k)||0, b:bCats.get(k)||0, d:(bCats.get(k)||0)-(aCats.get(k)||0) }));
+  makeChart("cCmpDaily", { type:"line", data:{ labels:dayLabels, datasets:months.map((m,i)=>({ label:m, data:byDayOfMonth(rowsArr[i]), borderColor:CMP_COLORS[i], backgroundColor:CMP_COLORS[i]+"1f", fill:true, tension:.3, borderWidth:3, pointRadius:3, pointBackgroundColor:CMP_COLORS[i] })) }, options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ position:"bottom" } }, scales:{ y:{ ticks:{ precision:0 } } } } });
+  const allChanges = catLabels.map(k=>({ cat:k, vals:catMaps.map(mp=>mp.get(k)||0), a:catMaps[0].get(k)||0, b:catMaps[catMaps.length-1].get(k)||0, d:(catMaps[catMaps.length-1].get(k)||0)-(catMaps[0].get(k)||0) }));
   const rise = allChanges.filter(r=>r.d>0).sort((x,y)=>y.d-x.d)[0];
   const fall = allChanges.filter(r=>r.d<0).sort((x,y)=>x.d-y.d)[0];
-  $("cmpInsight").innerHTML = aMonth === bMonth
-    ? "💡 <strong>洞察：</strong>請選兩個不同月份，查看哪個類別升幅或跌幅最大。"
-    : "💡 <strong>洞察：</strong>" + (rise ? "最大升幅 — <strong>" + rise.cat + "</strong>（" + rise.a + " → " + rise.b + "，" + fmtDelta(rise.d, "", 0) + "）" : "沒有類別上升") + "；" + (fall ? "最大跌幅 — <strong>" + fall.cat + "</strong>（" + fall.a + " → " + fall.b + "，" + fmtDelta(fall.d, "", 0) + "）" : "沒有類別下跌") + "（" + aMonth + " 與 " + bMonth + " 之間）。";
+  $("cmpInsight").innerHTML = dup
+    ? "💡 <strong>\u6d1e\u5bdf\uff1a</strong>\u8acb\u9078\u4e0d\u540c\u6708\u4efd\uff0c\u67e5\u770b\u54ea\u500b\u985e\u5225\u5347\u5e45\u6216\u8dcc\u5e45\u6700\u5927\u3002"
+    : "💡 <strong>\u6d1e\u5bdf\uff1a</strong>" + (rise ? "\u6700\u5927\u5347\u5e45 \u2014 <strong>" + rise.cat + "</strong>\uff08" + rise.a + " \u2192 " + rise.b + "\uff0c" + fmtDelta(rise.d, "", 0) + "\uff09" : "\u6c92\u6709\u985e\u5225\u4e0a\u5347") + "\uff1b" + (fall ? "\u6700\u5927\u8dcc\u5e45 \u2014 <strong>" + fall.cat + "</strong>\uff08" + fall.a + " \u2192 " + fall.b + "\uff0c" + fmtDelta(fall.d, "", 0) + "\uff09" : "\u6c92\u6709\u985e\u5225\u4e0b\u8dcc") + "\uff08" + aMonth + " \u8207 " + bMonth + " \u4e4b\u9593\uff09\u3002";
   const changes = allChanges.slice().sort((x,y)=>Math.abs(y.d)-Math.abs(x.d)).slice(0,8);
-  $("cmpChanges").innerHTML = changes.map(r=>"<tr><td>" + r.cat + "</td><td>" + r.a + "</td><td>" + r.b + "</td><td class=\"" + deltaClass(r.d) + "\">" + fmtDelta(r.d, "", 0) + "</td><td>" + pctText(r.a, r.b) + "</td></tr>").join("");
+  $("cmpChanges").innerHTML = changes.map(r=>"<tr><td>" + r.cat + "</td>" + r.vals.map(v=>"<td>" + v + "</td>").join("") + "<td class=\"" + deltaClass(r.d) + "\">" + fmtDelta(r.d, "", 0) + "</td><td>" + pctText(r.a, r.b) + "</td></tr>").join("");
 }
 function updateLocTable(rows){
   const allLocs = counter(rows, r=>r.loc).slice(0,10);
@@ -363,8 +370,9 @@ $("locSearch").addEventListener("input", ()=>updateLocTable(current()));
 $("trendDaily").addEventListener("click", ()=>{ trendMode = "daily"; updateTrendButtons(); render(); });
 $("trendWeekly").addEventListener("click", ()=>{ trendMode = "weekly"; updateTrendButtons(); render(); });
 ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).addEventListener("change", render));
-["cmpA","cmpB"].forEach(id=>$(id).addEventListener("change", render));
-$("btnRecent").addEventListener("click", ()=>{ $("cmpA").value = MONTHS_CHRON[Math.max(0, MONTHS_CHRON.length - 2)]; $("cmpB").value = MONTHS_CHRON[MONTHS_CHRON.length - 1]; render(); });
+["cmpM0","cmpM1","cmpM2","cmpM3","cmpM4","cmpM5"].forEach(id=>$(id).addEventListener("change", render));
+$("cmpCount").addEventListener("change", ()=>{ cmpRecent(); render(); });
+$("btnRecent").addEventListener("click", ()=>{ cmpRecent(); render(); });
 $("btnReset").addEventListener("click", ()=>{ ["fMonth","fCat","fSev","fBld","fChan","fReq","fStatus","fStaff"].forEach(id=>$(id).value=""); $("locSearch").value=""; render(); });
 function csvCell(v){ const s = String(v == null ? "" : v); return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; }
 function downloadCsv(){
