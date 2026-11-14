@@ -61,6 +61,11 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 .sample{display:inline-block;background:#fff;border:1.5px solid #c7d2fe;border-radius:11px;padding:9px 14px;font-size:13px;font-weight:700;color:#1e1b4b;line-height:1.5}
 .dots{font-size:16px;letter-spacing:5px;color:#3730a3}
 .figtitle{font-weight:800;color:#1e1b4b;margin-bottom:10px;font-size:14.5px}
+
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 14px;margin:14px 0 2px}
+.filterbar .fl{font-size:12.5px;font-weight:800;color:#64748b;letter-spacing:.04em}
+.fbtn{font:inherit;font-size:13px;font-weight:700;color:#3730a3;background:#eef2ff;border:1px solid #c7d2fe;padding:5px 13px;border-radius:999px;cursor:pointer}
+.fbtn.on{background:#1e1b4b;color:#fff;border-color:#1e1b4b}
 </style>
 </head>
 <body>
@@ -73,6 +78,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <a href="#c1">1 面板閃爍</a><a href="#c2">2 未就緒 — 解碼器故障</a><a href="#c3">3 PC 訊源無信號</a><a href="#c4">4 不同步</a><a href="#c5">5 路線中斷</a><a href="#c6">6 需重啟的解碼器</a><a href="#c7">7 電視重啟</a><a href="#c8">8 解碼器循環</a><a href="#c9">9 USB 風暴</a><a href="#c10">10 Manager 當機</a><a href="#c11">11 交換機登入失敗</a><a href="#c12">12 遲醒</a><a href="#c13">13 Common Area 上線</a>
 </div></nav>
 <main class="wrap">
+<div class="filterbar"><span class="fl">按嚴重程度篩選：</span><button class="fbtn on" data-sev="all">全部 13</button><button class="fbtn" data-sev="crit">緊急 · 2</button><button class="fbtn" data-sev="high">高 · 4</button><button class="fbtn" data-sev="med">中 · 6</button><button class="fbtn" data-sev="none">無需行動 · 1</button></div>
 <div class="intro"><strong>如何使用本頁。</strong> 找出與症狀吻合的案例，依其步驟次序處理 — 開首的步驟永遠是唯讀檢查。<span style="color:#991b1b"><strong>緊急</strong></span>案例可令一堂課或整個早上停頓，並已有預先議定的處理；<span style="color:#9a3412"><strong>高</strong></span>案例直接影響一間房的教學；<span style="color:#854d0e"><strong>中</strong></span>案例是已有明確補救方法、或已蓄意決定只作觀察的已知問題；最後一個案例<strong>完全無需任何行動</strong> — 它存在是為了避免有人去「修理」一個非故障。除非案例另有說明，任何更改裝置的步驟均須先經站點負責人確認（標準操作程序 §8）。</div>
 <div class="fig"><div class="figtitle">📡 AVoIP 訊號鏈 — 搵出畫面喺邊一環停低</div><div class="chain"><div class="node">💻 講台 PC／手提電腦<small>訊源</small></div><div class="arr">→</div><div class="node">🎛️ 編碼器<small>KDS-SW3-EN7</small></div><div class="arr">→</div><div class="node">🔀 網絡交換機<small>AV 子網</small></div><div class="arr">→</div><div class="node">📦 解碼器<small>KDS-DEC7</small></div><div class="arr">→</div><div class="node">📺 電視顯示<small>Fujitsu IW 系列</small></div></div><div class="cap">大多數案例都係靠搵出畫面喺邊一環停低嚟定位：來源側（案例 3）、傳輸（案例 5、8）、抑或解碼／顯示側（案例 2、4、6）。</div></div>
 <article class="case" id="c1">
@@ -265,5 +271,8 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 </article>
 <p class="foot">已知問題案例處理 · <a href="shekmun-campus-zh.html">石門校園標準操作程序</a>的配套頁面（批准規則：程序 §8）· Remote Campus · Support Portal。每當有新情境被經歷並結案，便會加入案例；當某案例的影響改變時，會重新審視排序。</p>
 </main>
+<script>
+document.querySelectorAll(".fbtn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".fbtn").forEach(function(x){x.classList.remove("on")});b.classList.add("on");var s=b.getAttribute("data-sev");document.querySelectorAll(".case").forEach(function(c){var sev=c.querySelector(".sev");var show=(s==="all")||(sev&&sev.classList.contains(s));c.style.display=show?"":"none";});});});
+</script>
 </body>
 </html>

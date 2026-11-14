@@ -61,6 +61,11 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 .sample{display:inline-block;background:#fff;border:1.5px solid #c7d2fe;border-radius:11px;padding:9px 14px;font-size:13px;font-weight:700;color:#1e1b4b;line-height:1.5}
 .dots{font-size:16px;letter-spacing:5px;color:#3730a3}
 .figtitle{font-weight:800;color:#1e1b4b;margin-bottom:10px;font-size:14.5px}
+
+.filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 14px;margin:14px 0 2px}
+.filterbar .fl{font-size:12.5px;font-weight:800;color:#64748b;letter-spacing:.04em}
+.fbtn{font:inherit;font-size:13px;font-weight:700;color:#3730a3;background:#eef2ff;border:1px solid #c7d2fe;padding:5px 13px;border-radius:999px;cursor:pointer}
+.fbtn.on{background:#1e1b4b;color:#fff;border-color:#1e1b4b}
 </style>
 </head>
 <body>
@@ -73,6 +78,7 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 <a href="#c1">1 Flashing panel</a><a href="#c2">2 Not ready — decoder fault</a><a href="#c3">3 PC source no signal</a><a href="#c4">4 Out of sync</a><a href="#c5">5 Route down</a><a href="#c6">6 Needs-restart decoder</a><a href="#c7">7 TV restarts</a><a href="#c8">8 Decoder loop</a><a href="#c9">9 USB storm</a><a href="#c10">10 Manager hangs</a><a href="#c11">11 Switch login fails</a><a href="#c12">12 Late wake</a><a href="#c13">13 Common Area online</a>
 </div></nav>
 <main class="wrap">
+<div class="filterbar"><span class="fl">FILTER BY SEVERITY:</span><button class="fbtn on" data-sev="all">All 13</button><button class="fbtn" data-sev="crit">Critical · 2</button><button class="fbtn" data-sev="high">High · 4</button><button class="fbtn" data-sev="med">Medium · 6</button><button class="fbtn" data-sev="none">No action · 1</button></div>
 <div class="intro"><strong>How to use this page.</strong> Find the case that matches the symptoms, then follow its steps in order — the early steps are always read-only checks. <span style="color:#991b1b"><strong>Critical</strong></span> cases can stop a class or a whole morning and have pre-agreed handling; <span style="color:#9a3412"><strong>High</strong></span> cases affect a room's teaching directly; <span style="color:#854d0e"><strong>Medium</strong></span> cases are known issues with a defined remedy or a deliberate observe-only decision; the final case needs <strong>no action at all</strong> — it exists so nobody “fixes” a non-fault. Unless a case says otherwise, any device-changing step needs the site owner's confirmation first (SOP §8).</div>
 <div class="fig"><div class="figtitle">📡 The AVoIP signal chain — find where the picture stops</div><div class="chain"><div class="node">💻 Lectern PC / Laptop<small>source</small></div><div class="arr">→</div><div class="node">🎛️ Encoder<small>KDS-SW3-EN7</small></div><div class="arr">→</div><div class="node">🔀 Network switch<small>AV subnet</small></div><div class="arr">→</div><div class="node">📦 Decoder<small>KDS-DEC7</small></div><div class="arr">→</div><div class="node">📺 TV display<small>Fujitsu IW series</small></div></div><div class="cap">Most cases are located by finding the link where the picture stops: source-side (Case 3), transport (Cases 5 and 8), or decoder / display-side (Cases 2, 4 and 6).</div></div>
 <article class="case" id="c1">
@@ -265,5 +271,8 @@ code{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:1px 6
 </article>
 <p class="foot">Case Handling for Known Issues · Companion to the <a href="shekmun-campus.html">ShekMun Campus SOP</a> (approval rules: SOP §8) · Remote Campus · Support Portal. Cases are added when a new scenario is experienced and closed out; ordering is reviewed when a case's impact changes.</p>
 </main>
+<script>
+document.querySelectorAll(".fbtn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".fbtn").forEach(function(x){x.classList.remove("on")});b.classList.add("on");var s=b.getAttribute("data-sev");document.querySelectorAll(".case").forEach(function(c){var sev=c.querySelector(".sev");var show=(s==="all")||(sev&&sev.classList.contains(s));c.style.display=show?"":"none";});});});
+</script>
 </body>
 </html>
