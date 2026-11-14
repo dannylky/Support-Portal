@@ -37,7 +37,8 @@ button.csvdl:hover{background:#cffafe}
 .count-note{font-size:13.5px;color:#475569;margin-left:auto;padding-bottom:8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:22px 0 8px}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 6px 18px rgba(15,23,42,.05)}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 6px 18px rgba(15,23,42,.05);transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(15,23,42,.09)}
 .card.wide{grid-column:1/-1}
 .card h2{margin:0 0 4px;font-size:17px}
 .card .hint{margin:0 0 10px;color:#64748b;font-size:13px}
@@ -124,7 +125,7 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 <header class="hero"><div class="wrap">
 <h1>🎫 Ticket Statistics</h1>
 <div class="sub">ITSC team ticket form · 2026–27 Semester 1 — interactive statistics from Sheet1 of the ticket workbook. Use the filters to slice by month, category and more, or use the month comparison (2–6 months) to see what changed between months. Every chart and figure updates together.</div>
-<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><a href="ticket-statistics-zh.html">🌐 繁體中文</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 Dark mode</button><span class="verpill">Version v1.20</span><span class="upd">Updated 14 Nov 2026 · refreshed daily 20:00 HKT</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal home</a><a href="change-log.html">📋 Change log</a><a href="ticket-statistics-zh.html">🌐 繁體中文</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 Dark mode</button><span class="verpill">Version v1.21</span><span class="upd">Updated 14 Nov 2026 · refreshed daily 20:00 HKT</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">Total cases (filtered)</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">Resolved rate</div></div>

@@ -37,7 +37,8 @@ button.csvdl:hover{background:#cffafe}
 .count-note{font-size:13.5px;color:#475569;margin-left:auto;padding-bottom:8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:22px 0 8px}
 @media (max-width:900px){.grid{grid-template-columns:1fr}}
-.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 6px 18px rgba(15,23,42,.05)}
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:18px 20px;box-shadow:0 6px 18px rgba(15,23,42,.05);transition:transform .15s ease,box-shadow .15s ease}
+.card:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(15,23,42,.09)}
 .card.wide{grid-column:1/-1}
 .card h2{margin:0 0 4px;font-size:17px}
 .card .hint{margin:0 0 10px;color:#64748b;font-size:13px}
@@ -124,7 +125,7 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 <header class="hero"><div class="wrap">
 <h1>🎫 工單統計</h1>
 <div class="sub">ITSC 團隊工單表格 · 2026–27 第一學期 — 互動統計，數據來自工單工作簿的 Sheet1。用篩選器按月份、類別等切分數據，或用多月比較（2–6 個月）查看各月之間的變化。所有圖表與數字會同步更新。</div>
-<div class="toplinks"><a href="index.html">← Support Portal 首頁</a><a href="change-log-zh.html">📋 更新日誌</a><a href="ticket-statistics.html">🌐 English</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 深色模式</button><span class="verpill">版本 v1.20</span><span class="upd">更新日期 2026年11月14日 · 每日 20:00 HKT 刷新</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal 首頁</a><a href="change-log-zh.html">📋 更新日誌</a><a href="ticket-statistics.html">🌐 English</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 深色模式</button><span class="verpill">版本 v1.21</span><span class="upd">更新日期 2026年11月14日 · 每日 20:00 HKT 刷新</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">個案總數（已篩選）</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">已解決比率</div></div>
