@@ -35,8 +35,9 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-se
 .badge.txt{background:#fef9c3;color:#854d0e;border:1px solid #fde68a}
 .dhead{margin-top:5px;line-height:1.55;color:#1f2937;font-size:14.5px}
 .dgo{font-weight:800;color:#3730a3;white-space:nowrap}
+.filterbar{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:14px 18px;margin:18px 0 4px;box-shadow:0 4px 14px rgba(15,23,42,.04)}.filterbar input{width:100%;box-sizing:border-box;padding:9px 13px;border:1px solid #cbd5e1;border-radius:10px;font-size:14.5px;font-family:inherit}.frow{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin-top:10px}.flab{font-size:12.5px;font-weight:800;color:#64748b;letter-spacing:.04em}.fbtn{font-family:inherit;font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px;border:1px solid #c7d2fe;background:#eef2ff;color:#3730a3;cursor:pointer}.fbtn.on{background:#3730a3;color:#fff;border-color:#3730a3}.drcount{margin-top:10px;font-size:13px;color:#64748b;font-weight:600}.drnone{background:#fff;border:1px dashed #cbd5e1;border-radius:14px;padding:18px;text-align:center;color:#64748b;margin-top:10px}
 .foot{color:#64748b;font-size:13px;line-height:1.6;padding:0 0 40px}
-.drbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:10px 14px;margin:0 0 14px}.drbar input{flex:1;min-width:200px;padding:9px 12px;border:1px solid #cbd5e1;border-radius:9px;font-size:14.5px}.drbar .dbtn{border:1px solid #c7d2fe;background:#eef2ff;color:#3730a3;font-weight:800;border-radius:999px;padding:6px 13px;cursor:pointer;font-size:13px}.drbar .dbtn.on{background:#3730a3;color:#fff}.drbar .dcount{font-size:13px;font-weight:700;color:#64748b}.drnone{display:none;background:#fffbeb;border:1px solid #fde68a;border-radius:11px;padding:12px 16px;margin:12px 0;color:#713f12}</style>
+</style>
 <style>/*SPNAVCSS*/.spnav{position:sticky;top:0;z-index:100;background:#0f172a;border-bottom:2px solid #facc15;font-family:"Segoe UI",system-ui,-apple-system,sans-serif}.spnav .in{max-width:1100px;margin:0 auto;padding:0 16px;display:flex;align-items:center;gap:2px;flex-wrap:wrap;min-height:50px}.spnav a{color:#e2e8f0;text-decoration:none;font-size:13.5px;font-weight:600;padding:7px 11px;border-radius:8px;white-space:nowrap}.spnav a:hover{background:rgba(255,255,255,.12);color:#fff}.spnav a.brand{color:#fff;font-size:15px;font-weight:800;margin-right:4px}.spnav a.act{background:#facc15;color:#0f172a;font-weight:800}.spnav .sp{flex:1}.spnav a.lang{border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:4px 12px;font-size:12.5px}.spnav button.themebtn{background:none;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;color:#fff;line-height:1.2;font-family:inherit}.spnav button.themebtn:hover{background:rgba(255,255,255,.12)}.toolbar,.toc{top:52px!important}@media(max-width:640px){.spnav a{font-size:12.5px;padding:6px 8px}.spnav a.brand{font-size:13.5px}}</style>
 <style>/*SPDARKCSS*/html.spdark{color-scheme:dark}html.spdark body{background:#0f172a!important;color:#e2e8f0}html.spdark .card,html.spdark .entry,html.spdark .blk,html.spdark .case,html.spdark .row,html.spdark .kpi,html.spdark .panel,html.spdark .gstat,html.spdark .glancewrap,html.spdark .filterbar,html.spdark .doc{background:#1e293b!important;border-color:#334155!important;color:#e2e8f0}html.spdark .spnav a{color:#e2e8f0}html.spdark .spnav a.brand{color:#fff}html.spdark .spnav a.act{color:#0f172a}html.spdark a{color:#7dd3fc}html.spdark .rlink{color:inherit}html.spdark .edate,html.spdark .ever,html.spdark .edata,html.spdark .foot,html.spdark .hint,html.spdark .dwd,html.spdark .dm,html.spdark .meta{color:#94a3b8}html.spdark input,html.spdark select,html.spdark textarea{background:#0f172a;color:#e2e8f0;border-color:#475569}html.spdark button{background:#334155;color:#e2e8f0;border-color:#475569}html.spdark th,html.spdark td{border-color:#334155}html.spdark .toolbar{background:rgba(15,23,42,.94)!important;border-bottom-color:#334155!important}html.spdark .toc{background:rgba(15,23,42,.95)!important;border-bottom-color:#334155!important}html.spdark .chip,html.spdark .tag{background:#334155;color:#e2e8f0;border-color:#475569}html.spdark .dont{background:#451a03!important;color:#ffedd5!important;border-color:#9a3412!important}html.spdark code{background:#334155;color:#fda4af}html.spdark img{filter:brightness(.93)}@media print{html.spdark body{background:#fff!important;color:#000}}</style>
 <script>/*SPNAVTHEME*/(function(){try{var t=localStorage.getItem('sp-theme');if(t!=='dark'&&t!=='light'){var o=localStorage.getItem('ts-dark');if(o==='1')t='dark';else if(o==='0')t='light';if(t)localStorage.setItem('sp-theme',t);}if(t==='dark')document.documentElement.classList.add('spdark');}catch(e){}})();</script>
@@ -47,149 +48,153 @@ body{font-family:"Segoe UI",system-ui,-apple-system,"Microsoft JhengHei",sans-se
 <header class="hero"><div class="wrap">
 <h1>📋 石門校園 — 每日總結報告</h1>
 <div class="sub">每個運作日的石門校園日終 AVoIP 總結，永久存檔於此。每份報告整合當日八輪日誌擷取（08:00–22:00）：合併事件時間線、各問題狀態，以及唯讀的 16 部交換機交叉檢查。新報告於每晚 22:00 整合運行後自動加入。<a href="remote-campus-zh.html">← 遙距校園</a> · <a href="shekmun-campus-zh.html">SOP</a> · <a href="shekmun-case-handling-zh.html">已知問題處理</a></div>
-<div class="meta"><span class="ver">已存檔 27 日</span><span>17 份完整儀表板</span><span>運作日：週一至週六</span><span>所有時間為香港時間</span><span class="langsw"><a href="shekmun-daily-reports.html">English</a><a class="on" href="shekmun-daily-reports-zh.html">繁體中文</a></span></div>
+<div class="meta"><span class="ver">已存檔 28 日</span><span>18 份完整儀表板</span><span>運作日：週一至週六</span><span>所有時間為香港時間</span><span class="langsw"><a href="shekmun-daily-reports.html">English</a><a class="on" href="shekmun-daily-reports-zh.html">繁體中文</a></span></div>
 </div></header>
-<main class="wrap"><div class="drbar"><input id="drSearch" type="search" placeholder="搜尋每日報告：輸入房號、科目或關鍵字，例如 SM-11-07、USB、停源" aria-label="搜尋每日報告"><button class="dbtn on" data-m="all">全部</button><button class="dbtn" data-m="Nov 2026">2026 年 11 月</button><button class="dbtn" data-m="Oct 2026">2026 年 10 月</button><span class="dcount" id="drCount">顯示 27 / 27 日</span></div><div class="drnone" id="drNone">冇報告符合搜尋或月份篩選，請清除搜尋或揀「全部」。</div><div class="list">
-<div class="row">
+<main class="wrap"><div class="filterbar" id="drBar"><input id="drQ" type="search" placeholder="搜尋標題、房間、課程編號…" aria-label="搜尋每日報告"><div class="frow"><span class="flab">月份：</span><button class="fbtn on" data-m="all" type="button">全部</button><button class="fbtn" data-m="2026-11" type="button">2026 年 11 月</button><button class="fbtn" data-m="2026-10" type="button">2026 年 10 月</button></div><div class="frow"><span class="flab">類型：</span><button class="fbtn on" data-t="all" type="button">全部類型</button><button class="fbtn" data-t="dashboard" type="button">完整儀表板 (18)</button><button class="fbtn" data-t="summary" type="button">文字總結 (10)</button></div><div class="drcount" id="drCount"></div></div><div class="list">
+<div class="row" data-month="2026-11" data-type="dashboard">
+<a class="rlink" href="daily-2026-11-16-zh.html">
+<div class="dblock"><div class="dd">16</div><div class="dm">Nov 2026</div></div>
+<div class="dmain"><div class="dtop"><span class="dwd">星期一 · Monday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">SM-11-06 停源 6 小時 25 分鐘覆蓋 STC5122-L01 成堂、SM-11-05 停源 3 小時 46 分鐘覆蓋 GELC6002-L01 成堂；最長停源 SM-11-02 7 小時 35 分鐘屬無堂時段；日終八房待機，SM-11-07 DEC-1 出現 No-space ×8</div></div></a>
+<div class="dgo"><a class="go" href="daily-2026-11-16-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-16.html">English →</a></div></div>
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-14-zh.html">
 <div class="dblock"><div class="dd">14</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期六 · Saturday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">三間房來源端靜默覆蓋晚課：SM-11-08 約 3 小時 32 分鐘、SM-11-07 HG004 成堂、SM-11-03 尾約 1 小時 34 分鐘；全日最長停源 13 小時 39 分鐘在全日冇預約的 SM-11-06；日終三台已知解碼器同時 USB 風暴，日終僅 SM-11-02 在線</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-14-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-14.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-13-zh.html">
 <div class="dblock"><div class="dd">13</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期五 · Friday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">SM-11-04 停源約 9 小時 23 分鐘覆蓋 GELC6001-L01 成堂、SM-11-02 停源覆蓋成個 ERB 晚課；SM-11-08 EN-PC 重啟有交換器脗合；日終在線只得 SM-11-03。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-13-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-13.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-12-zh.html">
 <div class="dblock"><div class="dd">12</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期四 · Thursday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">SM-11-08 長停源約 6 小時 25 分鐘為全日最長、覆蓋消防測試首段；15:47／15:53 兩宗裝置群重啟有交換器脗合；全日兩度就緒 8/8，日終在線 3 房、待機 5 房；昨晚 SM-11-06 段落失聯已復原。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-12-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-12.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-11-zh.html">
 <div class="dblock"><div class="dd">11</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期三 · Wednesday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">SM-11-06 講台段落日終失聯（解碼器迴圈中）列明早首要跟進；傍晚一度就緒 8/8，全日最長停源 SM-11-05 約 4 小時 32 分鐘覆蓋近乎全堂惟房間無人；日終只剩 SM-11-08 在線。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-11-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-11.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-10-zh.html">
 <div class="dblock"><div class="dd">10</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期二 · Tuesday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">來源側停止主導全日：五房 EN-PC 於 09:34–09:42 先後停，SM-11-03 停源約 6 小時 11 分鐘跨兩堂至日終，日終六房無畫面；15:02:57 拓撲變更與 SM-11-05 事件脗合；四台解碼器晚間同時 USB 風暴。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-10-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-10.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-09-zh.html">
 <div class="dblock"><div class="dd">9</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期一 · Monday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">SM-11-01 TV-DEC-1 的 USB 風暴寫滿日誌儲存（21:06:26）；全日最長停源 SM-11-07 約 7 小時 38 分鐘及 SM-11-02 約 7 小時 18 分鐘同屬閒置時段、開課前恢復；交換器交叉核對全負面。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-09-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-09.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-07-zh.html">
 <div class="dblock"><div class="dd">7</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期六 · Saturday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-05 停源約 13 小時 25 分鐘、SM-11-06 約 11 小時 30 分鐘，雙雙未恢復，為全日最長兩房；SM-11-08 衛星交換器約 19:18 因供電中斷重啟，19:26 STP 拓撲變更波次與晚間事件簇脗合；日終七房待機、只有 SM-11-02 在線，四台 USB 易波動解碼器全部同時風暴。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-07-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-07.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-06-zh.html">
 <div class="dblock"><div class="dd">6</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期五 · Friday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-05 停源 5 小時 33 分鐘為全日最長；SM-11-01 四台解碼器 08:23 同步重啟後重鎖；日終七房待機、只有 SM-11-06 在線，SM-11-02 解碼器未重鎖。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-06-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-06.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-05-zh.html">
 <div class="dblock"><div class="dd">5</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期四 · Thursday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-07 TV-DEC-1 USB 風暴日間寫滿日誌（17:11 No space）並凍結；SM-11-08 衛星交換器 08:35 供電中斷重啟；SM-11-06 停源約 6 小時 22 分鐘最長；日終七房待機。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-05-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-05.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-04-zh.html">
 <div class="dblock"><div class="dd">4</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期三 · Wednesday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-06 停源約 13 小時 02 分鐘（09:00:34 起）連續第二日最長；早上六房來源遲至 08:21–08:51 就緒，SM-11-07 兩台解碼器約 08:50 重新開機後重鎖；晚間日終六房待機，三台解碼器 USB 風暴於擷取結束時仍在進行。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-04-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-04.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-03-zh.html">
 <div class="dblock"><div class="dd">3</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期二 · Tuesday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-06 停源逾 7 小時 14 分鐘（14:48 起）為全日最長；SM-11-05 衛星交換器鏈路反覆引發全艦隊 STP 拓撲變更，同房解碼器迴圈爆發後重鎖；日終六房待機。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-03-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-03.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-11" data-type="dashboard">
 <a class="rlink" href="daily-2026-11-02-zh.html">
 <div class="dblock"><div class="dd">2</div><div class="dm">Nov 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期一 · Monday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-07 停源 6 小時 42 分鐘（11:46–18:28）為全日最長；晚間 20:53–21:57 四房先後停源，日終五房待機；三台解碼器 USB 風暴再現但無寫滿。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-11-02-zh.html">繁體中文 →</a><a class="go" href="daily-2026-11-02.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="dashboard">
 <a class="rlink" href="daily-2026-10-31-zh.html">
 <div class="dblock"><div class="dd">31</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期六 · Saturday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：傍晚來源側停源波次令日終七間房視信來源終止，SM-11-06 停源約 5 小時 41 分鐘為全日最長；兩台風暴解碼器日誌儲存寫滿，今晚首次出現 No space。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-31-zh.html">繁體中文 →</a><a class="go" href="daily-2026-10-31.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="dashboard">
 <a class="rlink" href="daily-2026-10-30-zh.html">
 <div class="dblock"><div class="dd">30</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期五 · Friday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">全日最重要事件：SM-11-07 衛星交換器於 21:43 左右重啟，連鎖令全房編碼器重啟、解碼器停源及 USB 風暴；其餘遺失皆為來源側停止。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-30-zh.html">繁體中文 →</a><a class="go" href="daily-2026-10-30.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="dashboard">
 <a class="rlink" href="daily-2026-10-29-zh.html">
 <div class="dblock"><div class="dd">29</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期四 · Thursday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">30/30 個目標可讀，全部 LOG-ACTION 1,3；含 SM-11-01 TV-DEC-1 課堂時段 USB 窗口（29 行）記錄。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-29-zh.html">繁體中文 →</a><a class="go" href="daily-2026-10-29.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="dashboard">
 <a class="rlink" href="daily-2026-10-28-zh.html">
 <div class="dblock"><div class="dd">28</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期三 · Wednesday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">30/30 個目標可讀，全部 LOG-ACTION 1,3；日終位置：SM-11-01 至 05 及 07 停源，SM-11-06、SM-11-08 在線。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-28-zh.html">繁體中文 →</a><a class="go" href="daily-2026-10-28.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="dashboard">
 <a class="rlink" href="daily-2026-10-27-zh.html">
 <div class="dblock"><div class="dd">27</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期二 · Tuesday</span><span class="badge dash">完整儀表板</span></div><div class="dhead">探索迴圈全日零；8 輪皆為 30/30（2200 輪 R7 EN-PC 回傳為唯一覆蓋缺口）。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-27-zh.html">繁體中文 →</a><a class="go" href="daily-2026-10-27.html">English →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-26.html">
 <div class="dblock"><div class="dd">26</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期一 · Monday</span><span class="badge txt">文字總結</span></div><div class="dhead">全日時間線、各問題狀態、交換器交叉檢查及全日分析；R8 衛星交換器為全日唯一陽性發現。</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-26.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-24.html">
 <div class="dblock"><div class="dd">24</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期六 · Saturday</span><span class="badge txt">文字總結</span></div><div class="dhead">“Day in one paragraph” edition — merged timeline, per-issue day status, day analysis and switch cross-check.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-24.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-23.html">
 <div class="dblock"><div class="dd">23</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期五 · Friday</span><span class="badge txt">文字總結</span></div><div class="dhead">Merged day timeline, per-issue day status, day analysis and read-only switch cross-check.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-23.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-22.html">
 <div class="dblock"><div class="dd">22</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期四 · Thursday</span><span class="badge txt">文字總結</span></div><div class="dhead">Merged day timeline, per-issue day status, day analysis and read-only switch cross-check.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-22.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-21.html">
 <div class="dblock"><div class="dd">21</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期三 · Wednesday</span><span class="badge txt">文字總結</span></div><div class="dhead">Merged day timeline, per-issue day status, day analysis and read-only switch cross-check.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-21.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-20.html">
 <div class="dblock"><div class="dd">20</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期二 · Tuesday</span><span class="badge txt">文字總結</span></div><div class="dhead">Day timeline, per-issue status and day analysis, with the 16-switch baseline cross-check (morning baseline pulled this day).</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-20.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-17.html">
 <div class="dblock"><div class="dd">17</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期六 · Saturday</span><span class="badge txt">文字總結</span></div><div class="dhead">All eight capture rounds exist; produced read-only — no resets, no config writes, no device changes in any run.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-17.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-16.html">
 <div class="dblock"><div class="dd">16</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期五 · Friday</span><span class="badge txt">文字總結</span></div><div class="dhead">All eight capture rounds exist; produced read-only — no resets, no config writes, no device changes in any run.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-16.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-15.html">
 <div class="dblock"><div class="dd">15</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期四 · Thursday</span><span class="badge txt">文字總結</span></div><div class="dhead">8/8 capture rounds present — merged day timeline, per-issue day status and switch cross-check.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-15.html">開啟 →</a></div></div>
-<div class="row">
+<div class="row" data-month="2026-10" data-type="summary">
 <a class="rlink" href="daily-2026-10-14.html">
 <div class="dblock"><div class="dd">14</div><div class="dm">Oct 2026</div></div>
 <div class="dmain"><div class="dtop"><span class="dwd">星期三 · Wednesday</span><span class="badge txt">文字總結</span></div><div class="dhead">Reconstructed summary — the 22:00 consolidation run was interrupted by a service restart; rebuilt the next day from the five genuine capture runs.</div></div></a>
 <div class="dgo"><a class="go" href="daily-2026-10-14.html">開啟 →</a></div></div>
 </div>
+<div id="drNone" class="drnone" style="display:none">冇符合條件嘅日子 — 試下清除搜尋或篩選。</div>
 <p class="foot">完整儀表板（2026 年 10 月 27 日起）是視覺化的日終報告 — KPI 卡、最長停源圖、22:00 房間狀態、證據相簿及交換機交叉檢查表。較早日子是同一整合的文字版。每個儀表板日子均有 English 及繁體中文兩個版本，格式相同，可用每頁的語言按鈕切換。原始數據留在運作存檔；本頁是發佈副本。</p>
 </main>
-<script>
-(function(){var mon="all",q="";function apply(){var n=0;document.querySelectorAll(".row").forEach(function(r){var okM=(mon==="all")||r.textContent.indexOf(mon)>=0;var okQ=(!q)||r.textContent.toLowerCase().indexOf(q)>=0;var show=okM&&okQ;r.style.display=show?"":"none";if(show)n++;});var cc=document.getElementById("drCount");if(cc)cc.textContent="顯示 "+n+" / 27 日";var nn=document.getElementById("drNone");if(nn)nn.style.display=n?"none":"block";}document.querySelectorAll(".dbtn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".dbtn").forEach(function(x){x.classList.remove("on")});b.classList.add("on");mon=b.getAttribute("data-m");apply();});});var inp=document.getElementById("drSearch");if(inp)inp.addEventListener("input",function(){q=inp.value.trim().toLowerCase();apply();});})();
-</script>
+<script>(function(){var rows=[].slice.call(document.querySelectorAll('.list .row'));var q=document.getElementById('drQ');var cnt=document.getElementById('drCount');var none=document.getElementById('drNone');var M='all',T='all';function apply(){var s=(q.value||'').toLowerCase();var n=0;rows.forEach(function(r){var ok=(!s||r.textContent.toLowerCase().indexOf(s)>-1)&&(M==='all'||r.getAttribute('data-month')===M)&&(T==='all'||r.getAttribute('data-type')===T);r.style.display=ok?'':'none';if(ok)n++;});cnt.textContent='顯示 '+n+' / '+rows.length+' 日';none.style.display=n?'none':'';}document.querySelectorAll('[data-m]').forEach(function(b){b.addEventListener('click',function(){M=b.getAttribute('data-m');document.querySelectorAll('[data-m]').forEach(function(x){x.classList.toggle('on',x===b)});apply();});});document.querySelectorAll('[data-t]').forEach(function(b){b.addEventListener('click',function(){T=b.getAttribute('data-t');document.querySelectorAll('[data-t]').forEach(function(x){x.classList.toggle('on',x===b)});apply();});});q.addEventListener('input',apply);apply();})();</script>
 </body>
 </html>
