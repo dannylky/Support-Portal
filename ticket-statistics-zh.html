@@ -65,7 +65,8 @@ tbody tr:hover{background:#eef2f7}
 .compare-top{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;flex-wrap:wrap}
 .compare-controls{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
 .compare-note{margin:14px 0;padding:11px 13px;border-radius:11px;background:#e0e7ff;color:#312e81;font-size:14px;line-height:1.5}
-.compare-insight{margin:-6px 0 14px;padding:11px 13px;border-radius:11px;background:#fff7ed;color:#7c2d12;font-size:14px;line-height:1.5;border:1px solid #fed7aa}
+.compare-insight{margin:-6px 0 14px;padding:11px 13px;border-radius:11px;background:#fff7ed;color:#7c2d12;font-size:14px;line-height:1.5;border:1px solid #fed7aa;transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.compare-insight:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(154,52,18,.14);border-color:#fdba74}
 .compare-table{margin-top:12px;background:#fff;border-radius:12px;overflow:hidden}
 .compare-table td:first-child{font-weight:650;color:#334155}
 .delta-up{color:#b45309;font-weight:750}.delta-down{color:#15803d;font-weight:750}.delta-flat{color:#64748b;font-weight:700}
@@ -131,7 +132,7 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 <header class="hero"><div class="wrap">
 <h1>🎫 工單統計</h1>
 <div class="sub">ITSC 團隊工單表格 · 2026–27 第一學期 — 互動統計，數據來自工單工作簿的 Sheet1。用篩選器按月份、類別等切分數據，或用多月比較（2–6 個月）查看各月之間的變化。所有圖表與數字會同步更新。</div>
-<div class="toplinks"><a href="index.html">← Support Portal 首頁</a><a href="change-log-zh.html">📋 更新日誌</a><a href="ticket-statistics.html">🌐 English</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 深色模式</button><span class="verpill">版本 v1.27</span><span class="upd">更新日期 2026年11月20日 · 每日 20:00 HKT 刷新</span></div>
+<div class="toplinks"><a href="index.html">← Support Portal 首頁</a><a href="change-log-zh.html">📋 更新日誌</a><a href="ticket-statistics.html">🌐 English</a><button class="darktoggle" id="btnDark" type="button" aria-pressed="false">🌙 深色模式</button><span class="verpill">版本 v1.28</span><span class="upd">更新日期 2026年11月21日 · 每日 20:00 HKT 刷新</span></div>
 <div class="kpis">
 <div class="kpi"><div class="v" id="kTotal">–</div><div class="l">個案總數（已篩選）</div></div>
 <div class="kpi"><div class="v" id="kResolved">–</div><div class="l">已解決比率</div></div>
@@ -211,7 +212,7 @@ body.dark th,body.dark td{border-bottom-color:#f1f5f9}
 
 <section class="card wide"><h2>⏱️ 處理時間分佈</h2><p class="hint">按時間段分組的個案處理時長（Duration Use [Mins]），跟隨上方主篩選。</p><div class="chartbox"><canvas id="cDur"></canvas></div></section>
 </div>
-<p class="foot">關於本頁：統計由瀏覽器即時計算，數據來自「ITSC team ticket form (26-27 Semester 1).xlsx」Sheet1 記錄的 315 宗個案（2026年9月1日 – 2026年11月20日），最後讀取日期 2026年11月20日。每次刷新都會與工作簿自身的 Dashboard 交叉核對：共 315 宗 · 314 已解決 + 1 處理中（99.7%）· 146 宗事故 · 平均處理時間 25.5 分鐘 — 全部吻合。本頁只發佈統計欄位；不包括表格中的報告人電郵、姓名及自由文字詳情。兩個類別標籤在試算表檢視時被寬度截斷（「Classroom - System po…」），本頁顯示為「Classroom - System power」。「Classroom - Touch Pane」按表格原文刊出。完整版本歷史：<a href="change-log-zh.html">更新日誌</a>。</p>
+<p class="foot">關於本頁：統計由瀏覽器即時計算，數據來自「ITSC team ticket form (26-27 Semester 1).xlsx」Sheet1 記錄的 315 宗個案（2026年9月1日 – 2026年11月20日），最後讀取日期 2026年11月21日。每次刷新都會與工作簿自身的 Dashboard 交叉核對：共 315 宗 · 314 已解決 + 1 處理中（99.7%）· 146 宗事故 · 平均處理時間 25.5 分鐘 — 全部吻合。本頁只發佈統計欄位；不包括表格中的報告人電郵、姓名及自由文字詳情。兩個類別標籤在試算表檢視時被寬度截斷（「Classroom - System po…」），本頁顯示為「Classroom - System power」。「Classroom - Touch Pane」按表格原文刊出。完整版本歷史：<a href="change-log-zh.html">更新日誌</a>。</p>
 </main>
 
 <script>
