@@ -62,16 +62,16 @@ strong.k{color:#1e1b4b}
 <div class="kpis">
 <div class="kpi"><div class="v">145</div><div class="l">分析案例總數</div></div>
 <div class="kpi hot"><div class="v">89.7%</div><div class="l">課室顯示類（145 宗中 130 宗）</div></div>
-<div class="kpi hot"><div class="v">48</div><div class="l">房 1 案例 · 佔總數 34.5%</div></div>
+<div class="kpi hot"><div class="v">49</div><div class="l">房 1 案例 · 佔總數 33.8%</div></div>
 <div class="kpi"><div class="v">12</div><div class="l">單日高峰 · 2026 年 11 月 6 日</div></div>
-<div class="kpi"><div class="v">69.8%</div><div class="l">已關閉（已解決 + 已完成 · 97 宗）</div></div>
-<div class="kpi hot"><div class="v">42</div><div class="l">仍然處理中 · 30.2%</div></div>
+<div class="kpi"><div class="v">66.9%</div><div class="l">已關閉（已解決 + 已完成 · 97 宗）</div></div>
+<div class="kpi hot"><div class="v">48</div><div class="l">仍然處理中 · 33.1%</div></div>
 </div>
 
 <div class="grid2" style="margin-top:16px">
 <section class="card"><h2>📅 每月案例量</h2>
 <div class="chartbox"><canvas id="chMonth"></canvas></div>
-<p>11 月只係<strong class="k">半個月（11 月 1–21 日）</strong>已經係最大月份：21 日 64 宗（約每日 3.0 宗），對比 10 月成個月 19 宗（約每日 0.6 宗）— 速率升咗五倍。9 月（42 宗）係之前嘅高峰。</p>
+<p>11 月只係<strong class="k">部分月份（11 月 1–23 日）</strong>已經係最大月份：23 日 70 宗（約每日 3.0 宗），對比 10 月成個月 19 宗（約每日 0.6 宗）— 速率升咗五倍。9 月（42 宗）係之前嘅高峰。</p>
 <table><tr><th>月份</th><th class="n">宗數</th><th class="n">涵蓋日數</th><th class="n">每日宗數</th></tr><tr><td>2026 年 8 月（8 月 5 日起）</td><td class="n">14</td><td class="n">27</td><td class="n">0.5</td></tr><tr><td>2026 年 9 月</td><td class="n">42</td><td class="n">30</td><td class="n">1.4</td></tr><tr><td>2026 年 10 月</td><td class="n">19</td><td class="n">31</td><td class="n">0.6</td></tr><tr><td>2026 年 11 月（1–23 日）</td><td class="n">70</td><td class="n">23</td><td class="n">3.0</td></tr></table><p style="margin-top:12px"><strong class="k">最忙嘅單日。</strong>個案量係尖峰式、唔平均：最忙一日加四日並列第二，合共已有 36 宗（佔全部 145 宗嘅 24.8%）。</p><table><tr><th>日子</th><th class="n">宗數</th><th class="n">佔全部 145 宗</th></tr><tr><td>2026 年 11 月 6 日</td><td class="n">12</td><td class="n">8.3%</td></tr><tr><td>2026 年 8 月 26 日</td><td class="n">6</td><td class="n">4.1%</td></tr><tr><td>2026 年 9 月 18 日</td><td class="n">6</td><td class="n">4.1%</td></tr><tr><td>2026 年 11 月 11 日</td><td class="n">6</td><td class="n">4.1%</td></tr><tr><td>2026 年 11 月 23 日</td><td class="n">6</td><td class="n">4.1%</td></tr></table>
 </section>
 <section class="card"><h2>🗂️ 按類別</h2>
@@ -148,7 +148,7 @@ strong.k{color:#1e1b4b}
 const PALETTE = ["#3730a3","#0057ff","#ff4d00","#00a651","#9333ea","#e6007e","#00acc1"];
 if (window.Chart) {
 Chart.defaults.font.family = '"Segoe UI",system-ui,-apple-system,sans-serif';
-new Chart(document.getElementById("chMonth"), {type:"bar", data:{labels:["2026 年 8 月","2026 年 9 月","2026 年 10 月","2026 年 11 月（1–21 日）"], datasets:[{label:"案例", data:[14,42,19,70], backgroundColor:["#3730a3","#3730a3","#3730a3","#ff4d00"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, title:{display:true, text:"宗數"}}}}});
+new Chart(document.getElementById("chMonth"), {type:"bar", data:{labels:["2026 年 8 月","2026 年 9 月","2026 年 10 月","2026 年 11 月（1–23 日）"], datasets:[{label:"案例", data:[14,42,19,70], backgroundColor:["#3730a3","#3730a3","#3730a3","#ff4d00"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, title:{display:true, text:"宗數"}}}}});
 new Chart(document.getElementById("chCat"), {type:"doughnut", data:{labels:["課室 — 顯示","軟件","PC 硬件","系統","用戶指南","用戶培訓","活動支援"], datasets:[{data:[130,5,5,2,1,1,1], backgroundColor:PALETTE}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"right", labels:{boxWidth:12, font:{size:11.5}}}}}});
 new Chart(document.getElementById("chRoom"), {type:"bar", data:{labels:["房 1","房 2","房 3","房 4","房 5","房 6","房 7","房 8"], datasets:[{label:"案例", data:[49,29,20,9,3,1,9,14], backgroundColor:["#dc2626","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3","#3730a3"]}]}, options:{indexAxis:"y", responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{x:{beginAtZero:true, title:{display:true, text:"宗數"}}}}});
 new Chart(document.getElementById("chStatus"), {type:"doughnut", data:{labels:["已解決","已完成","處理中","觀察中","開啟"], datasets:[{data:[87,10,23,8,17], backgroundColor:["#00a651","#00acc1","#ff4d00","#9333ea","#dc2626"]}]}, options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:"right", labels:{boxWidth:12, font:{size:11.5}}}}}});
